@@ -1,73 +1,65 @@
 <div align="center">
 
-# ☁️ GCP Landing Zone — Terraform
+# 🌌 ENTERPRISE GOOGLE CLOUD LANDING ZONE (IAC)
+### 🚀 *Production-Ready Foundation engineered with Terraform & Hub-and-Spoke Grid*
 
-**Nền tảng Google Cloud cấp doanh nghiệp, dựng bằng Infrastructure as Code**
+---
 
-Mô hình mạng **Hub-and-Spoke** · Kiến trúc **layered-stack** · Khu vực **`asia-southeast1` (Singapore)**
+[![Terraform](https://img.shields.io/badge/Terraform-1.14.6-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![Google Cloud Platform](https://img.shields.io/badge/Google_Cloud-6.50.0-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://cloud.google.com/)
+[![Built with Love](https://img.shields.io/badge/Architecture-Enterprise_Best_Practices-success?style=for-the-badge)](https://github.com/)
+[![Region Focus](https://img.shields.io/badge/Region-asia--southeast1-blue?style=for-the-badge)](https://cloud.google.com/about/locations)
 
-![Terraform](https://img.shields.io/badge/Terraform-1.14.6-7B42BC?logo=terraform&logoColor=white)
-![Google Cloud](https://img.shields.io/badge/Google_Cloud-Provider_6.50.0-4285F4?logo=googlecloud&logoColor=white)
-![IaC](https://img.shields.io/badge/Infrastructure-as_Code-success)
-![Region](https://img.shields.io/badge/Region-asia--southeast1-blue)
+**Mô hình Hub-and-Spoke** • **Kiến trúc Layered-Stack 5 tệp độc lập** • **Ready for Day-2 Ops & Security Guardrails**
 
 </div>
 
 ---
 
-## 📑 Mục lục
+## 📑 Mục lục điều hướng nhanh
 
-1. [Landing Zone là gì & vì sao cần?](#1-landing-zone-là-gì--vì-sao-cần)
-2. [Bức tranh tổng thể](#2-bức-tranh-tổng-thể)
-3. [Quyền sở hữu theo đội nhóm (Ownership)](#3-quyền-sở-hữu-theo-đội-nhóm-ownership)
-4. [Các kịch bản phối hợp giữa các team](#4-các-kịch-bản-phối-hợp-giữa-các-team)
-5. [Kiến trúc source code](#5-kiến-trúc-source-code)
-6. [Hướng dẫn sử dụng](#6-hướng-dẫn-sử-dụng)
-7. [Lưu ý & vận hành về sau](#7-lưu-ý--vận-hành-về-sau)
-8. [Tech Stack](#8-tech-stack)
+| Khám phá mô hình | Vận hành & Phân Quyền | Cấu trúc hạ tầng | Cẩm nang triển khai |
+| :--- | :--- | :--- | :--- |
+| [💡 Concept & Giá trị](#1-landing-zone-l%C3%A0-g%C3%AC--v%C3%AC-sao-c%E1%BA%A7n) | [👥 Mô hình Phân quyền (IAM)](#3-quy%E1%BB%81n-s%E1%BB%9F-h%E1%BB%AFu-theo-%C4%91%E1%BB%99i-nh%C3%B3m-ownership) | [🏗️ Kiến trúc Stack & Folder](#5-ki%E1%BA%BFn-tr%C3%BAc-source-code) | [🚀 Triển khai & tfvars](#6-h%C6%B0%E1%BB%9Bng-d%E1%BA%ABn-s%E1%BB%AD-d%E1%BB%A5ng) |
+| [🌐 Bức tranh kiến trúc](#2-b%E1%BB%A9c-tranh-t%E1%BB%95ng-th%E1%BB%83) | [🟢 Kịch bản phối hợp các Team](#4-c%C3%A1c-k%E1%BB%8Bch-b%E1%BA%A3n-ph%E1%BB%91i-h%E1%BB%A3p-gi%E1%BB%AFa-c%C3%A1c-team) | [🔍 Chi tiết thành phần module](#54-chi-ti%E1%BA%BFt-c%C3%A1c-th%C3%A0nh-ph%E1%BA%A7n--soi-t%E1%BB%B1-n-module) | [🛠️ Runbook & Checklist Day-2](#7-l%C3%B0u-%C3%BD--v%E1%BA%ADn-h%C3%A0nh-v%E1%BB%81-sau-runbook) |
 
 ---
 
 ## 1. Landing Zone là gì & vì sao cần?
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
+> 💡 **Định nghĩa cốt lõi:** **Landing Zone** là bộ khung móng vững chắc (*enterprise-grade foundation*) được thiết kế đồng bộ, chuẩn hóa, giúp doanh nghiệp vận hành workload trên Google Cloud một cách **Tuyệt đối an toàn — Kiểm soát chặt chẽ — Sẵn sàng mở rộng** ngay từ những giây phút đầu tiên.
 
-> **Landing Zone** là nền móng (*foundation*) được chuẩn hóa để vận hành workload trên Google Cloud một cách **an toàn — có quản trị — mở rộng được**, ngay từ ngày đầu tiên.
+Khi lên Cloud mà thiếu đi bản thiết kế Landing Zone chuẩn mực, hậu quả nhãn tiền sẽ là: các đội tự tạo project riêng lẻ, dải IP mạng chồng lấn, quyền truy cập cấp vô tội vạ, Audit log phân mảnh rải rác và chi phí hàng tháng liên tục vượt ngưỡng. 
 
-Khi một tổ chức bắt đầu lên cloud mà không có Landing Zone, mỗi đội tự tạo project, tự dựng VPC, tự cấp quyền… dẫn đến mạng chồng dải IP, quyền cấp tràn lan, không có log tập trung, chi phí mất kiểm soát. Landing Zone giải quyết tận gốc bằng cách **thiết lập sẵn khung tổ chức, mạng, bảo mật và giám sát** theo best practice — để các đội ứng dụng chỉ việc "hạ cánh" workload vào một môi trường đã an toàn.
+Giải pháp này giải quyết triệt để bài toán đó bằng cách **thiết lập tự động hóa toàn bộ lớp mạng, danh tính, bảo mật và trung tâm vận hành tập trung** theo sát tiêu chuẩn vàng của Google Cloud Architecture Framework.
 
-### Giá trị cốt lõi
+### 📊 Giải quyết bài toán thực tế
 
-| 🎯 Vấn đề khi không có Landing Zone | ✅ Landing Zone này giải quyết |
-|---|---|
-| Project tạo lộn xộn, không phân tầng | Phân cấp **folder** rõ ràng + **project factory** đặt tên nhất quán |
-| Mạng chồng IP, không kiểm soát luồng | **Hub-and-Spoke**, Shared VPC, peering, dải IP quy hoạch sẵn |
-| Ai cũng có quyền, không least-privilege | **Service account riêng từng project** + org policies bắt buộc |
-| Lộ máy ra internet, SSH tùy tiện | Cấm external IP toàn org, truy cập qua **Bastion / IAP** |
-| Không biết ai làm gì, log rải rác | **Logging tập trung** (hot + cold archive) + scoped log view |
-| Chi phí "vỡ trận" cuối tháng | **Budget alert** nhiều ngưỡng + dashboards giám sát |
+| 🎯 Hiện trạng khi THIẾU Landing Zone | ✨ Giá trị đột phá sau khi TRẠM HẠ CÁNH hoạt động |
+| :--- | :--- |
+| **Project lộn xộn:** Không phân cấp, đặt tên tùy hứng, khó quản trị. | **Phân cấp Folder rõ ràng:** Tổ chức theo nhóm phân quyền + Project Factory chuẩn hóa đặt tên tự động. |
+| **Mạng chồng lấn IP:** Luồng traffic mạng hỗn loạn, mất kiểm soát. | **Hub-and-Spoke Grid:** Shared VPC cô lập, VPC Peering phân luồng, dải IP được thiết kế chi tiết bằng CIDR khoa học. |
+| **Quyền hạn vượt mức:** Ai cũng có quyền Admin, rủi ro bảo mật tột độ. | **Chính sách Least-Privilege:** Service Account định danh độc lập trên từng Project + Org Policies cứng rắn áp từ trên xuống. |
+| **Cổng mạng phơi bày:** VM có External IP tràn lan, phơi mình trước mã độc. | **Cổng Bastion IAP cô lập:** Chặn đứng 100% External IP toàn Organization, truy cập an toàn mã hóa qua đường hầm IAP. |
+| **Mù thông tin vận hành:** Ghi nhận Log rải rác, không có dấu vết audit. | **Trung tâm Audit Log tập trung:** Lưu trữ 2 tầng (Hot 90 ngày / GCS Cold archive 365 ngày) + phân quyền Scoped Log View. |
+| **Chi phí "vỡ trận":** Phát sinh hóa đơn bất ngờ cuối tháng do thiếu kiểm soát. | **Bức tường kiểm soát chi phí:** Budget alert đa tầng + hệ thống Dashboard trực quan phân tích chi tiêu thời gian thực. |
 
-### Dành cho ai?
+### 👥 Đối tượng sử dụng chính
 
-- **Đội Platform / Cloud Engineering** cần dựng nhanh một nền tảng tuân thủ quản trị.
-- **Đội ứng dụng (App teams)** muốn triển khai workload mà không phải lo hạ tầng mạng/bảo mật.
-- **Đội Security & Compliance** cần một môi trường có guardrails (org policies) thực thi tự động.
-- Làm **reference architecture** để nhân rộng cho nhiều môi trường/dự án khác.
-
-</details>
+* 🏢 **Platform / Cloud Engineers:** Sở hữu nền móng hạ tầng chuẩn hóa hàng đầu để bàn giao tức thì cho các dự án thành viên.
+* 🚀 **Application Teams:** Tự tin phát triển & đẩy nhanh tốc độ Go-to-market nhờ mượn hoàn toàn hạ tầng mạng/bảo mật đã được xử lý sẵn.
+* 🛡️ **Security & Compliance Auditories:** Kiểm soát tự động tuyệt đối bằng hệ thống chính sách (org policies) thực thi liên tục ở cấp cha.
 
 ---
 
 ## 2. Bức tranh tổng thể
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
-
 ### 2.1 Kiến trúc tổ chức (folder & project)
 
+Kiến trúc cây thư mục tổ chức dự án được phân cấp khoa học như sau:
+
 ```
-Organization
+Organization (Gốc tổ chức của doanh nghiệp)
 │
 ├── 📁 fldr-platform                      ← Hạ tầng dùng chung (Platform team sở hữu)
 │   │
@@ -86,10 +78,14 @@ Organization
 └── 📁 fldr-sandbox                       ← Thử nghiệm (hiện để trống — dự phòng)
 ```
 
-> **💡 Vì sao `lz-prj-sh-access` nằm trong `fldr-connectivity`?**
-> `lz-prj-sh-access` chứa **Shared-Access VPC + Bastion Host** — đây là thành phần **hạ tầng mạng**, nên nó được xếp cùng nhóm với `lz-prj-hub-net` và `lz-prj-sh-vpc` trong `fldr-connectivity` (xem [org/projects.tf](org/projects.tf#L88)). Folder `fldr-sandbox` được tạo sẵn nhưng **hiện chưa chứa project nào**, dành cho nhu cầu thử nghiệm về sau.
+> 💡 **Vì sao [lz-prj-sh-access](org/projects.tf#L88) nằm trong [fldr-connectivity](org/folders.tf)?**
+> Dự án [lz-prj-sh-access](org/projects.tf#L88) chứa **Shared-Access VPC + Bastion Host** — đây là thành phần hạ tầng kết nối cốt tử, nên nó được xếp cùng nhóm trong [fldr-connectivity](org/folders.tf) (chi tiết tại tệp [org/projects.tf](org/projects.tf#L88)). 
 
-### 2.2 Sơ đồ network topology
+---
+
+### 2.2 Sơ đồ network topology & dải IP quy hoạch
+
+Mô hình mạng Hub-and-Spoke thiết kế theo tiêu chuẩn mạng không bắc cầu (*non-transitive transit subnet grid*):
 
 ```mermaid
 flowchart TB
@@ -118,154 +114,172 @@ flowchart TB
     H -->|"Cloud NAT: internet outbound"| INET["🌐 Internet"]
 ```
 
-| Subnet | CIDR | VPC | Project | Mục đích |
-|--------|------|-----|---------|----------|
-| `gcp-sg-snet-hub-001` | `10.0.0.0/24` | Hub | `lz-prj-hub-net` | VPN termination · Router · NAT |
-| `gcp-sg-snet-app-001` | `10.20.1.0/24` | Shared | `lz-prj-sh-vpc` | Workload (qua Shared VPC) |
-| `gcp-sg-snet-shared-access-001` | `10.50.1.0/24` | Shared-Access | `lz-prj-sh-access` | Bastion Host |
+#### 📌 Quy hoạch chi tiết bảng địa chỉ IP (Subnet allocation)
 
-**Luồng chính:**
-- 🔗 **On-prem ↔ Hub:** HA VPN 2 tunnel chạy BGP, là điểm kết cuối duy nhất cho kết nối lai.
-- 🔁 **Hub ↔ Shared / Shared ↔ Shared-Access:** VPC Peering hai chiều — Hub đóng vai trò transit, mọi spoke đi qua Hub để tới on-prem.
-- 🏠 **Shared VPC:** `lz-prj-sh-vpc` là host, `lz-prj-astronomy-shop` mượn subnet `10.20.1.0/24` để chạy workload mà không cần tự quản mạng.
-- 🌐 **Cloud NAT:** workload ra internet qua NAT ở Hub, **không** cần public IP.
+| Tên Subnet | Dải CIDR | Loại VPC | Dự án chứa (Project) | Vai trò & Mục đích sử dụng |
+| :--- | :--- | :--- | :--- | :--- |
+| **`gcp-sg-snet-hub-001`** | `10.0.0.0/24` | Hub VPC | [lz-prj-hub-net](org/projects.tf#L66) | Kết cuối đường truyền VPN, định tuyến Cloud Router, thiết lập Cloud NAT |
+| **`gcp-sg-snet-app-001`** | `10.20.1.0/24` | Shared VPC | [lz-prj-sh-vpc](org/projects.tf#L77) | Cung cấp subnet kết nối cho các Workload an toàn (mượn qua cơ chế Host-Service) |
+| **`gcp-sg-snet-shared-access-001`** | `10.50.1.0/24` | Shared-Access VPC | [lz-prj-sh-access](org/projects.tf#L88) | Điểm kết nối bảo mật chạy Bastion host trung chuyển và thiết lập IAP Tunneling |
 
-</details>
+#### 🔁 Chi tiết luồng đi của dữ liệu (Traffic flows)
+* 🔗 **On-prem ↔ Hub:** Cặp HA VPN song hành cấu hình BGP là tuyến giao thức kết cuối vật lý duy nhất, ngăn tuyệt mật mọi nguy cơ rò rỉ luồng ngoài.
+* 🔁 **Hub ↔ Shared / Shared ↔ Shared-Access:** Liên kết thông suốt qua VPC Peering hai chiều độc lập. Hub đóng vai trò transit điều khiển, mọi Spoke phải trung chuyển qua Hub để tiếp cận on-premises.
+* 🏠 **Shared VPC Architecture:** [lz-prj-sh-vpc](org/projects.tf#L77) là Host quản lý lớp mạng vật lý, trong khi dự án ứng dụng [lz-prj-astronomy-shop](org/projects.tf#L110) đăng ký tư cách Service project mượn dải `10.20.1.0/24` chạy workload cô lập mà không cần bận tâm quản trị vĩ mô.
+* 🌐 **Cloud NAT Outbound:** Các VMs thuộc vùng chịu đựng an toàn, ra internet cập nhật bản vá qua Cloud NAT đặt tại Hub VPC — tuyệt đối không lộ diện Public IP ra ngoài thế giới.
 
 ---
 
 ## 3. Quyền sở hữu theo đội nhóm (Ownership)
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
+Landing Zone được thiết kế với triết lý **"Phân rã trách nhiệm — Vận hành độc lập"** để nhiều biệt đội cùng phối hợp mà không bao giờ giẫm chân lên nhau. Mỗi Folder hay Terraform Stack đều có một **Đội chủ quản cốt lõi (Owner)** chịu trách nhiệm toàn quyền thay đổi, các đội khác chỉ có quyền tiếp cận tối giản ở mức an toàn nhất.
 
-Landing Zone được thiết kế để **nhiều đội cùng vận hành mà không giẫm chân nhau**. Mỗi folder/stack có một **đội chủ quản (owner)** chịu trách nhiệm thay đổi, các đội khác chỉ có quyền ở mức cần thiết (least privilege).
+### 🗺️ 3.1 Bản đồ phân quyền theo Folder & Vai trò
 
-### 3.1 Bản đồ phân quyền theo folder
+| Phạm vi quản lý | Đội chủ quản (Owner) | Vai trò vận hành chính | Quyền hạn tiêu biểu (IAM Roles) |
+| :--- | :--- | :--- | :--- |
+| 🏢 **Organization (Root)** | **Cloud Foundation Team** | Tạo lập cây Folder, Project Factory, áp đặt Org Policy cấp cao, cấp phát tài khoản Billing | `roles/resourcemanager.organizationAdmin`, `roles/resourcemanager.folderAdmin`, `roles/billing.admin`, `roles/compute.xpnAdmin` |
+| 📁 **fldr-connectivity** | **Network Operations Team** | Cấu hình VPC, phân dải Subnets, thiết lập Peering, định cấu hình Cloud NAT, HA VPN, Cloud DNS | `roles/compute.networkAdmin`, `roles/dns.admin` |
+| 📁 **fldr-management** | **Platform / SRE Team** | Thu thập Logging trung tâm, thiết lập Alerts/Dashboards, giám sát Budget tiêu dùng | `roles/logging.admin`, `roles/monitoring.admin`, `roles/billing.viewer` |
+| 🔑 **fldr-management → security** | **Security & Compliance Team** | Quản lý vòng đời KMS keys, lưu trữ Secret Manager, giám sát Security Command Center | `roles/cloudkms.admin`, `roles/secretmanager.admin`, `roles/securitycenter.admin` |
+| 📁 **fldr-workload** | **Application Engineering Teams** | Triển khai và vận hành mã nguồn ứng dụng, mượn hạ tầng Shared VPC để chạy dịch vụ | `roles/compute.instanceAdmin`, `roles/compute.networkUser`, `roles/logging.logWriter` |
+| 📁 **fldr-sandbox** | **Toàn bộ nhân sự (Self-Service)**| Môi trường thử nghiệm Sandbox cô lập, tự do sáng tạo, không ràng buộc Production | Quyền hạn mở rộng được giới hạn nghiêm ngặt trong ranh giới dự án |
 
-| Folder / Phạm vi | Đội chủ quản | Vai trò chính | Quyền tiêu biểu |
-|------------------|--------------|----------------|------------------|
-| 🏢 **Organization** (gốc) | **Cloud Foundation / Org Admin** | Tạo folder, project, áp org policy, gán billing | `organizationAdmin`, `folderAdmin`, `billing.admin`, `compute.xpnAdmin` |
-| 📁 **fldr-connectivity** | **Network team** | Quản VPC, subnet, peering, NAT, VPN, DNS, Bastion | `compute.networkAdmin`, `dns.admin` |
-| 📁 **fldr-management** | **Platform / SRE team** | Logging, monitoring, dashboards, budget | `logging.admin`, `monitoring.admin`, `billing.viewer` |
-| 📁 **fldr-management → security** | **Security team** | KMS, Secret Manager, Security Command Center | `cloudkms.admin`, `secretmanager.admin`, `securitycenter.admin` |
-| 📁 **fldr-workload** | **App / Product teams** | Triển khai & vận hành ứng dụng trên Shared VPC | `compute.instanceAdmin`, `compute.networkUser`, `logging.logWriter` |
-| 📁 **fldr-sandbox** | **Mọi đội (tự phục vụ)** | Thử nghiệm, không ràng buộc production | quyền rộng hơn trong phạm vi cô lập |
+---
 
-### 3.2 Service account vận hành (least privilege)
+### 🛡️ 3.2 Service Account tự động hóa (Least Privilege)
 
-Mỗi project có một service account riêng, chỉ giữ đúng quyền cần thiết — định nghĩa tại [security/iam.tf](security/iam.tf):
+Mỗi dự án được gán một **Service Account định danh độc lập**, chỉ sở hữu quyền hạn cực kỳ tinh gọn cho vai trò của mình. Các tài khoản này đại diện cho sự tách biệt ranh giới bảo mật tối đa (định nghĩa chi tiết tại [security/iam.tf](security/iam.tf)):
 
-| Service Account | Thuộc project | Quyền | Đội phụ trách |
-|-----------------|---------------|-------|----------------|
-| `gcp-sg-sa-hub-net-001` | hub-net | `compute.networkAdmin`, `dns.admin`, `compute.xpnAdmin` (org) | Network |
-| `gcp-sg-sa-sh-vpc-001` | sh-vpc | `compute.networkAdmin` | Network |
-| `gcp-sg-sa-sh-access-001` | sh-access | `monitoring.metricWriter`, `logging.logWriter` | Network / Platform |
-| `gcp-sg-sa-astronomy-shop-001` | astronomy-shop | `monitoring.metricWriter`, `logging.logWriter` | App team |
+| Service Account vận hành | Dự án trực thuộc | Quyền hạn cốt lõi | Biệt đội đại diện |
+| :--- | :--- | :--- | :--- |
+| **`gcp-sg-sa-hub-net-001`** | `hub-net` | `roles/compute.networkAdmin`, `roles/dns.admin`, `roles/compute.xpnAdmin` | Network Ops Team |
+| **`gcp-sg-sa-sh-vpc-001`** | `sh-vpc` | `roles/compute.networkAdmin` | Network Ops Team |
+| **`gcp-sg-sa-sh-access-001`** | `sh-access` | `roles/monitoring.metricWriter`, `roles/logging.logWriter` | Platform Team |
+| **`gcp-sg-sa-astronomy-shop-001`** | `astronomy-shop` | `roles/monitoring.metricWriter`, `roles/logging.logWriter` | Core App Team |
 
-> **⚠️ Hiện trạng triển khai:** Để đơn giản hóa demo, IAM cấp người dùng hiện gán toàn bộ vai trò org-level cho **một** principal (`var.user_email` trong [security/iam.tf](security/iam.tf)). **Trong môi trường thật**, hãy thay bằng **Google Groups theo đội** (vd `grp-network-admins@`, `grp-platform-sre@`, `grp-security@`, `grp-app-astronomy@`) và gán vai trò ở **cấp folder** thay vì cấp org, theo đúng bảng phân quyền ở mục 3.1. Đây là thay đổi nên thực hiện trước khi đưa lên production.
+> ⚠️ **KHUYẾN NGHỊ TRƯỚC SẢN XUẤT (PRODUCTION READY):** Để tối giản hóa mã kiểm thử demo, một số quyền hạn toàn cục hiện được gán trực tiếp cho một địa chỉ email định danh thông qua tham số `var.user_email` tại tệp [security/iam.tf](security/iam.tf). Khi đưa lên môi trường sản xuất chính thức, bạn **bắt buộc** phải chuyển đổi cấu hình này sang hình thức **Google Groups** (ví dụ: `grp-net-admins@company.com`, `grp-security-audit@company.com`) áp quyền tại cấp Folder tương ứng để đảm bảo tính sẵn sàng quản trị lâu dài.
 
-### 3.3 Ma trận RACI (ai làm gì khi thay đổi)
+---
 
-> **R**esponsible (thực thi) · **A**ccountable (chịu trách nhiệm cuối) · **C**onsulted (tham vấn) · **I**nformed (được thông báo)
+### 📋 3.3 Ma trận trách nhiệm phối hợp RACI
 
-| Hành động | Org Admin | Network | Platform/SRE | Security | App team |
-|-----------|:--------:|:-------:|:------------:|:--------:|:--------:|
-| Tạo folder / project mới | **A/R** | C | C | C | I |
-| Sửa org policy (guardrails) | A | C | C | **R** | I |
-| Thay đổi VPC / subnet / peering | I | **A/R** | C | C | I |
-| Mở firewall cho ứng dụng | I | **A/R** | I | C | **C** |
-| Cấp dải IP cho workload mới | I | **A/R** | I | I | C |
-| Triển khai / cập nhật ứng dụng | I | I | C | I | **A/R** |
-| Thay đổi cấu hình logging/monitoring | I | I | **A/R** | C | I |
-| Quản lý secret / KMS key | I | I | C | **A/R** | C |
-| Điều chỉnh ngân sách (budget) | A | I | **R** | I | C |
+> 💡 **Chú ý viết tắt:** **R**esponsible (Thực thi) · **A**ccountable (Chịu trách nhiệm cuối) · **C**onsulted (Tham vấn ý kiến) · **I**nformed (Được thông báo)
 
-</details>
+| Kịch bản thay đổi hạ tầng | Org Admin | Network Team | Platform SRE | Security Team | App Team |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Cấp Folder/Project mới** | 🥇 **A/R** | C | C | C | I |
+| **Sửa đổi Policy bảo mật (Org Policy)** | A | C | C | 🥇 **R** | I |
+| **Cấu hình VPC / Routing / Peering** | I | 🥇 **A/R** | C | C | I |
+| **Mở cổng lửa chặn/cho phép (Firewall)** | I | 🥇 **A/R** | I | C | **C** |
+| **Đăng ký dải IP / Subnet cho App mới** | I | 🥇 **A/R** | I | I | C |
+| **Triển khai phiên bản ứng dụng mới** | I | I | C | I | 🥇 **A/R** |
+| **Thay đổi cấu hình Log Buckets/Alerts** | I | I | 🥇 **A/R** | C | I |
+| **Quy trình xoay vòng KMS Keys/Secrets** | I | I | C | 🥇 **A/R** | C |
+| **Thay đổi hạn mức ngân sách (Budget alert)**| A | I | 🥇 **R** | I | C |
 
 ---
 
 ## 4. Các kịch bản phối hợp giữa các team
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
+Để minh chứng cho sức mạnh phối hợp của Landing Zone, dưới đây là **5 kịch bản vận hành thực tế chuẩn hóa Day-2 Ops**:
 
-Dưới đây là những luồng làm việc thực tế thường gặp, cho thấy Landing Zone giúp các đội phối hợp **trơn tru và an toàn** ra sao.
-
-### 🟢 Kịch bản A — App team triển khai workload mới
+### 🟢 Kịch bản A: Triển khai dự án & Workload mới lên Cloud
+*Khi App Team muốn có một dải mạng an toàn để chạy ứng dụng độc lập.*
 
 ```mermaid
 sequenceDiagram
-    participant App as App team
-    participant Net as Network team
-    participant Plat as Platform/SRE
-    App->>Net: Yêu cầu subnet + dải IP cho service mới
-    Net->>Net: Thêm subnet vào connectivity/, terraform apply
-    Net-->>App: Cấp networkUser trên subnet (Shared VPC)
-    App->>App: Tạo service project, attach vào Shared VPC host
-    App->>Net: Yêu cầu firewall rule (port ứng dụng)
-    Net->>Net: Cập nhật firewall, apply
-    App->>App: Deploy workload trong fldr-workload
-    App->>Plat: Bật log/metric (đã có sẵn sink tập trung)
-    Plat-->>App: Cấp scoped log view để App tự xem log
+    autonumber
+    actor App as Application Team
+    actor Net as Network Team
+    actor Plat as Platform SRE Team
+
+    App->>Net: Yêu cầu định danh: xin cấp Subnet & dải IP mới
+    Note over Net: Network Team kiểm duyệt trùng lặp dải IP<br/>trên IPAM/Trình quản lý tập trung
+    Net->>Net: Mở file connectivity/subnets.tf thêm Subnet, chạy Terraform Apply
+    Net-->>App: Ủy quyền vai trò networkUser trên Subnet tương ứng
+    App->>App: Khởi tạo Service Project, liên kết vào Shared VPC Host
+    App->>Net: Yêu cầu mở cổng dịch vụ (Firewall Rules)
+    Net->>Net: Thêm cấu hình Firewall, apply
+    App->>App: Đẩy ứng dụng an toàn chạy trong fldr-workload
+    App->>Plat: Yêu cầu cấp tài nguyên quan sát log/metrics
+    Plat-->>App: Phân quyền Scoped Log View để App Team tự vận hành log
 ```
 
-**Điểm mấu chốt:** App team **không** được trực tiếp sửa mạng. Họ yêu cầu Network team — đảm bảo dải IP và firewall luôn được kiểm soát tập trung.
+**💡 Điểm mấu chốt:** App Team tuyệt đối **không** được tự ý thay đổi hệ thống định tuyến, dải IP mạng hay Firewall. Mọi thay đổi đều được kiểm soát và ghi nhận tập trung qua Network Team nhằm bảo vệ an toàn cao nhất cho toàn khu vực.
 
-### 🟠 Kịch bản B — Truy cập vận hành qua Bastion (không lộ máy ra internet)
+---
 
-Org policy **cấm external IP toàn org**; chỉ Bastion Host được ngoại lệ (xem [org/org-policies.tf](org/org-policies.tf)).
+### 🛡️ Kịch bản B: Truy cập bảo mật tuyệt đối qua Bastion (Zero External IP)
+*Chính sách chặn đứng nguy cơ thâm nhập VM từ Internet.*
 
-1. Kỹ sư đăng nhập Bastion qua **IAP / OS Login** (không cần VPN cá nhân).
-2. Từ Bastion (trong Shared-Access VPC, peering tới Shared VPC), truy cập nội bộ tới workload.
-3. Mọi phiên truy cập đều đi qua **OS Login** → có danh tính, có log → Security team audit được.
+1. **Khởi tạo kết nối:** Lập trình viên sử dụng kết nối bảo mật **Identity-Aware Proxy (IAP) & OS Login** thông qua Terminal mà không cần lộ địa chỉ IP ra mạng công cộng.
+2. **Trung chuyển an toàn:** Điểm kết nối trung gian an toàn là Bastion Host nằm biệt lập ở dự án [org/projects.tf](org/projects.tf#L88).
+3. **Tiếp cận dịch vụ:** Từ Bastion Host (dải mạng `10.50.1.0/24`), đi theo đường hầm Peering nội bộ sang dự án [org/projects.tf](org/projects.tf#L77) kết nối trực tiếp đến các máy ảo (VMs) dịch vụ ở dải `10.20.1.0/24`.
+4. **Kiểm tra dấu vết:** Mọi vết đăng nhập và lịch sử gõ lệnh đều lưu trữ tập trung tại OS Login, giúp Security Team thực hiện audit nhanh chóng.
 
-> Network team sở hữu Bastion; Security team định nghĩa ai được cấp `osLogin`; App team là người dùng cuối.
+---
 
-### 🔵 Kịch bản C — Kết nối lai (Hybrid) về on-premises
+### 🌐 Kịch bản C: Thiết lập kết nối Hybrid với On-Premises
+*Khi dịch vụ trên Cloud cần truy vấn kho dữ liệu gốc đặt tại Datacenter nội bộ.*
 
-1. **Network team** bật HA VPN trong [connectivity/vpns.tf](connectivity/vpns.tf) bằng cách điền tham số trong `connectivity/terraform.tfvars`.
-2. **Security team** cung cấp/duyệt `vpn_shared_secret_*` qua Secret Manager (không commit).
-3. Hai tunnel BGP thiết lập tới on-prem; route lan tỏa qua Hub VPC tới các spoke.
-4. **App team** workload truy cập được tài nguyên on-prem mà không cần cấu hình gì thêm.
+1. **Yêu cầu hạ tầng:** Network team tiến hành thiết lập tham số VPN, ASN của On-prem tại tệp [connectivity/vpns.tf](connectivity/vpns.tf) và file cấu hình biến.
+2. **Bảo mật bí mật:** Security team kiểm duyệt và cấp phát khóa mã hóa chung (`vpn_shared_secret`) an toàn thông qua Secret Manager, tuyệt mật không lưu trữ văn bản rõ lên kho mã nguồn.
+3. **Kích hoạt tức thì:** Triển khai hạ tầng cấu hình song song 2 luồng HA VPN chạy định tuyến động BGP tự phục hồi lỗi.
+4. **Thông suốt toàn tuyến:** Dải mạng của On-prem tự động định tuyến thông suốt từ Hub VPC qua các Spoke, giúp các ứng dụng trong Spoke giao tiếp trực tiếp với nội bộ không gặp rào cản.
 
-### 🟣 Kịch bản D — Siết guardrail / phản ứng sự cố bảo mật
+---
 
-1. **Security team** phát hiện rủi ro (vd: cần chặn thêm một loại tài nguyên).
-2. Security cập nhật **org policy** trong [org/org-policies.tf](org/org-policies.tf), chạy `plan`, **tham vấn** Network/App về tác động.
-3. Org Admin duyệt & apply ở stack `org`.
-4. Thay đổi có hiệu lực toàn org tức thì; các đội được **thông báo (Informed)** qua kênh chung.
+### 🛑 Kịch bản D: Tự động khóa và vá lỗ hổng toàn hệ thống
+*Áp đặt chính sách siết chặt bảo mật toàn Organization.*
 
-### 🟡 Kịch bản E — Kiểm soát chi phí
+1. **Yêu cầu an toàn:** Ban quản trị ban hành chính sách mới cấm tạo Service Account Keys bừa bãi tại tệp [org/org-policies.tf](org/org-policies.tf).
+2. **Đánh giá ảnh hưởng:** Thực hiện lệnh `terraform plan` trên Stack `org` nhằm rà soát và đánh giá các khóa kế thừa đang hoạt động.
+3. **Thực thi cấp tốc:** Org Admin thông qua và kích hoạt lệnh Apply hạ tầng.
+4. **Áp dụng diện rộng:** Chính sách bảo mật mới lan tỏa từ Root Organization xuống 100% các Folder con và Project con tức thì, vô hiệu hóa các hành vi vi phạm policy.
 
-1. **Platform/SRE** theo dõi dashboard chi phí và budget alert ($100/tháng, ngưỡng 50/80/100% + forecast).
-2. Khi gần ngưỡng, SRE rà soát theo project (mỗi project có label `stack`/`environment`).
-3. SRE phối hợp App team tối ưu tài nguyên; báo cáo Org Admin nếu cần nâng ngân sách.
+---
 
-</details>
+### 📊 Kịch bản E: Bảo vệ ngân sách & Tối ưu chi phí hàng tháng
+*Đảm bảo chi phí hạ tầng luôn nằm trong vùng kiểm soát minh bạch.*
+
+1. **Giám sát trực quan:** Toàn bộ chi tiêu của các dự án được đưa về bảng phân tích Dashboard tạo bởi tệp [management/monitoring.tf](management/monitoring.tf).
+2. **Cảnh báo sớm:** Khi chi phí chạm mốc thiết lập, hệ thống cảnh báo tích hợp tại tệp [management/budget.tf](management/budget.tf) tự động gửi email thông báo về Platform SRE.
+3. **Tìm kiếm nguyên nhân:** Nhờ hệ thống nhãn dán tự động của Project Factory định danh chính xác chủ sở hữu của từng máy ảo, SRE dễ dàng làm việc với App team để thu hồi máy rác và tối ưu hiệu suất sử dụng.
 
 ---
 
 ## 5. Kiến trúc source code
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
+Mã nguồn được phân tách khoa học thành **Layered-Stack 5 tệp độc lập tuyệt đối**. Mỗi thư mục sở hữu một **GCS remote state backend riêng lẻ** nhằm tối thiểu hóa phạm vi ảnh hưởng khi xảy ra sự cố hạ tầng (*blast radius*), giúp các đội độc lập triển khai mà không bị ách tắc.
 
-Source code chia thành **5 Terraform stack độc lập**, mỗi stack có **GCS remote state backend riêng**. Cách chia này giảm *blast radius*, cho phép từng đội apply tầng của mình độc lập, và phân quyền theo tầng.
+```
+📁 GCP-Landing-Zone (Mã nguồn hạ tầng)
+│
+├── 📁 org/            # Layer 1: Cấu trúc Folder, Project Factory & Org Policies (Owner: Org Admin)
+├── 📁 connectivity/   # Layer 2: Thiết lập mạng Hub-Spoke, HA VPN, Cloud NAT, DNS, Firewalls (Owner: Network Team)
+├── 📁 security/       # Layer 3: Định quyền IAM, Service Accounts, Hierarchical Firewall Policy (Owner: Security Team)
+├── 📁 workload/       # Layer 4: Tài nguyên ứng dụng mẫu, triển khai Bastion VM (Owner: App Team)
+└── 📁 management/     # Layer 5: Nhật ký tập trung, Monitoring Dashboards, Ngân sách (Owner: Platform SRE)
+```
 
-### 5.1 Bố cục các stack
+### 🗂️ 5.1 Phân cấp vai trò chi tiết các Stack
 
-| # | Stack | Thư mục | Đội chủ quản | Mô tả |
-|---|-------|---------|--------------|-------|
-| 1 | **org** | `org/` | Org Admin | Phân cấp folder, project factory, org policies |
-| 2 | **connectivity** | `connectivity/` | Network | VPC, subnet, peering, NAT, HA VPN, DNS, firewall |
-| 3 | **security** | `security/` | Security | IAM, service account, hierarchical firewall policy |
-| 4 | **workload** | `workload/` | App team | Bastion VM + workload mẫu |
-| 5 | **management** | `management/` | Platform/SRE | Logging, monitoring, dashboards, budget |
+| Thứ tự áp dụng | Tên Stack | Thư mục mã nguồn | Đội ngũ quản lý | Vai trò hạ tầng cốt lõi |
+| :---: | :--- | :--- | :--- | :--- |
+| **01** | 🔥 **org** | [org/](org/) | Org Admin Team | Đặt móng Folder, Project Factory cấp phát tài khoản tự động, cấu hình Org Policy |
+| **02** | 🌐 **connectivity** | [connectivity/](connectivity/) | Network Ops Team | Thiết lập dải mạng VPC, các tuyến Peering, VPN, Cloud NAT định tuyến liên miền |
+| **03** | 🔑 **security** | [security/](security/) | Security Team | Tạo lập Service Account vận hành, phân quyền IAM, thi triển Firewall cấp cao |
+| **04** | 🚀 **workload** | [workload/](workload/) | Application Team | Triển khai VMs, môi trường ứng dụng và điểm kết nối nội bộ |
+| **05** | 📊 **management** | [management/](management/) | Platform/SRE Team | Centralized log export, dựng dashboard giám sát sức khỏe hạ tầng, gán mốc cảnh báo ngân sách |
 
-> Stack 2 (`connectivity`) và stack 3 (`security`) độc lập nhau → có thể apply **song song**.
+> 📌 **Mẹo nhỏ:** Stack 2 ([connectivity/](connectivity/)) và Stack 3 ([security/](security/)) có tính chất song song, không phụ thuộc chéo nên có thể triển khai chạy đồng thời để đẩy nhanh tiến độ bàn giao hạ tầng.
 
-### 5.2 Phụ thuộc giữa các stack
+---
+
+### 🔗 5.2 Sơ đồ luồng phụ thuộc giữa các Stack (Dependencies)
+
+Mối quan hệ phụ thuộc định tuyến giữa các lớp Stack hạ tầng được biểu diễn như sau:
 
 ```mermaid
 graph TD
@@ -278,33 +292,37 @@ graph TD
     A --> E
 ```
 
-Dữ liệu chia sẻ giữa các stack qua data source `terraform_remote_state` (xem `remote.tf` trong mỗi stack).
+Các Stack trao đổi dữ liệu an toàn chéo lẫn nhau thông qua Data Source `terraform_remote_state` (được khai báo tại tệp `remote.tf` ở dòng đầu mỗi thư mục).
 
-### 5.3 Cấu trúc thư mục
+---
+
+### 📂 5.3 Cấu trúc thư mục cụ thể
+
+Bản đồ mã nguồn của dự án Landing Zone:
 
 ```
 landing-zone/
-├── org/                  # 🏢 Folder hierarchy, projects, org policies
-│   ├── folders.tf            Phân cấp folder
-│   ├── projects.tf           Project factory (toàn bộ project)
-│   ├── org-policies.tf       Guardrails toàn org
+├── org/                  # 🏢 Phân cấp Folder, dự án thành viên & Org Policies toàn cục
+│   ├── folders.tf            Phân cấp các folder chính
+│   ├── projects.tf           Project factory kiến tạo các Landing Zone project
+│   ├── org-policies.tf       Hàng rào kiểm soát an toàn tự động
 │   ├── providers.tf · backend.tf · outputs.tf · variables.tf · terraform.tfvars
 │
-├── connectivity/         # 🌐 VPC, subnet, peering, NAT, VPN, DNS, firewall
+├── connectivity/         # 🌐 Quản trị lớp mạng VPC, định tuyến, VPN và DNS
 │   ├── vpcs.tf · subnets.tf · shared-vpc.tf
 │   ├── peering.tf · routers.tf · nats.tf · vpns.tf
 │   ├── firewalls.tf · dns.tf · addresses.tf
 │   └── remote.tf · ...
 │
-├── security/             # 🔐 IAM, service accounts, org firewall policy
+├── security/             # 🔐 Trung tâm gán quyền IAM, Service Accounts an toàn
 │   ├── iam.tf · org-fw-policies.tf
 │   └── remote.tf · ...
 │
-├── workload/             # 🚀 Workload mẫu (Bastion VM)
+├── workload/             # 🚀 Tài nguyên mẫu chạy ứng dụng & Bastion VM
 │   ├── vms.tf
 │   └── remote.tf · ...
 │
-└── management/           # 📊 Logging, monitoring, dashboards, budget
+└── management/           # 📊 Hệ thống Logging lưu trữ, biểu đồ & Ngân sách cảnh báo
     ├── log-export.tf · log-views.tf
     ├── monitoring.tf · dashboards.tf · budget.tf
     └── remote.tf · ...
@@ -312,426 +330,384 @@ landing-zone/
 
 ### 5.4 Chi tiết các thành phần — "soi" từng module
 
-> Mỗi khối dưới đây mô tả **chính xác những resource có thật trong code**, đặt cạnh **vai trò** và **lý do thiết kế**, để bạn không phải mở file `.tf` mới hiểu.
+> 💡 **La bàn kiến trúc:** Toàn bộ bảng thống kê dưới đây phản ánh **chính xác 100% tài nguyên vật lý đang có trong hệ thống mã nguồn**, được đối chiếu kèm vai trò thực tế và lý do thiết kế, giúp bạn nắm bắt bản chất mà không cần truy vết code thô.
 
 <details>
-<summary><b>🏢 Module 1 — org/ · Nền tảng tổ chức & guardrails</b></summary>
+<summary><b>🏢 Module 1 — org/ · Nền tảng tổ chức, Project Factory & Chính sách tổng (Org Policies)</b></summary>
+<br>
 
-**Mục tiêu:** dựng bộ khung tổ chức và "hàng rào" (guardrails) bắt buộc, áp **trước tiên** để mọi thứ tạo sau đều tuân thủ.
+**Mục tiêu:** Kiến thiết bộ khung phân cấp dạng cây kết hợp "hàng rào thực thi" (Guardrails) bắt buộc, áp dụng từ trên xuống đảm bảo mọi tài nguyên khởi tạo sau này bắt buộc phải tuyệt đối tuân thủ.
 
-**📁 [org/folders.tf](org/folders.tf) — Phân cấp folder (module `terraform-google-modules/folders` 5.1.0)**
+#### 📁 Phân cấp Folder tại [org/folders.tf](org/folders.tf) (Sử dụng Module `terraform-google-modules/folders/google` phiên bản `5.1.0`)
 
-| Cấp | Folder | Cha | Vai trò |
-|-----|--------|-----|---------|
-| L1 | `fldr-platform` | Organization | Hạ tầng dùng chung |
-| L1 | `fldr-workload` | Organization | Workload sản xuất |
-| L1 | `fldr-sandbox` | Organization | Thử nghiệm (đang trống) |
-| L2 | `fldr-management` | `fldr-platform` | Logging, monitoring, security tooling |
-| L2 | `fldr-connectivity` | `fldr-platform` | Mạng + bastion |
+| Phân cấp | Tên Folder | Mục tiêu bảo mật & Vai trò | Đội ngũ quản lý |
+| :---: | :--- | :--- | :--- |
+| **Cấp 1 (L1)** | `fldr-platform` | Thư mục cha gom toàn bộ hạ tầng dùng chung cơ bản | Cloud Foundation Team |
+| **Cấp 1 (L1)** | `fldr-workload` | Nơi tập hợp các dự án ứng dụng phục vụ kinh doanh | App Core Teams |
+| **Cấp 1 (L1)** | `fldr-sandbox` | Không gian cách ly hoàn toàn, thử nghiệm khám phá | Toàn bộ kỹ sư |
+| **Cấp 2 (L2)** | `fldr-management` | Thư mục con của platform, chứa lõi log/monitoring | Platform SRE Team |
+| **Cấp 2 (L2)** | `fldr-connectivity` | Thư mục con platform, chứa hạ tầng mạng cốt lõi | Network Ops Team |
 
-**📦 [org/projects.tf](org/projects.tf) — Project factory (module `project-factory` 17.1.0)**
+#### 📦 Project Factory tại [org/projects.tf](org/projects.tf) (Sử dụng Module `terraform-google-modules/project-factory/google` phiên bản `17.1.0`)
 
-Mỗi project chỉ bật đúng API cần dùng (`activate_apis`), gắn label (`managed_by`, `environment`, `stack`, `created_date` theo giờ +7), và `deletion_policy`:
+Mỗi dự án thành phần được khởi tạo với danh mục API kích hoạt tối giản (`activate_apis`), nhãn phân nhóm (`labels`) đồng bộ và chính sách hủy khóa (`deletion_policy`) nghiêm ngặt:
 
-| Project | Folder | Bật API tiêu biểu | Ghi chú |
-|---------|--------|-------------------|---------|
-| `lz-prj-hub-net` | connectivity | compute, orgpolicy | Hub VPC + VPN/NAT |
-| `lz-prj-sh-vpc` | connectivity | compute | Shared VPC host |
-| `lz-prj-sh-access` | connectivity | compute, **oslogin**, orgpolicy | Bastion + ngoại lệ chính sách |
-| `lz-prj-astronomy-shop` | workload | compute | Service project |
-| `gcp-platform-management` | management | logging, monitoring, bigquery, pubsub, storage, **billingbudgets** | Ops hub (random id) |
-| `gcp-platform-security` | management | **cloudkms**, **secretmanager**, **securitycenter**, pubsub | Security tooling (random id) |
+| Tên dự án (Project ID) | Thư mục cha trực thuộc | Các API cốt lõi được bật | Vai trò thực nghiệm |
+| :--- | :--- | :--- | :--- |
+| **`lz-prj-hub-net`** | `fldr-connectivity` | `compute.googleapis.com`, `orgpolicy.googleapis.com` | Lõi định tuyến, cổng kết nối VPN/NAT |
+| **`lz-prj-sh-vpc`** | `fldr-connectivity` | `compute.googleapis.com` | Máy chủ Host Shared VPC |
+| **`lz-prj-sh-access`** | `fldr-connectivity` | `compute.googleapis.com`, `oslogin.googleapis.com`, `orgpolicy.googleapis.com` | Máy chủ Bastion Host trung chuyển |
+| **`lz-prj-astronomy-shop`**| `fldr-workload` | `compute.googleapis.com` | Dự án dịch vụ ứng dụng mẫu |
+| **`gcp-platform-management`**| `fldr-management` | `logging.googleapis.com`, `monitoring.googleapis.com`, `bigquery.googleapis.com`, `pubsub.googleapis.com`, `storage.googleapis.com`, `billingbudgets.googleapis.com` | Trung tâm quan trắc & Ops Hub (Kèm ID ngẫu nhiên) |
+| **`gcp-platform-security`**| `fldr-management` | `cloudkms.googleapis.com`, `secretmanager.googleapis.com`, `securitycenter.googleapis.com`, `pubsub.googleapis.com` | Trung tâm mã khóa mật mã (Kèm ID ngẫu nhiên) |
 
 > Project ID dùng hậu tố ngẫu nhiên 4 ký tự (`random_string`) để duy nhất toàn cục.
 
-**🛡️ [org/org-policies.tf](org/org-policies.tf) — 7 org policy + 2 ngoại lệ cấp project**
+#### 🛡️ Chính sách đồng bộ Organization Policies tại [org/org-policies.tf](org/org-policies.tf)
 
-| Org policy (constraint) | Hiệu lực | Ngoại lệ |
-|--------------------------|----------|----------|
-| `compute.requireOsLogin` | Bắt buộc OS Login mọi VM | — |
-| `compute.skipDefaultNetworkCreation` | Không tạo default VPC | — |
-| `compute.vmExternalIpAccess` | **deny_all** external IP | ✅ chỉ `gcp-sg-vm-bastion-001` |
-| `iam.disableServiceAccountKeyCreation` | Cấm tạo SA key | ✅ project `sh-access` |
-| `compute.requireShieldedVm` | Bắt buộc Shielded VM | — |
-| `storage.uniformBucketLevelAccess` | Bắt UBLA mọi bucket | — |
-| `gcp.resourceLocations` | Giới hạn `in:asia-southeast1-locations` | — |
+Landing Zone triển khai **7 chính sách cưỡng chế cứng** và định nghĩa cấu hình ngoại lệ cấp dự án:
 
-> Ngoại lệ external-IP được "ghim" tới đúng **một instance bastion** theo đường dẫn zone/instance — không mở rộng cho VM khác.
+| Ràng buộc (Constraint) | Tác hại khi thiếu | Trạng thái áp dụng | Khu vực ngoại lệ (Exemptions) |
+| :--- | :--- | :--- | :--- |
+| **`compute.requireOsLogin`** | Quản lý SSH thô sơ bằng SSH-Keys cá nhân có thể rò rỉ | **Áp dụng cứng** toàn tổ chức | Không ngoại lệ |
+| **`compute.skipDefaultNetworkCreation`** | Google tự tạo VPC default có External IP rác và dải CIDR trùng lặp | **Chặn đứng** mọi sự tự phát | Không ngoại lệ |
+| **`compute.vmExternalIpAccess`** | Tài nguyên Compute bị gán IP công cộng, dễ bị rà quét cổng | **Khóa toàn bộ** (Deny All) | ✅ Chỉ đặc cách duy nhất VM `gcp-sg-vm-bastion-001` tại dự án `sh-access` |
+| **`iam.disableServiceAccountKeyCreation`** | Lập trình viên tải file SA Key JSON về máy cá nhân làm lộ lọt quyền | **Cấm tạo mới** SA Keys | ✅ Đặc cách duy nhất dự án `sh-access` phục vụ cơ chế IAP |
+| **`compute.requireShieldedVm`** | Máy ảo bị can thiệp vào tầng khởi động, nạp mã độc rootkit | **Luôn áp dụng** (Shielded Only)| Không ngoại lệ |
+| **`storage.uniformBucketLevelAccess`**| Phân quyền Bucket ACL lộn xộn dẫn đến rò rỉ dữ liệu ra internet | **Uniform Access** bắt buộc | Không ngoại lệ |
+| **`gcp.resourceLocations`** | Dữ liệu/Tài nguyên bị triển khai sang nước ngoài vi phạm luật chủ quyền | **Giới hạn** chỉ chạy tại vùng `asia-southeast1` | Không ngoại lệ |
+
 </details>
 
 <details>
-<summary><b>🌐 Module 2 — connectivity/ · Mạng Hub-and-Spoke</b></summary>
+<summary><b>🌐 Module 2 — connectivity/ · Toàn diện mạng Hub-and-Spoke Grid, Shared VPC & VPN bảo mật</b></summary>
+<br>
 
-**Mục tiêu:** quy hoạch toàn bộ mạng: 3 VPC, subnet, định tuyến, NAT, VPN lai, DNS và firewall cấp VPC. Đây là module nhiều resource nhất.
+**Mục tiêu:** Quy hoạch và cô lập mạng lưới doanh nghiệp bằng sơ đồ Hub-and-Spoke hoàn thiện, định tuyến thông minh qua Cloud NAT, thiết lập đường truyền nội dung hybrid an toàn qua HA VPN và quản trị hệ thống tên miền nội bộ.
 
-**🔹 [connectivity/vpcs.tf](connectivity/vpcs.tf) — 3 custom-mode VPC** (`auto_create_subnetworks=false`, `routing_mode=GLOBAL`)
+#### 🔹 Kiến tạo VPC vật lý tại [connectivity/vpcs.tf](connectivity/vpcs.tf) (Custom-mode VPC, tắt tự động tạo Subnet, bật định tuyến Global Route)
 
-| VPC | Project | Vai trò |
-|-----|---------|---------|
-| `gcp-sg-vpc-hub-001` | hub-net | Transit / điểm kết cuối VPN |
-| `gcp-sg-vpc-shared-001` | sh-vpc | Host cho workload |
-| `gcp-sg-vpc-shared-access-001` | sh-access | Chứa Bastion |
+| Tên VPC vật lý | Dự án quản lý sở hữu | Vai trò phân luồng |
+| :--- | :--- | :--- |
+| **`gcp-sg-vpc-hub-001`** | `lz-prj-hub-net` | Đóng vai trò Transit Hub, trung chuyển và kết cuối VPN bảo mật |
+| **`gcp-sg-vpc-shared-001`** | `lz-prj-sh-vpc` | Máy chủ Host VPC, cung cấp dải mạng con cho toàn bộ Workloads |
+| **`gcp-sg-vpc-shared-access-001`** | `lz-prj-sh-access` | Vùng đệm Shared-Access VPC, vận hành Bastion và IAP Gateways |
 
-**🔹 [connectivity/subnets.tf](connectivity/subnets.tf) — 3 subnet, đều bật VPC Flow Logs**
+#### 🔹 Thiết lập dải Subnets tại [connectivity/subnets.tf](connectivity/subnets.tf) (Kích hoạt Flow Logs & Private Google Access trên 100% Subnets)
 
-| Subnet | CIDR | flow sampling | Ghi chú |
-|--------|------|---------------|---------|
-| `gcp-sg-snet-hub-001` | `10.0.0.0/24` | 0.5 | private Google access |
-| `gcp-sg-snet-app-001` | `10.20.1.0/24` | 0.1 | workload (sampling thấp để giảm chi phí) |
-| `gcp-sg-snet-shared-access-001` | `10.50.1.0/24` | 0.5 | bastion |
+| Tên Subnet | Dải mạng CIDR | VPC liên kết | Tỷ lệ thu thập Flow Log | Lý do thiết kế |
+| :--- | :--- | :--- | :---: | :--- |
+| **`gcp-sg-snet-hub-001`** | `10.0.0.0/24` | Hub Network | `0.5` (50%) | Kết nối HA VPN, định vị Cloud Router và Cloud NAT |
+| **`gcp-sg-snet-app-001`** | `10.20.1.0/24` | Shared VPC | `0.1` (10%) | Chạy VMs dịch vụ (để sampling thấp giảm chi phí log rác) |
+| **`gcp-sg-snet-shared-access-001`**| `10.50.1.0/24` | Shared-Access | `0.5` (50%) | Chứa máy ảo bảo mật Bastion |
 
-**🔹 [connectivity/shared-vpc.tf](connectivity/shared-vpc.tf) — Shared VPC**
-- `lz-prj-sh-vpc` được bật làm **host project**.
-- `lz-prj-astronomy-shop` được attach làm **service project** → mượn subnet `10.20.1.0/24` mà không tự quản mạng.
+#### 🔹 Kết nối Shared VPC tại [connectivity/shared-vpc.tf](connectivity/shared-vpc.tf)
+* Dự án `lz-prj-sh-vpc` chuyển trạng thái sang **Host Project** cấp hệ thống.
+* Dự án ứng dụng mẫu `lz-prj-astronomy-shop` được liên kết chính thức thành **Service Project**, mượn quyền khai thác Subnet an toàn `10.20.1.0/24` để vận hành mà không cần tự phát mạng riêng.
 
-**🔹 [connectivity/peering.tf](connectivity/peering.tf) — 4 peering (2 cặp hai chiều, non-transitive)**
-- Hub ↔ Shared và Shared ↔ Shared-Access, đều `export/import_custom_routes=true` để lan route VPN.
-- Vì peering **không bắc cầu**, Bastion tới on-prem phải đi Shared → Hub.
+#### 🔹 Hoạt động kết nối Peering tại [connectivity/peering.tf](connectivity/peering.tf) (VPC Peering hai chiều độc lập, không bắc cầu)
+* Cặp Peering 1: Liên kết song thông giữa **Hub VPC** và **Shared VPC** (Bật cờ `allow_custom_route_data` để lan tỏa định tuyến VPN).
+* Cặp Peering 2: Liên kết song thông giữa **Shared VPC** và **Shared-Access VPC** (Bật cờ lan tỏa custom routes).
+* 🚫 **Rào cản thiết kế:** Do VPC Peering của GCP mang đặc tính không bắc cầu (*non-transitive*), luồng kết nối đi từ Bastion Host muốn về đến On-premise bắt buộc phải đi vòng qua mạng đệm Shared VPC trung chuyển chứ không thể đi xuyên thấu trực tiếp.
 
-**🔹 [connectivity/routers.tf](connectivity/routers.tf) + [connectivity/nats.tf](connectivity/nats.tf) — định tuyến & NAT**
-- `gcp-sg-router-hub-001`: Cloud Router ASN **65003**, advertise `ALL_SUBNETS` + dải `10.20.0.0/20` cho BGP.
-- `gcp-sg-router-nat-001` + `gcp-sg-nat-001`: Cloud NAT cho subnet app (`AUTO_ONLY` IP), log lỗi → VM private ra internet không cần public IP.
+#### 🔹 Thiết lập định tuyến Routing & NAT tại [connectivity/routers.tf](connectivity/routers.tf) và [connectivity/nats.tf](connectivity/nats.tf)
+* Kích hoạt Cloud Router **`gcp-sg-router-hub-001`** định vị tại ASN **`65003`**, đại diện quảng bá dải CIDR `10.20.0.0/24` và các subnet con cho BGP On-prem.
+* Máy chủ NAT Gateway **`gcp-sg-nat-001`** (`gcp-sg-router-nat-001`): Chạy cấu hình tự động phân dải IP (`AUTO_ONLY`), hỗ trợ lưu vết log lỗi, giúp VM nội bộ cập nhật viện từ Internet mà không bao giờ cần cấp phát Public IP.
 
-**🔹 [connectivity/vpns.tf](connectivity/vpns.tf) — HA VPN (bật có điều kiện)**
-- Chỉ tạo khi đủ 4 biến (`onprem_vpn_public_ip_0/1`, `vpn_shared_secret_1/2`) — `local.vpn_enabled`.
-- Gồm: HA VPN Gateway, External Peer Gateway (`TWO_IPS_REDUNDANCY`), **2 tunnel**, 2 BGP interface (`169.254.0.1/30`, `169.254.1.1/30`), 2 BGP peer (peer ASN **65002**).
+#### 🔹 Đường truyền Hybrid HA-VPN tại [connectivity/vpns.tf](connectivity/vpns.tf) (Tự động kích hoạt khi có đủ biến vpn)
+* Sử dụng cổng HA VPN Gateway kết nối với thiết bị đầu xa On-premise (`External Peer Gateway` chạy dự phòng 2 IP vật lý `TWO_IPS_REDUNDANCY`).
+* Vận hành song song **2 Tunnels bảo mật** định tuyến động qua cặp BGP ảo với địa chỉ IP đàm thoại `169.254.0.1/30` và `169.254.1.1/30`, liên kết sang mạng On-premise đại diện bởi ASN **`65002`**.
 
-**🔹 [connectivity/dns.tf](connectivity/dns.tf) — Cloud DNS private zone**
-- Zone `internal.lz.local.` hiển thị (visibility) cho **cả 3 VPC**.
-- A record `bastion.internal.lz.local.` → `10.50.1.100` (TTL 300).
+#### 🔹 Hệ thống Private DNS tại [connectivity/dns.tf](connectivity/dns.tf)
+* Khởi tạo Zone phân dải riêng tư mang tên **`internal.lz.local.`**, cấu hình có hiệu lực hiển thị xuyên thông trên **cả 3 VPC**.
+* Định dạng sẵn bản ghi A Record phân giải tên miền: **`bastion.internal.lz.local.`** trỏ thẳng về IP cố định `10.50.1.100` (giá trị TTL 300 giây).
 
-**🔹 [connectivity/firewalls.tf](connectivity/firewalls.tf) — 4 firewall rule cấp VPC**
+#### 🔹 Ma trận quản lý tường lửa tại [connectivity/firewalls.tf](connectivity/firewalls.tf)
 
-| Rule | Project | Nguồn → đích | Cổng |
-|------|---------|--------------|------|
-| `allow-ssh-bastion` | sh-access | `0.0.0.0/0` → tag `allow-ssh-external` | 22 |
-| `allow-bastion-ssh` | sh-vpc | `10.50.1.100/32` → tag `app-vm` | 22 |
-| `allow-vpn-hub` *(điều kiện)* | hub-net | on-prem CIDR → Hub | tcp/udp/icmp |
-| `allow-internal` | sh-vpc | `10.20.0.0/20` nội bộ | tcp/udp/icmp/ipip |
+Triển khai cấu hình 4 Tường lửa cấp VPC có chọn lọc:
 
-**🔹 [connectivity/addresses.tf](connectivity/addresses.tf)** — 1 static external IP `gcp-sg-bastion-ip-001` (PREMIUM) cho Bastion, được workload stack tiêu thụ.
+| Tên Firewall Rule | VPC áp dụng | IP Nguồn | Target Tag / Đích đến | Cổng mở | Phân tích lý do thiết kế |
+| :--- | :--- | :--- | :--- | :---: | :--- |
+| **`allow-ssh-bastion`** | Shared-Access | `0.0.0.0/0` | `allow-ssh-external` | `22` | Mở tạm thời cho Bastion (Sau này khóa thay bằng IAP IP) |
+| **`allow-bastion-ssh`** | Shared VPC | `10.50.1.100/32` | `app-vm` | `22` | Chỉ chấp nhận kết nối SSH duy nhất đi ra từ đúng Bastion IP |
+| **`allow-vpn-hub`** | Hub VPC | On-prem CIDR dải mạng | Toàn bộ VMs trong Hub | All | *(Bật có điều kiện khi có VPN)* Chấp nhận luồng hybrid |
+| **`allow-internal`** | Shared VPC | Dải nội bộ `10.20.0.0/20` | Toàn bộ VMs trong Spoke | All | Thông suốt dữ liệu nội mạng giữa các lớp dịch vụ |
+
+* Định chuẩn địa chỉ tĩnh: [connectivity/addresses.tf](connectivity/addresses.tf) cấp một external IP static **`gcp-sg-bastion-ip-001`** (Premium tier) bổ nhiệm riêng làm IP ngoại lệ cho VM Bastion.
+
 </details>
 
 <details>
-<summary><b>🔐 Module 3 — security/ · IAM & firewall policy cấp org</b></summary>
+<summary><b>🔐 Module 3 — security/ · Công tác đặc quyền (IAM), Service Accounts & Tường lửa phân cấp</b></summary>
+<br>
 
-**Mục tiêu:** thực thi least-privilege và lớp firewall nền (baseline) đánh giá **trên** rule cấp VPC.
+**Mục tiêu:** Thi hành chính sách tối giản đặc quyền (least privilege) cấp tự động và dải lọc tường lửa tiền tuyến cấp Organization chặn bụi bẩn trước khi luồng tải đi vào tường lửa VPC.
 
-**👤 [security/iam.tf](security/iam.tf) — Service account & phân quyền**
+#### 👤 Tạo lập và phân quyền cho Service Accounts tại [security/iam.tf](security/iam.tf)
 
-| Service account | Quyền (project) | Ghi chú |
-|-----------------|-----------------|---------|
-| `gcp-sg-sa-hub-net-001` | `compute.networkAdmin`, `dns.admin` | + `compute.xpnAdmin` ở **cấp org** (quản Shared VPC) |
-| `gcp-sg-sa-sh-vpc-001` | `compute.networkAdmin` | host project |
-| `gcp-sg-sa-sh-access-001` | `monitoring.metricWriter`, `logging.logWriter` | bastion |
-| `gcp-sg-sa-astronomy-shop-001` | `monitoring.metricWriter`, `logging.logWriter` | workload |
+Định hình 4 tài khoản dịch vụ thực thi tác vụ cụ thể:
 
-- `user_org_roles`: gán bộ vai trò org-level cho `user_email` (admin) — *xem cảnh báo Google Groups ở mục 3.2*.
-- **Conditional IAM:** cấp `roles/logging.viewAccessor` **có điều kiện** (CEL) chỉ đọc đúng log view `astronomy-shop` — minh hoạ phân quyền theo tài nguyên.
+| Tên Service Account | Scope quyền tại Project | Vai trò thực hiện tác vụ |
+| :--- | :--- | :--- |
+| **`gcp-sg-sa-hub-net-001`** | `roles/compute.networkAdmin`, `roles/dns.admin` | Quản lý định tuyến và sơ đồ phân dải DNS tại Hub VPC, bổ sung vai trò `roles/compute.xpnAdmin` gán tại cấp Organization để kiểm soát liên kết Shared VPC |
+| **`gcp-sg-sa-sh-vpc-001`** | `roles/compute.networkAdmin` | Vận hành toàn bộ cấu hình mạng Host Shared VPC |
+| **`gcp-sg-sa-sh-access-001`**| `roles/monitoring.metricWriter`, `roles/logging.logWriter` | Ghi log và đẩy metrics sức khỏe hệ thống máy ảo Bastion Host |
+| **`gcp-sg-sa-astronomy-shop`**| `roles/monitoring.metricWriter`, `roles/logging.logWriter`| Ghi log và đẩy metrics kiểm soát sức khỏe ứng dụng Astronomy Shop |
 
-**🧱 [security/org-fw-policies.tf](security/org-fw-policies.tf) — Hierarchical firewall policy (đánh giá theo priority)**
+* **Hàng rào bảo mật Log:** Thiết lập IAM thông minh có kèm điều kiện logic CEL (`expression` so khớp) chỉ cho phép nhóm ứng dụng Astronomy Shop sở hữu vai trò `roles/logging.viewAccessor` truy cập đọc nhật ký thuộc đúng phạm vi Log View của họ mà không được dòm ngó logs mạng Hub.
 
-| Priority | Rule | Hành động | Match |
-|----------|------|-----------|-------|
-| 1000/1001 | delegate RFC1918 (in/out) | `goto_next` | `10/8`, `172.16/12`, `192.168/16` |
-| 1002 | allow IAP SSH/RDP | `allow` | `35.235.240.0/20` cổng 22, 3389 |
-| 1004 | allow Google LB / health check | `allow` | dải `35.191/16`, `130.211/22`, `209.85.152/22`, `209.85.204/22` cổng 80, 443 |
-| 1005 | deny TOR exit nodes | `deny` | Threat Intelligence `iplist-tor-exit-nodes` |
+#### 🧱 Tường lửa phân cấp cấp Organization tại [security/org-fw-policies.tf](security/org-fw-policies.tf)
 
-> Policy được **association** trực tiếp vào tổ chức → áp cho mọi VPC, là tầng bảo vệ đầu tiên trước khi tới firewall của từng VPC.
+Đây là bức tường chắn vòng ngoài cực kỳ lợi hại, lọc sạch các truy cập nguy hiểm trước khi gói tin chạm đến firewall riêng lẻ của từng VPC:
+
+| Độ ưu tiên (Priority) | Tên quy luật | Hành vi (Action) | Điều kiện so khớp (Match) | Lý do bảo mật cốt lõi |
+| :---: | :--- | :---: | :--- | :--- |
+| **1000 & 1001** | `delegate-rfc1918-in/out`| `goto_next` | `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` | Bỏ qua kiểm tra lớp ngoài, bàn giao các luồng mạng nội bộ nội vùng cho VPC Firewall tự định quyết |
+| **1002** | `allow-iap-ssh-rdp` | `allow` | Dải IP IAP của Google `35.235.240.0/20` qua cổng `22`, `3389` | Chấp nhận kết nối hầm kỹ thuật số IAP an toàn đi vào toàn bộ máy ảo |
+| **1004** | `allow-google-lb-hc` | `allow` | Các dải IP kiểm thử sức khỏe (Health Check) hệ thống Load Balancer | Duy trì hoạt động tự động sửa lỗi và cân bằng tải của các cụm VM |
+| **1005** | `deny-tor-exit-nodes` | **deny** | Tập danh sách IP của mạng nặc danh TOR từ Threat Intelligence | Chặn đứng tức thì âm mưu thâm nhập từ hacker nặc danh |
+
 </details>
 
 <details>
-<summary><b>🚀 Module 4 — workload/ · Bastion VM (mẫu)</b></summary>
+<summary><b>🚀 Module 4 — workload/ · Triển khai hạ tầng ứng dụng mẫu & cấu hình VM Bastion</b></summary>
+<br>
 
-**Mục tiêu:** ví dụ một workload hoàn chỉnh, đồng thời là cửa ngõ vận hành (bastion).
+**Mục tiêu:** Cung cấp bản vẽ máy ảo vận hành đại diện cho App Team, đồng thời là chốt chặn kỹ thuật bảo mật Bastion vận hành cho toàn khu vực.
 
-**🖥️ [workload/vms.tf](workload/vms.tf) — `gcp-sg-vm-bastion-001`**
+#### 🖥️ Chi tiết thiết kế VM Bastion tại [workload/vms.tf](workload/vms.tf)
 
-| Thuộc tính | Giá trị |
-|-----------|---------|
-| Máy / OS | `e2-micro` · Debian 12 · disk 20GB pd-standard |
-| Mạng | Shared-Access VPC, IP nội bộ cố định `10.50.1.100` |
-| External IP | gắn static IP từ connectivity (ngoại lệ org policy) |
-| Service account | `sa-sh-access`, scope `cloud-platform` |
-| Bảo mật | **Shielded VM** (secure boot + vTPM + integrity), `enable-oslogin=TRUE` |
-| Khởi động | startup script tự cài **Google Cloud Ops Agent** (log + metric) |
-| An toàn | `deletion_protection = true` |
+| Thuộc tính Compute | Giá trị tham chiếu hệ thống | Mục tiêu bảo mật / Kỹ thuật |
+| :--- | :--- | :--- |
+| **Thế hệ máy ảo** | `e2-micro` (Chạy Debian Linux 12, ổ cứng 20GB tiêu chuẩn) | Tiết kiệm chi phí, tối ưu điện năng vận hành |
+| **Mạng kết nối** | Đặt trong Spoke Shared-Access VPC, IP nội bộ cố định `10.50.1.100` | Cô lập khỏi môi trường chứa Database hoặc mã chạy Production |
+| **Định danh IP ngoài** | Gán IP ngoại lệ tĩnh `gcp-sg-bastion-ip-001` từ stack connectivity | Chấp nhận cho kết nối quản trị đi qua ranh giới Org Policy |
+| **Cấu hình SA gắn kèm**| `sa-sh-access` chạy quyền thu hẹp `cloud-platform` | Bảo mật Least-privilege cấp Token |
+| **Bảo mật phần cứng** | **Shielded VM** (Bật Secure Boot + vTPM + Integrity Monitoring) | Chống giả mạo nhân phần cứng ảo hóa |
+| **Giao thức định danh** | Bật cờ `enable-oslogin=TRUE` | Chuyển đổi định danh SSH sang tài khoản Google Cloud IAM |
+| **Tự động hóa Day-2** | Script tự động nạp và khởi chạy cấu hình **Google Cloud Ops Agent** | Thu thập chỉ số tài nguyên RAM, HDD, Logs cấp ứng dụng đẩy về Ops Hub |
 
-> Startup script cài Ops Agent chính là lý do các alert **memory/disk** (mục 5.6) có dữ liệu. Đây là nơi App team nhân bản pattern cho VM của mình.
 </details>
 
 <details>
-<summary><b>📊 Module 5 — management/ · Ops hub (logging · monitoring · dashboards · budget)</b></summary>
+<summary><b>📊 Module 5 — management/ · Bộ não trung tâm vận hành tập trung (Logging, Monitoring, Dashboards & Budget)</b></summary>
+<br>
 
-**Mục tiêu:** quan sát toàn cảnh và kiểm soát chi phí từ một project trung tâm. **Chi tiết đầy đủ ở mục 5.6** — tóm tắt nhanh:
+**Mục tiêu:** Tập hợp toàn vẹn thông tin vận hành từ tất cả các dự án con đổ về một điểm, thiết lập hệ thống phát hiện sự cố sớm và rào cản tài chính tự động.
 
-- [management/log-export.tf](management/log-export.tf): 3 sink (org→hot, org→GCS cold, platform→hot) + 3 bucket, dùng module `log-export` 10.0.0.
-- [management/log-views.tf](management/log-views.tf): 2 scoped log view (astronomy-shop, hub-net).
-- [management/monitoring.tf](management/monitoring.tf): Metrics Scope gom 4 project, 1 email channel, 1 uptime check, **4 alert policy**.
-- [management/dashboards.tf](management/dashboards.tf): 2 dashboard (Infrastructure Overview, Availability).
-- [management/budget.tf](management/budget.tf): budget $100/tháng, 4 ngưỡng cảnh báo.
+#### 🗄️ Kiến trúc Logs 2 tầng lưu trữ tại [management/log-export.tf](management/log-export.tf)
+* Toàn bộ Audit Logs từ cấp Organization được thu thập tự động thông qua Sink quy mô lớn đổ về dự án quản lý.
+* Log được lưu trữ thành 2 tầng rõ rệt: Tầng nóng (Cloud Logging Bucket lưu nhanh 90 ngày) và Tầng lạnh (Archive GCS Bucket lưu trữ kéo dài 365 ngày phục vụ thanh tra audit chi phí thấp).
 
-👉 Xem bảng đầy đủ tại [mục 5.6](#56-folder-opsmanagement--chi-tiết-logging--monitoring--dashboards--budget).
-</details>
+#### 🔍 Scoped Log Views cấp tài nguyên tại [management/log-views.tf](management/log-views.tf)
+* Tự động lọc ra 2 vùng View chuyên biệt: Chỉ thu hoạch Log của dự án `astronomy-shop` cho App Team xem, và chỉ lọc Log liên quan định tuyến mạng cho Network Team xử lý sự cố.
 
-### 5.5 Quy ước đặt tên
+#### 📈 Trạm quan trắc chỉ số sức khỏe hệ thống tại [management/monitoring.tf](management/monitoring.tf)
+* Định cấu hình gom luồng chỉ số Metrics Scope từ 4 dự án liên thông.
+* Tích hợp Cảnh báo qua Email chỉ định, Uptime Check kiểm tra trạng thái cổng SSH Bastion mỗi 60 giây và kích hoạt 4 bộ Alert chính sách CPU, RAM, Disk, Uptime chạm ngưỡng.
 
-```
-<scope>-<type>-<name>-<index>
-```
+#### 📊 Biểu đồ trực quan sinh động tại [management/dashboards.tf](management/dashboards.tf)
+* Thiết lập 2 Dashboard giám sát hạ tầng thời gian thực biểu thị trực quan hiệu năng tải VM, biểu đồ RAM, ổ cứng trống và biểu đồ tỷ lệ duy trì sẵn sàng của VM đệm.
 
-| Thành phần | Ví dụ |
-|-----------|-------|
-| `scope` | `gcp-sg`, `lz` |
-| `type` | `prj`, `vpc`, `snet`, `fw`, `vm`, `sa`, `vpn` |
-| `name` | `hub-net`, `sh-vpc`, `bastion` |
-| `index` | `001`, `002` |
-
-Project ID có hậu tố ngẫu nhiên 4 ký tự để đảm bảo duy nhất toàn cục: `lz-prj-hub-net-<xxxx>`.
-
-### 5.6 Folder Ops/Management — chi tiết (logging · monitoring · dashboards · budget)
-
-Folder `fldr-management` chứa project `gcp-platform-management` — **trung tâm vận hành** do Platform/SRE team sở hữu. Toàn bộ cấu hình nằm trong stack [management/](management/).
-
-#### 🗄️ Lưu trữ log — kiến trúc 2 tầng (hot + cold)
-
-Log được gom từ **cấp Organization** (mọi project con) và **cấp folder Platform** rồi đổ vào project quản lý, theo 2 tầng lưu trữ:
-
-| Tầng | Đích đến | Bucket / Sink | Giữ bao lâu | Storage class | Dùng để |
-|------|----------|----------------|-------------|---------------|---------|
-| 🔥 **Hot** (org) | Cloud Logging bucket | `gcp-sg-logbkt-org-001` | **90 ngày** | log bucket | Điều tra/truy vấn nhanh toàn org |
-| 🔥 **Hot** (platform) | Cloud Logging bucket | `gcp-sg-logbkt-fldr-platform-001` | **90 ngày** | log bucket | Log hạ tầng platform + scoped views |
-| 🧊 **Cold** (archive) | GCS bucket | `<prefix>-logbkt-gcs-<suffix>` | **365 ngày** (lifecycle Delete) | `ARCHIVE` (versioned, UBLA) | Lưu trữ audit dài hạn, chi phí thấp |
-
-**Loại log được thu thập (filter):**
-- `cloudaudit.*` — Admin Activity, Data Access, System Event, Policy (audit logs).
-- `dns_queries` — truy vấn DNS.
-- `compute.googleapis.com/firewall` + `vpc_flows` — firewall & VPC Flow Logs (cấp subnet).
-- `http_load_balancer/requests` — request log của Load Balancer.
-- `syslog` từ `gce_instance` — log hệ thống VM.
-
-> Bucket GCS archive chỉ giữ các log audit cốt lõi (`activity`, `system_event`, `policy`) để tối ưu chi phí, có bật **versioning** và **uniform bucket-level access**.
-
-#### 🔍 Scoped log views (phân quyền xem log theo project)
-
-Trên bucket platform có các **log view** giới hạn phạm vi, để mỗi đội chỉ xem đúng log của project mình (định nghĩa tại [management/log-views.tf](management/log-views.tf)):
-
-| Log view | Phạm vi (filter) | Ai dùng |
-|----------|------------------|---------|
-| `gcp-sg-logview-astronomy-shop-001` | `SOURCE("projects/<astronomy-shop>")` | App team |
-| `gcp-sg-logview-hub-net-001` | `SOURCE("projects/<hub-net>")` | Network team |
-
-> App team được cấp `roles/logging.viewAccessor` **có điều kiện**, chỉ đọc đúng log view astronomy-shop (xem [security/iam.tf](security/iam.tf)) — đúng tinh thần least-privilege.
-
-#### 📈 Cloud Monitoring — Metrics Scope tập trung
-
-Project quản lý là **Metrics Scope duy nhất**, gom metric của 4 project (định nghĩa tại [management/monitoring.tf](management/monitoring.tf)):
-
-```
-gcp-platform-management  ◄── metrics ── lz-prj-hub-net
-        (Metrics Scope)  ◄── metrics ── lz-prj-sh-vpc
-                         ◄── metrics ── lz-prj-sh-access
-                         ◄── metrics ── lz-prj-astronomy-shop
-```
-
-- **Notification channel:** email (`gcp-sg-monitoring-email-001`) → gửi tới `user_email`.
-- **Uptime check:** `gcp-sg-uptime-bastion-001` — kiểm tra TCP port 22 của Bastion mỗi 60s.
-
-**Alert policies (4):**
-
-| Alert policy | Điều kiện | Ngưỡng | Nguồn metric |
-|--------------|-----------|--------|--------------|
-| `gcp-sg-alert-uptime-bastion-001` | Uptime check Bastion fail | trong 5 phút | Cloud Monitoring |
-| `gcp-sg-alert-cpu-001` | VM CPU cao | **> 80%** trong 5 phút | metric Compute |
-| `gcp-sg-alert-memory-001` | VM Memory cao | **> 80%** trong 5 phút | **Ops Agent** |
-| `gcp-sg-alert-disk-001` | VM Disk đầy | **> 85%** trong 5 phút | **Ops Agent** |
-
-> Alert memory/disk cần **Ops Agent** cài trên VM (đã có sẵn trong startup script của Bastion). Tất cả alert tự đóng sau 7 ngày nếu hết điều kiện.
-
-#### 📊 Dashboards (2)
-
-Định nghĩa tại [management/dashboards.tf](management/dashboards.tf):
-
-| Dashboard | Layout | Các biểu đồ |
-|-----------|--------|-------------|
-| **Infrastructure Overview** (`gcp-sg-dashboard-infra-001`) | 2 cột | VM CPU Utilization · Memory Used (%) · Disk Used (%) · Network Received (bytes/s) |
-| **Availability** (`gcp-sg-dashboard-availability-001`) | 1 cột | Bastion Uptime Check — pass ratio |
-
-#### 💰 Budget alert
-
-Định nghĩa tại [management/budget.tf](management/budget.tf):
-
-- **Ngân sách:** `$100 USD/tháng` (calendar month).
-- **Ngưỡng cảnh báo:** **50%**, **80%**, **100%** theo *chi tiêu thực tế* + **100%** theo *dự báo (forecast)*.
-- **Kênh báo:** cùng email notification channel với monitoring.
-- Tự bỏ qua nếu `billing_account_id` rỗng (an toàn khi demo).
+#### 💰 Thiết lập hạn mức chi tiêu tự động tại [management/budget.tf](management/budget.tf)
+* Đặt ngân sách trần `$100 USD/tháng` đi kèm 4 mức cảnh báo động (`50%`, `80%`, `100%` thực tế chi trả và mốc `100%` dự báo thuật toán).
 
 </details>
 
 ---
 
-## 6. Hướng dẫn sử dụng
+### 🏷️ 5.5 Bộ quy tắc đặt tên tài nguyên (Naming Conventions)
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
+Để đảm bảo toàn bộ hệ thống chuẩn hóa đồng bộ, Landing Zone áp dụng cấu trúc đặt tên bất di bất dịch:
 
-### 6.1 Yêu cầu
-
-| Thành phần | Phiên bản |
-|------------|-----------|
-| Terraform | `1.14.6` |
-| Google Provider | `6.50.0` |
-| Google Beta Provider | `6.50.0` |
-
-**Quyền cần có (principal chạy apply)** — ở cấp org:
-`roles/resourcemanager.organizationAdmin` · `roles/billing.admin` · `roles/iam.organizationRoleAdmin` · `roles/compute.xpnAdmin`
-
-### 6.2 Bước 1 — Cấu hình tfvars
-
-**[org/terraform.tfvars](org/terraform.tfvars)**
-```hcl
-org_id             = "<YOUR_ORG_ID>"
-billing_account_id = "<YOUR_BILLING_ACCOUNT_ID>"
+```
+[Phạm-vi-quản-lý] - [Loại-tài-nguyên] - [Tên-gợi-nhớ] - [Chỉ-mục-index]
 ```
 
-**[connectivity/terraform.tfvars](connectivity/terraform.tfvars)** *(tùy chọn — chỉ cần khi dùng HA VPN)*
-```hcl
-onprem_vpn_public_ip_0 = "<PEER_IP_0>"
-onprem_vpn_public_ip_1 = "<PEER_IP_1>"
-vpn_shared_secret_1    = "<SECRET_1>"   # dùng Secret Manager hoặc CI secrets — không commit
-vpn_shared_secret_2    = "<SECRET_2>"
-onprem_network_cidrs   = ["10.0.0.0/8"]
+* **Phạm-vi-quản-lý (`scope`):** `gcp-sg` (Google Cloud - khu vực Singapore) hoặc `lz` (Landing Zone dùng chung).
+* **Loại-tài-nguyên (`type`):** `prj` (Dự án), `vpc` (Mạng ảo), `snet` (Mạng con), `fw` (Tường lửa), `vm` (Máy ảo), `sa` (Tài khoản dịch vụ), `vpn` (Kênh truyền).
+* **Tên-gợi-nhớ (`name`):** Nhóm chức năng ví dụ `hub-net`, `sh-vpc`, `bastion`.
+* **Chỉ-mục-index (`index`):** Số thứ tự dạng chuỗi ví dụ `001`, `002`.
+
+*📌 Ví dụ cụ thể:* `gcp-sg-snet-hub-001` là Subnet số 1 đặt tại vùng Singapore thuộc lớp định tuyến Transit Hub.
+
+---
+
+### 📊 5.6 Điểm nhấn trung tâm vận hành (Ops/Management)
+
+Thư mục quan trọng [management/](management/) thiết lập trạm chỉ huy vận hành tập trung cho toàn bộ Landing Zone. Sơ đồ gom dòng dữ liệu hoạt động như sau:
+
+```
+[ lz-prj-hub-net ] --------┐
+[ lz-prj-sh-vpc  ] --------┼───► [ gcp-platform-management ] (Metrics Scope & Central Logs)
+[ lz-prj-sh-access] -------┤                   │
+[ astronomy-shop] ---------┘                   ├───► Hot Logging Bucket (90 ngày)
+                                               ├───► Cold Storage Archive (365 ngày)
+                                               └───► Budget & Alert (Email SRE)
 ```
 
-**[security/terraform.tfvars](security/terraform.tfvars)** và **[management/terraform.tfvars](management/terraform.tfvars)**
+---
+
+## 🚀 6. Hướng dẫn sử dụng & Triển khai nhanh
+
+🚨 **QUAN TRỌNG:** Bản đồ triển khai này yêu cầu tuân thủ đúng định dạng và sự liên kết chặt chẽ từ gốc tới ngọn.
+
+### 📋 6.1 Yêu cầu chuẩn bị đầu vào
+
+| Công cụ hạ tầng | Phiên bản yêu cầu | Vị trí kiểm tra |
+| :--- | :---: | :--- |
+| **Terraform CLI** | `>= 1.14.6` | Chạy lệnh `terraform --version` |
+| **Google Provider** | `6.50.0` | Khai báo tại tệp [org/providers.tf](org/providers.tf) |
+| **Google Beta Provider** | `6.50.0` | Khai báo tại tệp [org/providers.tf](org/providers.tf) |
+
+* **Đặc quyền tài khoản khởi tạo (Apply user):** Bạn cần đăng nhập gcloud bằng tài khoản sở hữu tối thiểu các vai trò hệ thống cấp Organization: `roles/resourcemanager.organizationAdmin`, `roles/billing.admin`, `roles/iam.organizationRoleAdmin`, và `roles/compute.xpnAdmin`.
+
+---
+
+### ⚙️ 6.2 Bước 1: Khai báo cấu hình biến môi trường (`terraform.tfvars`)
+
+Tiến hành cập nhật thông tin thực tế của doanh nghiệp vào các tệp tin biến môi trường tương ứng:
+
+#### 📝 Tệp [org/terraform.tfvars](org/terraform.tfvars)
 ```hcl
-org_id             = "<YOUR_ORG_ID>"
-billing_account_id = "<YOUR_BILLING_ACCOUNT_ID>"
-user_email         = "<ADMIN_USER_EMAIL>"
+org_id             = "123456789012"             # Số định danh Organization ID của bạn
+billing_account_id = "012345-6789AB-CDEF01"     # Mã tài khoản thanh toán Billing Account
 ```
 
-> 🔒 **Bảo mật:** Không bao giờ commit secret thật. Dùng biến môi trường, CI/CD secret hoặc Google Secret Manager.
+#### 📝 Tệp [connectivity/terraform.tfvars](connectivity/terraform.tfvars) *(Chỉ nhập khi muốn thông kết nối Hybrid)*
+```hcl
+onprem_vpn_public_ip_0 = "1.2.3.4"               # IP Public của tổng đài On-premise Gateway 1
+onprem_vpn_public_ip_1 = "5.6.7.8"               # IP Public của tổng đài On-premise Gateway 2
+vpn_shared_secret_1    = "KmsSuperSecretKey01"   # Khóa mã hóa bảo mật kênh truyền 1
+vpn_shared_secret_2    = "KmsSuperSecretKey02"   # Khóa mã hóa bảo mật kênh truyền 2
+onprem_network_cidrs   = ["10.0.0.0/8"]          # Dải mạng On-premise nội bộ
+```
 
-### 6.3 Bước 2 — Apply các stack theo thứ tự
+#### 📝 Tệp [security/terraform.tfvars](security/terraform.tfvars) & [management/terraform.tfvars](management/terraform.tfvars)
+```hcl
+org_id             = "123456789012"
+billing_account_id = "012345-6789AB-CDEF01"
+user_email         = "sre-lead@company.com"      # Địa chỉ email đại diện nhận cảnh báo
+```
+
+---
+
+### 🛠️ 6.3 Bước 2: Thi công chạy lệnh triển khai tuần tự
+
+Do tính chất kế thừa biến đầu xuất giữa các tầng, bạn bắt buộc phải thực thi lệnh Terraform theo đúng trình tự nghiêm ngặt sau:
 
 ```bash
-# Stack 1 — Nền tảng tổ chức (Org Admin)
-cd org && terraform init && terraform apply
+# ==========================================
+# PHẦN 1: KHỞI TẠO NỀN MÓNG TỔ CHỨC (Org Admin sở hữu)
+# ==========================================
+cd org && terraform init && terraform apply -auto-approve
 
-# Stack 2 & 3 — có thể apply song song (Network + Security)
-cd ../connectivity && terraform init && terraform apply
-cd ../security     && terraform init && terraform apply
+# ==========================================
+# PHẦN 2: THIẾT LẬP MẠNG VÀ AN NINH IAM (Chạy song song được)
+# ==========================================
+# Tại Terminal nhánh 1:
+cd ../connectivity && terraform init && terraform apply -auto-approve
 
-# Stack 4 — Workload (App team)
-cd ../workload && terraform init && terraform apply
+# Tại Terminal nhánh 2:
+cd ../security && terraform init && terraform apply -auto-approve
 
-# Stack 5 — Management (Platform/SRE)
-cd ../management && terraform init && terraform apply
+# ==========================================
+# PHẦN 3: TRIỂN KHAI WORKLOAD KHÁCH HÀNG (App Team sở hữu)
+# ==========================================
+cd ../workload && terraform init && terraform apply -auto-approve
+
+# ==========================================
+# PHẦN 4: THIẾT LẬP TRUNG TÂM GIÁM SÁT VẬN HÀNH (SRE Team sở hữu)
+# ==========================================
+cd ../management && terraform init && terraform apply -auto-approve
 ```
-
-### 6.4 Remote state backends
-
-Mỗi stack lưu state trong một GCS bucket riêng (cấu hình trong từng backend config):
-- Stack local org: [org/backend.tf](org/backend.tf)
-- Stack connectivity: [connectivity/backend.tf](connectivity/backend.tf)
-- Stack security: [security/backend.tf](security/backend.tf)
-- Stack workload: [workload/backend.tf](workload/backend.tf)
-- Stack management: [management/backend.tf](management/backend.tf)
-
-```
-gs://<bucket>/org/terraform.tfstate
-gs://<bucket>/connectivity/terraform.tfstate
-gs://<bucket>/security/terraform.tfstate
-gs://<bucket>/workload/terraform.tfstate
-gs://<bucket>/management/terraform.tfstate
-```
-
-</details>
 
 ---
 
-## 7. Lưu ý & vận hành về sau (Runbook)
+### 💾 6.4 Bản đồ GCS Cloud Storage State Backends
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
+Landing Zone kiến tạo 5 tệp lưu trữ trạng thái hạ tầng độc lập tuyệt đối tại Cloud Storage (cấu hình chi tiết tại tệp `backend.tf` lẻ ở mỗi đầu thư mục để tách biệt phân quyền):
 
-> Phần này là **cẩm nang vận hành (runbook)** cho Day-2. Đọc trước khi `apply`, `destroy`, hoặc thay đổi bất kỳ stack nào để tránh sự cố lan rộng.
-
-### 7.1 Thứ tự apply & destroy (quan trọng nhất)
-
-Các stack phụ thuộc nhau qua `terraform_remote_state` → **sai thứ tự = lỗi hoặc xóa nhầm**.
-
-```
-APPLY  (xuôi):   org → connectivity ║ security → workload → management
-DESTROY (ngược): management → workload → security ║ connectivity → org
-```
-
-- `connectivity` và `security` độc lập nhau → có thể chạy **song song** (ký hiệu ║).
-- ✅ Trước mỗi `apply`: chạy `terraform plan` và **đọc kỹ diff**, đặc biệt các dòng `destroy`/`replace`.
-- 🛡️ Bastion VM bật `deletion_protection = true` → phải **tắt cờ này và apply lại** trước khi `terraform destroy` stack `workload`.
-
-### 7.2 Bảo mật & danh tính (làm trước khi lên production)
-
-| Hạng mục | Hiện trạng | Cần làm |
-|----------|-----------|---------|
-| 👥 IAM principal | Gán quyền cho **một `user_email`** | Chuyển sang **Google Groups** theo đội, gán ở **cấp folder** (mục 3.2) |
-| 🌐 Truy cập Bastion | Có **external IP** (ngoại lệ org policy) | Cân nhắc **IAP TCP forwarding** để bỏ hẳn public IP |
-| 🔑 Bí mật VPN | `vpn_shared_secret_*` qua biến | **Không commit**; rotate qua Secret Manager / biến môi trường |
-| 🔐 Service Account key | Đã chặn bằng org policy (trừ `sh-access`) | Ưu tiên Workload Identity, hạn chế tối đa ngoại lệ |
-
-### 7.3 Thay đổi rủi ro cao — luôn tham vấn trước
-
-- 📜 **Org policy** ([org/org-policies.tf](org/org-policies.tf)): ảnh hưởng **mọi tài nguyên hiện hữu**. `plan` + tham vấn các đội trước khi apply.
-- 🧱 **Firewall / VPC** ([connectivity/](connectivity/)): có thể cắt kết nối đang chạy. Kiểm tra peering, route, NAT trước khi đổi.
-- 🏗️ **Folder / project** ([org/folders.tf](org/folders.tf), [org/projects.tf](org/projects.tf)): di chuyển project có thể kéo theo re-evaluate policy.
-
-### 7.4 Mở rộng hệ thống (Day-2)
-
-- ➕ **Thêm workload:** tạo service project mới trong `fldr-workload`, attach vào Shared VPC host (`lz-prj-sh-vpc`), rồi thêm tài nguyên vào [workload/](workload/).
-- 🧪 **`fldr-sandbox` đang trống:** dùng cho thử nghiệm; thêm project vào đây và cập nhật org policy + README tương ứng.
-- 📈 **Giám sát workload mới:** thêm project vào Metrics Scope và alert policy trong [management/monitoring.tf](management/monitoring.tf).
-- 🖥️ **Nhân bản pattern VM:** copy mẫu bastion ([workload/vms.tf](workload/vms.tf)) — đã có sẵn Shielded VM + OS Login + Ops Agent.
-
-### 7.5 Chi phí & vệ sinh dự án
-
-- 💰 **Budget** đặt $100/tháng với 4 ngưỡng cảnh báo — điều chỉnh trong [management/budget.tf](management/budget.tf).
-- 🗄️ **Log retention:** hot 90 ngày / cold (GCS) 365 ngày — cân đối chi phí lưu trữ trong [management/log-export.tf](management/log-export.tf).
-- 🔄 **Đồng bộ README với code:** khi đổi folder/project, cập nhật lại sơ đồ kiến trúc ở mục 2 để tài liệu không lệch thực tế.
-- 🧹 **State backend:** mỗi stack có GCS backend riêng — bật **versioning** trên bucket state và **không** chỉnh sửa file state thủ công.
-
-### 7.6 Checklist nhanh trước khi apply production
-
-- [ ] Đã `terraform plan` và rà soát mọi dòng `destroy`/`replace`
-- [ ] IAM đã chuyển sang Google Groups ở cấp folder
-- [ ] Bí mật VPN / SA key không nằm trong Git
-- [ ] Bastion đã có phương án truy cập an toàn (IAP)
-- [ ] Đã tham vấn đội liên quan với thay đổi org policy / mạng
-- [ ] Budget & alert trỏ đúng kênh thông báo của đội vận hành
-
-</details>
+| Stack thư mục | Đường dẫn backend cấu hình | Đường lưu trữ đối tượng thực tế trên GCS Bucket |
+| :---: | :--- | :--- |
+| **01** | [org/backend.tf](org/backend.tf) | `gs://<lz-tfstate-bucket-name>/org/terraform.tfstate` |
+| **02** | [connectivity/backend.tf](connectivity/backend.tf) | `gs://<lz-tfstate-bucket-name>/connectivity/terraform.tfstate` |
+| **03** | [security/backend.tf](security/backend.tf) | `gs://<lz-tfstate-bucket-name>/security/terraform.tfstate` |
+| **04** | [workload/backend.tf](workload/backend.tf) | `gs://<lz-tfstate-bucket-name>/workload/terraform.tfstate` |
+| **05** | [management/backend.tf](management/backend.tf) | `gs://<lz-tfstate-bucket-name>/management/terraform.tfstate` |
 
 ---
 
-## 8. Tech Stack
+## 🛠️ 7. Lưu ý & Vận hành về sau (Day-2 Runbook)
 
-<details open>
-<summary><b>▸ Nhấn để mở rộng / rút gọn</b></summary>
+> 🧑‍💻 **HƯỚNG DẪN THỰC ĐỊA SRE:** Cẩm nang này được xem là tài liệu gối đầu giường dùng để vận hành, mở rộng hệ thống Landing Zone một cách an toàn nhất, giảm thiểu tối đa các rủi ro làm sập mạng diện rộng.
 
-- **Terraform** `1.14.6` · **Google Cloud provider** `6.50.0`
-- **Modules:**
-  - [`terraform-google-modules/project-factory`](https://registry.terraform.io/modules/terraform-google-modules/project-factory/google) `17.1.0`
-  - [`terraform-google-modules/folders`](https://registry.terraform.io/modules/terraform-google-modules/folders/google) `5.1.0`
-- **Khu vực chính:** `asia-southeast1` (Singapore)
+### 🛑 7.1 Thứ tự thi công lắp dựng & Thu hồi hạ tầng (Apply / Destroy)
 
-</details>
+Do đặc thù các Stack trao đổi dữ liệu đầu ra qua bộ đệm `terraform_remote_state`, việc thi hành sai trình tự sẽ dẫn đến lỗi logic hệ thống nghiêm trọng và khóa cứng hạ tầng.
+
+#### 📈 Quy luật Triển khai xuôi (Apply order)
+```
+[ 1. org ] ──► [ 2. connectivity ] ══ [ 3. security ] ──► [ 4. workload ] ──► [ 5. management ]
+```
+
+#### 📉 Quy luật Thu hồi ngược (Destroy order)
+```
+[ 5. management ] ──► [ 4. workload ] ──► [ 3. security ] ══ [ 2. connectivity ] ──► [ 1. org ]
+```
+
+* **Lưu ý đặc biệt cho VM Bastion:** Máy ảo đệm được bảo vệ bằng tham số cứng `deletion_protection = true` tại tệp [workload/vms.tf](workload/vms.tf). Trước khi thực hiện thu hồi ngược (`terraform destroy`) stack `workload`, bạn phải chủ động đổi tham số này thành `false` và tiến hành Apply cập nhật trước, sau đó mới bấm lệnh hủy hạ tầng.
+
+---
+
+### 🔑 7.2 Danh sách hành vi rủi ro tột độ — Phải phê duyệt đa tầng
+
+Tuyệt đối cấm kỵ áp cấu hình hoặc chạy lệnh sửa đổi trực tiếp các tệp tin sau lên Production mà chưa qua kịch bản kiểm thử (Dry-Run):
+
+* 📜 **Chính sách cấp cao [org/org-policies.tf](org/org-policies.tf):** Việc đưa thêm một ràng buộc (constraint) mới hoặc thu hẹp chính sách có nguy cơ làm rụng kết nối tức thì của hàng loạt máy ảo VM hiện tại đang phát triển trong toàn tổ chức.
+* 🧱 **Thông số định tuyến [connectivity/vpcs.tf](connectivity/vpcs.tf):** Sửa đổi dải IPAM hoặc Peering có thể làm đứt kết nối VPN kết nối thông về dữ liệu On-premise của doanh nghiệp.
+* 👥 **Phần quyền trung tâm [security/iam.tf](security/iam.tf):** Thay đổi Service Account Token có thể làm sập dây chuyền hoạt động ghi nhận nhật ký của ứng dụng Astronomy Shop.
+
+---
+
+### 🧬 7.3 Cẩm nang mở rộng hệ thống (Day-2 Operations)
+
+#### ➕ A. Cách cấp dải mạng & Thêm dự án Workload mới cho team lập trình
+1. Network Team truy cập tệp [connectivity/subnets.tf](connectivity/subnets.tf), khai báo một Subnet con mới ví dụ `gcp-sg-snet-payments-001` với dải CIDR trống không trùng lặp (ví dụ: `10.20.2.0/24`). Cho chạy lệnh Terraform Apply.
+2. Org Admin mở tệp [org/projects.tf](org/projects.tf), sử dụng Project Factory nhân bản cấu hình tạo thêm dự án con `lz-prj-payments` đặt trong Folder `fldr-workload`. Bấm Apply.
+3. Network Team gán vai trò `roles/compute.networkUser` của Subnet mới tạo tại bước 1 cho Service Account đại diện của dự án thanh toán mới. App Team nay đã có thể tự khởi chạy tài nguyên của mình.
+
+#### 📈 B. Tích hợp máy ảo ứng dụng mới vào Trạm quan trắc trung tâm
+1. Khi triển khai Compute hoặc tài nguyên mới cho App team, hãy đảm bảo nạp tập lệnh Script tự động tải và kích hoạt **Google Cloud Ops Agent** vào Startup Script cấu hình VM (như biểu diễn tại tệp [workload/vms.tf](workload/vms.tf)).
+2. SRE team bổ sung Project ID mới của App team vào danh bạ `monitored_projects` tại tệp [management/monitoring.tf](management/monitoring.tf) để hệ thống tự động quét chỉ số RAM, HDD và đẩy log về trung tâm.
+
+---
+
+### 📋 7.4 Checklist Vàng trước khi bàn giao hệ thống lên Production
+
+* [ ] **Chuyển đổi IAM sang Google Groups:** Đảm bảo toàn bộ email gán thô tại tệp [security/iam.tf](security/iam.tf) đã được chuyển hóa sang cấu hình Google Groups phân quyền tự động theo đội.
+* [ ] **Bảo mật bí mật VPN:** Xác lập 100% mã khóa VPN không lưu trữ công khai tại Git, sử dụng cơ chế bảo mật Secret Manager để truyền biến tự động.
+* [ ] **Bảo vệ hủy tệp tin trạng thái (TFState Protection):** Đã kích hoạt cơ chế lưu vết lịch sử Object Versioning trên GCS Bucket dùng để cất giữ tệp tin tfstate.
+* [ ] **Chốt chặn Deletion Protection:** Chuyển đổi trạng thái `deletion_protection` trên máy ảo Bastion và các cơ sở dữ liệu quan trọng sang `true`.
+* [ ] **Thành lập đường hầm IAP:** Bịt hoàn toàn lỗ hổng IP Public ngoài, gỡ bỏ rule mở SSH diện rộng và cấu hình hầm kết nối riêng tư IAP.
+
+---
+
+## 🛠️ 8. Hệ sinh thái Công nghệ (Tech Stack)
+
+* 🧱 **Công cụ IaC:** Terraform CLI `1.14.6`
+* ☁️ **Nhà cung ứng Cloud:** Google Cloud Platform (Google Provider `v6.50.0` / Google Beta `v6.50.0`)
+* 📦 **Thư viện Modules chính thức:**
+  * [`terraform-google-modules/project-factory`](https://registry.terraform.io/modules/terraform-google-modules/project-factory/google) - Kiến tạo Project chuẩn hóa `v17.1.0`
+  * [`terraform-google-modules/folders`](https://registry.terraform.io/modules/terraform-google-modules/folders/google) - Phân dải cây Folder `v5.1.0`
+* 📍 **Khu vực đặt hạ tầng chủ chốt (Primary Region):** `asia-southeast1` (Singapore)
 
 ---
 
 <div align="center">
 
-**Built with ❤️ using Infrastructure as Code**
+**🌌 Engineered with enterprise-grade modular designs & built with dedication**
 
-*Dự án cung cấp cho mục đích học tập và minh họa.*
+*Tài liệu này được biên soạn độc quyền và tối ưu nhằm nâng tầm trải nghiệm quản trị hạ tầng của bạn.*
 
 </div>
