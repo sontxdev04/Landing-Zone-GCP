@@ -1,0 +1,50 @@
+# ── Secrets & credentials ─────────────────────────────────────────────────────
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+*.ppk
+*-key.json
+*credentials*.json
+*service-account*.json
+.env
+.env.*
+
+# ── Terraform state ───────────────────────────────────────────────────────────
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+crash.*.log
+
+# ── Variable files (may contain org_id / emails / sensitive values) ───────────
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# ── Terraform working dirs & locks ────────────────────────────────────────────
+**/.terraform/*
+.terraform.lock.hcl
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# ── Plan output ───────────────────────────────────────────────────────────────
+*.tfplan
+*.plan
+
+# ── Editor / OS ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# ── Windows reserved device names ─────────────────────────────────────────────
+nul
+/nul
