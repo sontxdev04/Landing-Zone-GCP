@@ -1,149 +1,502 @@
-# 🚀 Enterprise GCP Landing Zone — Step-by-Step Deployment Guide
+<div align="center">
 
-Follow this guide to deploy the Landing Zone infrastructure from scratch. Ensure all prerequisites are met and execute the phases sequentially.
+# 🚀 Hướng Dẫn Triển Khai — GCP Landing Zone
+
+### *Hướng dẫn từng bước để dựng toàn bộ hạ tầng Landing Zone từ con số 0*
+
+<br>
+
+🔐 **Zero-Key Bootstrap** &nbsp;•&nbsp; 🧱 **5 Stack tuần tự** &nbsp;•&nbsp; ✅ **Kiểm tra sau mỗi bước**
+
+</div>
 
 ---
 
-## 📋 1. Prerequisites & Setup
+> [!NOTE]
+> Tài liệu này hướng dẫn **thao tác triển khai**. Nếu bạn muốn hiểu *tại sao* hạ tầng được thiết kế như vậy, đọc thêm [architecture.md](./architecture.md) và [iam-roles.md](./iam-roles.md).
 
-### 1.1 Command-Line Tools
-The deploying administrator must have the following tools installed locally:
-- **Terraform CLI** version `>= 1.14.6`.
-- **Google Cloud SDK (gcloud CLI)**: Install and update with `gcloud components update`.
-- **Bash Shell**: For executing setup scripts.
+---
 
-### 1.2 Administrative Credentials
-You must log in to gcloud using an identity with the following organization-level permissions:
+## 📑 Mục lục
+
+1. [Bức tranh tổng thể — luồng triển khai](#1)
+2. [Chuẩn bị trước khi bắt đầu](#2)
+3. [Bước 1 — Cấu hình tham số](#3)
+4. [Bước 2 — Phase A: Bootstrap nền móng](#4)
+5. [Bước 3 — Cấu hình Backend & tfvars](#5)
+6. [Bước 4 — Phase B: Triển khai 5 stack tuần tự](#6)
+7. [Bước 5 — Kiểm tra sau triển khai](#7)
+8. [Phụ lục — Xử lý sự cố thường gặp](#8)
+
+---
+
+<a id="1"></a>
+
+## 1. 🗺️ Bức Tranh Tổng Thể — Luồng Triển Khai
+
+Toàn bộ quá trình gồm **hai pha (phase)**:
+
+- **Phase A — Bootstrap (chạy MỘT LẦN):** Dùng tài khoản cá nhân có quyền Organization Admin để tạo "hạt giống": Seed Project, State Bucket, và 5 Terraform Runner Service Account. Đây là pha duy nhất bạn dùng quyền cá nhân trực tiếp.
+- **Phase B — Triển khai stack (lặp lại khi cần):** Từ đây trở đi, Terraform **không** chạy bằng quyền cá nhân của bạn nữa, mà *mượn quyền* (impersonate) các Runner SA đã tạo ở Phase A.
+
+```mermaid
+flowchart TD
+    A["👤 Đăng nhập tài khoản cá nhân<br/>(Organization Admin)"] --> B["⚙️ Phase A<br/>01-bootstrap.sh"]
+    B --> C["📦 Tạo: Seed Project · State Bucket · 5 Runner SA"]
+    C --> D["1️⃣ apply org/"]
+    D --> E["📜 02-post-org-roles.sh<br/>03-runtime-sa.sh"]
+    E --> F["2️⃣ apply connectivity/"]
+    E --> G["3️⃣ apply security/"]
+    F --> H["4️⃣ apply workload/"]
+    G --> H
+    H --> I["5️⃣ apply management/"]
+    I --> J["✅ Hoàn tất — kiểm tra trên Console"]
+
+    classDef pa fill:#fce8e6,stroke:#d93025,color:#a50e0e;
+    classDef pb fill:#e8f0fe,stroke:#1a73e8,color:#174ea6;
+    class A,B,C pa;
+    class D,E,F,G,H,I,J pb;
+```
+
+> [!IMPORTANT]
+> **Thứ tự là bắt buộc.** Stack `org` phải xong trước (vì nó sinh ra các project mà các stack sau cần). `connectivity` và `security` có thể chạy song song. `workload` cần cả hai stack trước nó. `management` chạy cuối cùng.
+
+---
+
+<a id="2"></a>
+
+## 2. 📋 Chuẩn Bị Trước Khi Bắt Đầu
+
+### 2.1 Cài đặt công cụ dòng lệnh
+
+Máy của người triển khai cần có sẵn 3 công cụ sau:
+
+| Công cụ | Phiên bản | Ghi chú |
+|:--------|:----------|:--------|
+| **Terraform CLI** | `1.14.6` (đúng phiên bản) | Khớp với `required_version` trong code. |
+| **Google Cloud SDK** (`gcloud`) | Mới nhất | Cập nhật bằng lệnh bên dưới. |
+| **Bash Shell** | — | Để chạy các script `.sh` trong thư mục `scripts/`. |
+
+Kiểm tra Terraform đã cài đúng phiên bản:
+
+```bash
+terraform version
+```
+
+Cập nhật gcloud lên bản mới nhất:
+
+```bash
+gcloud components update
+```
+
+### 2.2 Quyền của tài khoản triển khai (Phase A)
+
+Tài khoản cá nhân bạn dùng để chạy Phase A **phải** có các quyền cấp Organization sau:
+
 - `roles/resourcemanager.organizationAdmin`
 - `roles/billing.admin`
 - `roles/iam.organizationRoleAdmin`
 - `roles/compute.xpnAdmin`
 
-Verify your active credentials:
+### 2.3 Đăng nhập gcloud
+
+Đăng nhập tài khoản người dùng (mở trình duyệt):
+
 ```bash
 gcloud auth login
+```
+
+Đăng nhập **Application Default Credentials** (Terraform & các script dùng cái này để xác thực):
+
+```bash
 gcloud auth application-default login
 ```
 
----
-
-## ⚙️ 2. Configuration Phase
-
-### Step 2.1: Configure Global Settings
-Open the file [scripts/config.sh](file:///d:/GCP/landing-zone/scripts/config.sh) and update the parameters to match your GCP deployment targets:
+Kiểm tra tài khoản đang hoạt động đúng là tài khoản admin của bạn:
 
 ```bash
-# Targets
-export ORG_ID="123456789012"                              # GCP Organization ID
-export BILLING_ACCOUNT_1="012345-6789AB-CDEF01"           # Billing Account for Platform/Security
-export BILLING_ACCOUNT_2="012345-6789AB-CDEF01"           # Billing Account for Network/Workloads
-export BILLING_ACCOUNT_BUDGET="012345-6789AB-CDEF01"      # Billing Account to track budgets
-export STATE_BUCKET="gcp-sg-tfstate-yourcompany"          # Globally unique bucket name for state files
-
-# Group Mappings (Ensure these groups exist in your Cloud Identity/Workspace)
-export GRP_FOUNDATION="group:grp-gcp-foundation@company.com"
-export GRP_NETWORK="group:grp-gcp-network@company.com"
-export GRP_SECURITY="group:grp-gcp-security@company.com"
-export GRP_APP="group:grp-gcp-app-eng@company.com"
-export GRP_SRE="group:grp-gcp-sre@company.com"
+gcloud auth list
 ```
+
+> [!TIP]
+> Lấy nhanh **Organization ID** nếu bạn chưa biết:
+> ```bash
+> gcloud organizations list
+> ```
+> Lấy danh sách **Billing Account ID**:
+> ```bash
+> gcloud billing accounts list
+> ```
 
 ---
 
-## 🔨 3. Phase A — Bootstrapping the Infrastructure Foundation
+<a id="3"></a>
 
-We utilize a bootstrap script to set up our Terraform state bucket and runner Service Accounts.
+## 3. ⚙️ Bước 1 — Cấu Hình Tham Số
 
-> [!IMPORTANT]  
-> All Service Accounts and GCS prefix permission rules are created manually via `gcloud CLI` (automated in scripts). Terraform does not create SAs or self-bind role scopes, maintaining clean management separation.
+Mọi tham số dùng chung được tập trung trong một file duy nhất: [scripts/config.sh](../scripts/config.sh). Mở file này và điền các giá trị thực tế của bạn.
 
-### Step 3.1: Execute the Bootstrap Script
-Run the script from the root directory:
+### 3.1 Các giá trị BẮT BUỘC điền
+
+```bash
+export ORG_ID="123456789012"                         # ID tổ chức GCP
+export BILLING_ACCOUNT_1="012345-6789AB-CDEF01"      # Billing cho Platform & Security
+export BILLING_ACCOUNT_2="012345-6789AB-CDEF01"      # Billing cho Network & Workload
+export BILLING_ACCOUNT_BUDGET="012345-6789AB-CDEF01" # Billing để theo dõi ngân sách (thường = BILLING_ACCOUNT_1)
+export STATE_BUCKET="gcp-sg-tfstate-yourcompany"     # Tên bucket lưu state — PHẢI duy nhất toàn cầu
+```
+
+### 3.2 Ánh xạ nhóm (Group) → Runner SA
+
+Các group này quyết định **ai được phép apply stack nào** (qua cơ chế impersonation). Đảm bảo chúng đã tồn tại trong Cloud Identity / Google Workspace của bạn.
+
+```bash
+export GRP_FOUNDATION="group:grp-gcp-foundation@company.com"   # → impersonate sa-tf-org-001
+export GRP_NETWORK="group:grp-gcp-network@company.com"         # → impersonate sa-tf-conn-001
+export GRP_SECURITY="group:grp-gcp-security@company.com"       # → impersonate sa-tf-sec-001
+export GRP_APP="group:grp-gcp-app-eng@company.com"             # → impersonate sa-tf-wl-001
+export GRP_SRE="group:grp-gcp-sre@company.com"                 # → impersonate sa-tf-mgmt-001
+```
+
+> [!WARNING]
+> `STATE_BUCKET` phải **duy nhất trên toàn cầu** (giống mọi GCS bucket). Nếu tên đã có người dùng, lệnh tạo bucket ở Phase A sẽ thất bại — hãy đổi sang tên khác.
+
+> [!NOTE]
+> Bạn **không cần** sửa email của 5 Runner SA — chúng được tự suy ra từ `SEED_PROJECT` ngay trong [scripts/config.sh](../scripts/config.sh). Chi tiết bảng phân quyền nằm ở [iam-roles.md](./iam-roles.md).
+
+---
+
+<a id="4"></a>
+
+## 4. 🔨 Bước 2 — Phase A: Bootstrap Nền Móng
+
+Phase A dùng một script tự động để dựng toàn bộ "hạt giống". Chạy script này từ **thư mục gốc** của repo.
+
+> [!IMPORTANT]
+> Mọi Service Account và quy tắc cô lập state (GCS IAM Conditions) đều được tạo **thủ công qua gcloud** (đóng gói sẵn trong script). Terraform **không** tự tạo SA hay tự gán quyền cho chính nó — giữ ranh giới quản trị sạch sẽ.
+
+### 4.1 Chạy script bootstrap
+
+Đảm bảo bạn đang đứng ở thư mục gốc `landing-zone/`:
+
+```bash
+cd /d/GCP/landing-zone
+```
+
+Chạy script:
+
 ```bash
 ./scripts/01-bootstrap.sh
 ```
 
-### Step 3.2: Verify Bootstrap Outputs
-Ensure the script successfully completes the following steps:
-1. Provisions the **Seed Project** (`gcp-platform-bootstrap-001`).
-2. Generates the **State Bucket** (`gs://<STATE_BUCKET>`) with Versioning enabled.
-3. Provisions **5 TF Runner SAs** (org, conn, sec, wl, mgmt).
-4. Limits state bucket read/write scopes to specific folder prefixes using GCS IAM Conditions.
+### 4.2 Script này làm những gì?
 
-### Step 3.3: Configure Backends
-Update the `backend.tf` files inside `org/`, `connectivity/`, `security/`, `workload/`, and `management/` to target your new `$STATE_BUCKET` name:
+| Bước | Hành động |
+|:----:|:----------|
+| **B** | Tạo **Seed Project** (`gcp-platform-bootstrap-001`) + bật các API cần thiết. |
+| **C** | Tạo **State Bucket** (`gs://$STATE_BUCKET`) + bật **Object Versioning**. |
+| **D** | Tạo **5 TF Runner SA**: org, conn, sec, wl, mgmt. |
+| **E** | Gán role **tối thiểu** cấp Org + Billing cho từng SA. |
+| **F** | Cấp **Token Creator** cho từng nhóm trên SA của nhóm mình (cơ chế impersonation). |
+| **G** | **Cô lập state** theo prefix: mỗi SA chỉ ghi được đúng thư mục state của mình. |
+
+> [!TIP]
+> Script được thiết kế **idempotent** — chạy lại nhiều lần vẫn an toàn. Nếu một vài lệnh báo "đã tồn tại" thì đó là bình thường, không phải lỗi.
+
+### 4.3 Kiểm tra kết quả Phase A
+
+Xác nhận Seed Project đã được tạo:
+
+```bash
+gcloud projects describe gcp-platform-bootstrap-001
+```
+
+Xác nhận State Bucket tồn tại và đã bật versioning:
+
+```bash
+gcloud storage buckets describe gs://$STATE_BUCKET --format="default(versioning)"
+```
+
+Xác nhận đủ 5 Runner SA:
+
+```bash
+gcloud iam service-accounts list --project gcp-platform-bootstrap-001
+```
+
+Kết quả mong đợi: thấy `sa-tf-org-001`, `sa-tf-conn-001`, `sa-tf-sec-001`, `sa-tf-wl-001`, `sa-tf-mgmt-001`.
+
+---
+
+<a id="5"></a>
+
+## 5. 🔧 Bước 3 — Cấu Hình Backend & tfvars
+
+Trước khi apply, mỗi stack cần biết **lưu state ở đâu** (backend) và **mượn quyền SA nào** (tf_runner_sa).
+
+### 5.1 Trỏ Backend về State Bucket của bạn
+
+Mở file `backend.tf` trong **mỗi** thư mục stack: `org/`, `connectivity/`, `security/`, `workload/`, `management/`. Sửa giá trị `bucket` thành đúng tên `$STATE_BUCKET` của bạn. Giữ nguyên `prefix` (đã khớp tên thư mục stack).
+
+Ví dụ với [org/backend.tf](../org/backend.tf):
 
 ```hcl
 terraform {
   backend "gcs" {
-    bucket = "gcp-sg-tfstate-yourcompany"   # Set to your exact $STATE_BUCKET
-    prefix = "terraform/org"                # Set to match stack folder name
+    bucket = "gcp-sg-tfstate-yourcompany"   # ← đổi thành $STATE_BUCKET của bạn
+    prefix = "terraform/org"                # ← giữ nguyên (khớp tên stack)
   }
 }
 ```
 
----
+Lần lượt các `prefix` tương ứng cho từng stack:
 
-## 🏗️ 4. Phase B — Sequential Stack Deployment
+| Stack | `prefix` trong backend.tf |
+|:------|:--------------------------|
+| `org/` | `terraform/org` |
+| `connectivity/` | `terraform/connectivity` |
+| `security/` | `terraform/security` |
+| `workload/` | `terraform/workload` |
+| `management/` | `terraform/management` |
 
-Apply the stacks in the exact sequence specified. Each folder runs with dynamic credential impersonation via its `terraform.tfvars` configuration.
+### 5.2 Kiểm tra `tf_runner_sa` trong từng tfvars
 
-```mermaid
-graph LR
-    org[1. Deploy org] --> postOrg[2. Apply scripts]
-    postOrg --> conn[3a. Deploy connectivity]
-    postOrg --> sec[3b. Deploy security]
-    conn --> wl[4. Deploy workload]
-    sec --> wl
-    wl --> mgmt[5. Deploy management]
+Mỗi stack đã được khai báo sẵn Runner SA tương ứng trong file `terraform.tfvars`. Mở và xác nhận đúng (thường **không cần sửa** nếu bạn dùng Seed Project mặc định):
+
+| Stack | `tf_runner_sa` mong đợi |
+|:------|:------------------------|
+| [org/terraform.tfvars](../org/terraform.tfvars) | `sa-tf-org-001@...` |
+| [connectivity/terraform.tfvars](../connectivity/terraform.tfvars) | `sa-tf-conn-001@...` |
+| [security/terraform.tfvars](../security/terraform.tfvars) | `sa-tf-sec-001@...` |
+| [workload/terraform.tfvars](../workload/terraform.tfvars) | `sa-tf-wl-001@...` |
+| [management/terraform.tfvars](../management/terraform.tfvars) | `sa-tf-mgmt-001@...` |
+
+> [!NOTE]
+> Cơ chế impersonation nằm ở `providers.tf` của mỗi stack: provider Google nhận `impersonate_service_account = var.tf_runner_sa`. Nhờ vậy Terraform tự mượn quyền SA mà **không cần file key tĩnh**.
+
+### 5.3 (Tùy chọn) Cấu hình VPN cho stack connectivity
+
+Mặc định **VPN bị tắt** — landing zone vẫn triển khai được trong môi trường lab không có thiết bị on-prem. Nếu cần kết nối hybrid thật, điền 4 giá trị trong [connectivity/terraform.tfvars](../connectivity/terraform.tfvars):
+
+```hcl
+onprem_vpn_public_ip_0 = ""   # IP công khai gateway on-prem #1
+onprem_vpn_public_ip_1 = ""   # IP công khai gateway on-prem #2
+vpn_shared_secret_1    = ""   # shared secret tunnel #1
+vpn_shared_secret_2    = ""   # shared secret tunnel #2
+onprem_network_cidrs   = []   # ví dụ ["192.168.0.0/16"]
 ```
 
-### Step 4.1: Deploy Layer 1 — Org Stack
-This builds folders, launches projects, and sets Organization Policies:
+> [!WARNING]
+> **Không commit secret thật** vào git. Để trống cả 4 giá trị nếu bạn chưa cần VPN — toàn bộ tài nguyên VPN sẽ tự động bị bỏ qua.
+
+---
+
+<a id="6"></a>
+
+## 6. 🏗️ Bước 4 — Phase B: Triển Khai 5 Stack Tuần Tự
+
+Apply các stack **đúng theo thứ tự** dưới đây. Từ đây Terraform chạy bằng quyền impersonate (không phải quyền cá nhân của bạn).
+
+```mermaid
+flowchart LR
+    org["1️⃣ org"] --> scripts["📜 02 + 03 scripts"]
+    scripts --> conn["2️⃣ connectivity"]
+    scripts --> sec["3️⃣ security"]
+    conn --> wl["4️⃣ workload"]
+    sec --> wl
+    wl --> mgmt["5️⃣ management"]
+    classDef s fill:#e8f0fe,stroke:#1a73e8,color:#174ea6;
+    class org,scripts,conn,sec,wl,mgmt s;
+```
+
+### 6.1 Lớp 1 — Stack `org`
+
+Stack này tạo **cây Folder**, **5 project** (qua Project Factory) và **Organization Policies** (guardrails).
+
+Vào thư mục `org`:
+
 ```bash
 cd org
+```
+
+Khởi tạo backend & provider:
+
+```bash
 terraform init
+```
+
+Xem trước thay đổi (khuyến nghị luôn chạy trước khi apply):
+
+```bash
+terraform plan
+```
+
+Áp dụng:
+
+```bash
 terraform apply
 ```
 
-### Step 4.2: Apply Post-Org Setup Scripts
-Run these scripts from the repository root to authorize SAs on the newly created projects:
+> [!NOTE]
+> Khi `apply` hỏi xác nhận, gõ `yes`. Nếu muốn tự động (CI), thêm cờ `-auto-approve`.
+
+### 6.2 Chạy script hậu-org (Post-Org)
+
+Sau khi `org` apply xong, các project mới có **ID thật** (sinh từ random suffix). Hai script sau gán nốt quyền cấp project và tạo Runtime SA cho VM.
+
+Quay về thư mục gốc:
+
 ```bash
 cd ..
+```
+
+Gán role cấp project cho `sa-tf-sec` / `sa-tf-wl` / `sa-tf-mgmt`:
+
+```bash
 ./scripts/02-post-org-roles.sh
+```
+
+Tạo Runtime SA cho workload (astronomy-shop) và các tool (hub-net, sh-vpc):
+
+```bash
 ./scripts/03-runtime-sa.sh --astro --tools
 ```
 
-### Step 4.3: Deploy Layer 2 — Connectivity & Security (Parallel)
-Deploy the core network and security policy layers:
+> [!TIP]
+> Cờ của `03-runtime-sa.sh` là tùy chọn:
+> - `--astro` → chỉ tạo Runtime SA cho `astronomy-shop`.
+> - `--tools` → chỉ tạo Runtime SA cho `hub-net` & `sh-vpc`.
+> - Dùng cả hai nếu muốn tạo tất cả.
+
+### 6.3 Lớp 2 — `connectivity` và `security` (chạy song song được)
+
+Hai stack này độc lập với nhau nên có thể chạy ở hai terminal khác nhau.
+
+**Terminal A — Connectivity** (VPC, Shared VPC, Peering, NAT, DNS, VPN):
 
 ```bash
-# Terminal A (Connectivity)
 cd connectivity
-terraform init
-terraform apply
+```
 
-# Terminal B (Security)
-cd security
+```bash
 terraform init
+```
+
+```bash
 terraform apply
 ```
 
-### Step 4.4: Deploy Layer 3 — Workload Stack
-This deploys the private compute instances within the astronomy workload project:
+**Terminal B — Security** (Org Firewall Policies, IAM cho admin, IAP, Log View):
+
+```bash
+cd security
+```
+
+```bash
+terraform init
+```
+
+```bash
+terraform apply
+```
+
+### 6.4 Lớp 3 — Stack `workload`
+
+Triển khai VM private trong project `astronomy-shop` (gắn vào Shared VPC, không IP public).
+
 ```bash
 cd ../workload
+```
+
+```bash
 terraform init
+```
+
+```bash
 terraform apply
 ```
 
-### Step 4.5: Deploy Layer 4 — Management Stack
-Apply the central monitoring configurations, dashboards, log exports, and budget controls:
+### 6.5 Lớp 4 — Stack `management`
+
+Triển khai giám sát tập trung: Log Sinks, Log Views, Dashboards, Alert Policies và Budget.
+
 ```bash
 cd ../management
+```
+
+```bash
 terraform init
+```
+
+```bash
 terraform apply
 ```
 
-> [!TIP]  
-> All stacks are now successfully deployed. Verify resource links, budgets, and central log buckets inside the Google Cloud Console to confirm operations are running correctly.
+> [!TIP]
+> Đến đây cả 5 stack đã triển khai xong. 🎉
+
+---
+
+<a id="7"></a>
+
+## 7. ✅ Bước 5 — Kiểm Tra Sau Triển Khai
+
+Xác nhận cây Folder & project đã được tạo:
+
+```bash
+gcloud resource-manager folders list --organization=$ORG_ID
+```
+
+Xem các project đã tạo (lọc theo tiền tố của dự án):
+
+```bash
+gcloud projects list --filter="projectId:(lz-prj-* OR gcp-platform-*)"
+```
+
+Lấy nhanh project ID thật từ output của stack `org` (chạy trong thư mục `org/`):
+
+```bash
+cd org && terraform output && cd ..
+```
+
+Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
+
+- 🌐 **VPC Network** → xác nhận 2 VPC, Peering ở trạng thái `ACTIVE`, Cloud NAT, subnet.
+- 🛡️ **Firewall / Org Policies** → xác nhận các guardrail đã áp.
+- 📊 **Monitoring & Logging** → xác nhận Dashboards, Log Buckets, Alert Policies.
+- 💰 **Billing → Budgets** → xác nhận ngân sách & cảnh báo đã bật.
+
+> [!TIP]
+> Để SSH vào VM workload (không cần IP public, không cần bastion), dùng Cloud IAP:
+> ```bash
+> gcloud compute ssh <TÊN_VM> --project <PROJECT_ID> --zone asia-southeast1-b --tunnel-through-iap
+> ```
+> Chi tiết quyền truy cập xem [iam-roles.md](./iam-roles.md).
+
+---
+
+<a id="8"></a>
+
+## 8. 🛟 Phụ Lục — Xử Lý Sự Cố Thường Gặp
+
+| Triệu chứng | Nguyên nhân thường gặp | Cách xử lý |
+|:------------|:-----------------------|:-----------|
+| `Error: unable to impersonate` khi `plan`/`apply` | Tài khoản của bạn không thuộc nhóm được phép impersonate Runner SA của stack đó | Kiểm tra `gcloud auth list`; xác nhận nhóm của bạn có trong `TOKEN_CREATOR_BINDINGS` ([scripts/roles.sh](../scripts/roles.sh)) |
+| `[ERROR] Bien ... con placeholder` khi chạy script | Còn giá trị `<...>` chưa thay trong [scripts/config.sh](../scripts/config.sh) | Điền hết các biến bắt buộc rồi chạy lại |
+| Tạo bucket thất bại (`already exists`/`conflict`) | Tên `STATE_BUCKET` đã có người dùng toàn cầu | Đổi sang tên bucket khác, độc nhất hơn |
+| `terraform init` không thấy backend | `backend.tf` chưa trỏ đúng `$STATE_BUCKET` | Sửa `bucket` trong `backend.tf` của stack (xem §5.1) |
+| Script `02`/`03` báo không lấy được `terraform output` | Chưa `apply` stack `org` trước đó | Apply `org` thành công rồi mới chạy script hậu-org |
+| `Permission denied` khi tạo tài nguyên cấp Org | Tài khoản Phase A thiếu quyền Org Admin / billing | Cấp đủ quyền ở §2.2 rồi đăng nhập lại |
+
+> [!NOTE]
+> Tài liệu vận hành thường ngày (cập nhật, mở rộng subnet, thêm quyền, gỡ bỏ tài nguyên) nằm ở [day2-ops.md](./day2-ops.md).
+
+---
+
+### 🔗 Tài liệu liên quan
+
+| Tài liệu | Nội dung |
+|:---------|:---------|
+| [README.md](../README.md) | Tổng quan dự án & tính năng. |
+| [architecture.md](./architecture.md) | Chiều sâu thiết kế: mạng, routing, firewall, guardrails. |
+| [iam-roles.md](./iam-roles.md) | Mô hình IAM, Service Account & phân quyền chi tiết. |
+| [day2-ops.md](./day2-ops.md) | Vận hành & bảo trì sau triển khai. |
