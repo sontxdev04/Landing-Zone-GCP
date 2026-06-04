@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 # =============================================================================
-# 03-runtime-sa.sh — Phase B: tạo Runtime Service Account cho VM/Workload.
+# 03-runtime-sa.sh — Phase B: tạo Runtime Service Account cho VM / Workload.
 #
-# Các SA này KHÔNG dùng để chạy Terraform mà gắn vào VM/workload lúc runtime.
-# CHẠY SAU `terraform apply` của stack org. Phải chạy từ thư mục gốc landing-zone.
+# Mục đích : Các SA này KHÔNG dùng để chạy Terraform mà được GẮN vào VM/workload
+#            lúc runtime (vd: ghi log/metric). Tách bạch với 5 TF Runner SA.
+# Yêu cầu  : Đã `terraform apply` xong stack `org` (project_id thật sinh từ
+#            random_string chỉ có sau khi apply). Chạy từ thư mục gốc landing-zone.
+# Idempotent: Tạo lại an toàn — SA đã tồn tại sẽ bỏ qua, các binding chạy lặp được.
 #
-#   ./scripts/03-runtime-sa.sh --app    # Tạo SA cho sample-app
-#   ./scripts/03-runtime-sa.sh --tools    # Tạo SA cho hub-net / sh-vpc tools
-#   ./scripts/03-runtime-sa.sh --app --tools
+# Cách dùng:
+#   ./scripts/03-runtime-sa.sh --app            # SA cho sample-app
+#   ./scripts/03-runtime-sa.sh --tools          # SA cho hub-net / sh-vpc tools
+#   ./scripts/03-runtime-sa.sh --app --tools    # cả hai nhóm
+#   (nhóm "core" — nếu có — luôn được tạo, không cần cờ)
 # =============================================================================
 set -euo pipefail
 
@@ -48,9 +53,9 @@ for entry in "${RUNTIME_SA_BINDINGS[@]}"; do
 
   # Lọc theo nhóm + cờ dòng lệnh
   case "$grp" in
-    core)  ;;
-    app) [[ "$DO_APP" == "1" ]] || continue ;;
-    tools) [[ "$DO_TOOLS" == "1" ]] || continue ;;
+    core)  ;;                                        # luôn tạo, không cần cờ
+    app)   [[ "$DO_APP" == "1" ]]   || continue ;;   # chỉ khi có --app
+    tools) [[ "$DO_TOOLS" == "1" ]] || continue ;;   # chỉ khi có --tools
     *) echo "[ERROR] nhom khong hop le: $grp (roles.sh)"; exit 1 ;;
   esac
 

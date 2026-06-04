@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 # =============================================================================
-# 02-post-org-roles.sh — Phase A Bước J: hoàn tất role project-level cho
-# sa-tf-sec / sa-tf-wl / sa-tf-mgmt.
+# 02-post-org-roles.sh — Phase A Bước J: hoàn tất role project-level.
 #
-# CHẠY SAU `terraform apply` của stack org (vì project_id thật sinh từ
-# random_string mới có sau khi apply). Phải chạy từ thư mục gốc landing-zone.
+# Mục đích : Gán các role cấp project cho sa-tf-sec / sa-tf-wl / sa-tf-mgmt
+#            (những quyền chỉ có thể cấp sau khi project đã tồn tại).
+# Yêu cầu  : Đã `terraform apply` xong stack `org` (project_id thật sinh từ
+#            random_string chỉ có sau khi apply). Chạy từ thư mục gốc landing-zone.
+# Idempotent: Toàn bộ binding chạy lặp được; tự impersonate sa-tf-org-001 vì
+#            project do SA này sở hữu (admin cá nhân không có setIamPolicy).
 #
+# Cách dùng:
 #   ./scripts/02-post-org-roles.sh
 # =============================================================================
 set -euo pipefail

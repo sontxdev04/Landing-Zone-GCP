@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 # =============================================================================
-# 01-bootstrap.sh — Phase A (Bước B → G): tạo Seed Project, State Bucket,
-# 5 TF Runner SA, gán role tối thiểu, Token Creator cho team, cô lập GCS state.
+# 01-bootstrap.sh — Phase A (Bước B → G): nền tảng cho toàn bộ Landing Zone.
 #
-# Chạy MỘT LẦN duy nhất, bằng tài khoản cá nhân có quyền Organization Admin.
-# Trước khi chạy: đã `gcloud auth login` và `gcloud auth application-default login`.
+# Mục đích : Tạo Seed Project, State Bucket, 5 TF Runner SA, gán role tối thiểu,
+#            cấp Token Creator cho team và cô lập quyền GCS state theo từng SA.
+# Yêu cầu  : Tài khoản cá nhân có quyền Organization Admin; đã chạy
+#            `gcloud auth login` và `gcloud auth application-default login`.
+# Idempotent: Các lệnh add-iam-policy-binding / bucket versioning chạy lặp được;
+#            project/SA/bucket đã tồn tại chỉ báo lỗi nhẹ rồi chạy tiếp.
 #
-#   ./scripts/01-bootstrap.sh
-#
-# An toàn chạy lại (idempotent): các lệnh add-iam-policy-binding và bucket
-# versioning có thể chạy lặp; tạo project/SA/bucket đã tồn tại sẽ báo lỗi nhẹ.
+# Cách dùng:
+#   ./scripts/01-bootstrap.sh        # chạy MỘT LẦN khi khởi tạo nền tảng
 # =============================================================================
 set -euo pipefail
 

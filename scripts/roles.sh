@@ -30,13 +30,19 @@ ORG_ROLE_BINDINGS=(
   "$SA_MGMT  roles/logging.admin"                        # Log Sinks org+folder
 )
 
-# [2] Role trên BILLING ACCOUNT       cột:  <billing account>  <SA>  <role>
+# ─────────────────────────────────────────────────────────────────────────────
+# [2] Role trên BILLING ACCOUNT                cột:  <billing account>  <SA>  <role>
+#     → dùng ở 01-bootstrap.sh (Bước E)
+# ─────────────────────────────────────────────────────────────────────────────
 BILLING_ROLE_BINDINGS=(
   "$BILLING_ACCOUNT_1  $SA_ORG  roles/billing.user"
   "$BILLING_ACCOUNT_2  $SA_ORG  roles/billing.user"
 )
 
+# ─────────────────────────────────────────────────────────────────────────────
 # [3] TOKEN CREATOR: team nào được impersonate SA nào   cột:  <SA>  <member>
+#     → dùng ở 01-bootstrap.sh (Bước F)
+# ─────────────────────────────────────────────────────────────────────────────
 TOKEN_CREATOR_BINDINGS=(
   "$SA_ORG   $GRP_FOUNDATION"
   "$SA_CONN  $GRP_NETWORK"
@@ -45,7 +51,10 @@ TOKEN_CREATOR_BINDINGS=(
   "$SA_MGMT  $GRP_SRE"
 )
 
+# ─────────────────────────────────────────────────────────────────────────────
 # [4] STATE BUCKET — quyền GHI prefix của stack MÌNH    cột:  <SA>  <stack>
+#     → dùng ở 01-bootstrap.sh (Bước G)
+# ─────────────────────────────────────────────────────────────────────────────
 STATE_OWN_BINDINGS=(
   "$SA_ORG   org"
   "$SA_CONN  connectivity"
@@ -54,7 +63,10 @@ STATE_OWN_BINDINGS=(
   "$SA_MGMT  management"
 )
 
+# ─────────────────────────────────────────────────────────────────────────────
 # [5] STATE BUCKET — quyền ĐỌC prefix UPSTREAM          cột:  <SA>  <upstream stack>
+#     → dùng ở 01-bootstrap.sh (Bước G)
+# ─────────────────────────────────────────────────────────────────────────────
 STATE_UPSTREAM_BINDINGS=(
   "$SA_CONN  org"           # connectivity → org
   "$SA_SEC   org"           # security     → org
@@ -110,7 +122,10 @@ POSTORG_PROJECT_BINDINGS=(
   "SH_VPC   $SA_MGMT  roles/monitoring.admin"
 )
 
-# [7] Role BILLING (gán SAU apply org)      cột:  <billing account>  <SA>  <role>
+# ─────────────────────────────────────────────────────────────────────────────
+# [7] Role trên BILLING ACCOUNT (gán SAU apply org)  cột:  <billing account>  <SA>  <role>
+#     → dùng ở 02-post-org-roles.sh (Bước J)
+# ─────────────────────────────────────────────────────────────────────────────
 POSTORG_BILLING_BINDINGS=(
   "$BILLING_ACCOUNT_BUDGET  $SA_MGMT  roles/billing.costsManager"
 )
