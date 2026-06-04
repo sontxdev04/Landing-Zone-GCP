@@ -9,11 +9,9 @@
 [![Terraform](https://img.shields.io/badge/Terraform-1.14.6-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![Google Cloud Platform](https://img.shields.io/badge/Google_Cloud-6.50.0-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)](https://cloud.google.com/)
 [![Region](https://img.shields.io/badge/Region-asia--southeast1-1A73E8?style=for-the-badge&logo=googlecloud&logoColor=white)](https://cloud.google.com/about/locations)
-[![IaC](https://img.shields.io/badge/IaC-100%25_Declarative-FF9900?style=for-the-badge)](#)
-
 <br>
 
-🏗️ **Hub-and-Spoke Network** &nbsp;•&nbsp; 🧱 **5 Layered Stacks độc lập** &nbsp;•&nbsp; 🔐 **Zero-Key Impersonation** &nbsp;•&nbsp; 📊 **Centralized Observability**
+🏗️ **Hub-and-Spoke Network** &nbsp;•&nbsp; 🔐 **Zero-Key Impersonation** &nbsp;•&nbsp; 📊 **Centralized Observability**
 
 <br>
 
