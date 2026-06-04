@@ -1,4 +1,4 @@
-# �️ Thiết Kế Kiến Trúc — GCP Landing Zone
+# 🏛️ Thiết Kế Kiến Trúc — GCP Landing Zone
 
 > Tài liệu này đi sâu vào **lý do thiết kế** (the *why*) đằng sau từng quyết định kiến trúc, không chỉ liệt kê tài nguyên. Mục tiêu là giúp người vận hành hiểu được *tại sao* hạ tầng được dựng theo cách này, từ đó tự tin mở rộng, sửa đổi và khắc phục sự cố.
 
