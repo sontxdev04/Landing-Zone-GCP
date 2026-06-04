@@ -144,7 +144,7 @@ Mỗi stack là một thư mục Terraform **độc lập hoàn toàn** — có 
 | 1️⃣ | [`org/`](org/) | **Nền móng tổ chức** | Cây Folder, Project Factory (5 project), 7 Org Policies guardrails |
 | 2️⃣ | [`connectivity/`](connectivity/) | **Mạng Hub-and-Spoke** | 2 VPC, Shared VPC, Peering, Cloud NAT, DNS nội bộ, HA VPN |
 | 3️⃣ | [`security/`](security/) | **Bảo mật & phân quyền** | Org Firewall Policies, IAM cho admin, IAP & Log View access |
-| 4️⃣ | [`workload/`](workload/) | **Tài nguyên ứng dụng** | VM/workload mẫu gắn vào Shared VPC (sample-app) |
+| 4️⃣ | [`workload/`](workload/) | **Tài nguyên ứng dụng** | VM mẫu `e2-small` + Ops Agent gắn Shared VPC (sample-app), bật/tắt qua `enable_sample_vm` |
 | 5️⃣ | [`management/`](management/) | **Quan trắc & tài chính** | Log Sinks, Log Views, Dashboards, Alert Policies, Budget |
 
 ```mermaid

@@ -263,10 +263,13 @@ Mặc định **VPN không được tạo** (`vpn_enabled = 0`) vì các giá tr
 
 Để VM gửi log & metric về dashboard SRE:
 
+> [!NOTE]
+> **VM mẫu (`sample-app`) đã tự cài Ops Agent** qua `startup-script` trong [workload/vms.tf](../workload/vms.tf) — không cần làm thủ công. Các bước dưới đây áp dụng cho **VM bạn tự thêm về sau**.
+
 1. **Cài Ops Agent** trên VM (qua startup script hoặc image):
    ```bash
-   curl -sSO https://dl.google.com/cloudagents/add-googlecloud-ops-agent-repo.sh
-   sudo bash add-googlecloud-ops-agent-repo.sh --also-install
+   curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent.sh
+   sudo bash add-google-cloud-ops-agent.sh --also-install
    ```
    > Các alert **memory** (`agent.googleapis.com/memory/percent_used`) và **disk** (`agent.googleapis.com/disk/percent_used`) trong [management/monitoring.tf](../management/monitoring.tf) **chỉ hoạt động khi có Ops Agent**. Không cài agent → hai alert này không bao giờ có dữ liệu.
 2. **Đăng ký project vào Metrics Scope**: Mở [management/monitoring.tf](../management/monitoring.tf), thêm một khối `google_monitoring_monitored_project` trỏ tới project mới (`metrics_scope = local.org.project_id_management`). Chạy `terraform apply` trong `management`.

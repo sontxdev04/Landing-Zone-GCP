@@ -143,7 +143,7 @@ flowchart TD
     style SharedVPCProject fill:#1a202c,stroke:#e2e8f0,stroke-width:1px
 
     subgraph WorkloadProject["📦 lz-prj-sample-app (Service Project)"]
-        VM["🖥️ Workload VM<br/>(IP nội bộ, KHÔNG IP ngoài)"]:::project
+        VM["🖥️ VM mẫu e2-small + Ops Agent<br/>(IP nội bộ, KHÔNG IP ngoài)"]:::project
     end
     style WorkloadProject fill:#1a202c,stroke:#e2e8f0,stroke-width:1px
 

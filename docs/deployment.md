@@ -164,6 +164,17 @@ export GRP_SRE="group:grp-gcp-sre@company.com"                 # → impersonate
 > [!NOTE]
 > Bạn **không cần** sửa email của 5 Runner SA — chúng được tự suy ra từ `SEED_PROJECT` ngay trong [scripts/config.sh](../scripts/config.sh). Chi tiết bảng phân quyền nằm ở [iam-roles.md](./iam-roles.md).
 
+### 3.3 Nạp biến vào shell hiện tại
+
+Sau khi điền xong [scripts/config.sh](../scripts/config.sh), **nạp nó vào shell** để mọi lệnh `$ORG_ID`, `$STATE_BUCKET`, `$SEED_PROJECT`… trong tài liệu này copy-paste được ngay (không phải thay tay):
+
+```bash
+source scripts/config.sh
+```
+
+> [!TIP]
+> Mỗi khi mở terminal mới, hãy `source scripts/config.sh` lại trước khi chạy các lệnh ở những bước sau.
+
 ---
 
 <a id="4"></a>
