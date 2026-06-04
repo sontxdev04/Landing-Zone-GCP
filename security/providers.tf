@@ -10,7 +10,8 @@ terraform {
 }
 
 provider "google" {
-  region                = "asia-southeast1"
-  user_project_override = true
-  billing_project       = local.org.project_id_hub_net
+  impersonate_service_account = var.tf_runner_sa
+  region                      = "asia-southeast1"
+  user_project_override       = true
+  billing_project             = local.org.project_id_management
 }

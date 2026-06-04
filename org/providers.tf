@@ -22,9 +22,11 @@ terraform {
 }
 
 provider "google" {
-  region = "asia-southeast1"
+  impersonate_service_account = var.tf_runner_sa
+  region                      = "asia-southeast1"
 }
 
 provider "google-beta" {
-  region = "asia-southeast1"
+  impersonate_service_account = var.tf_runner_sa
+  region                      = "asia-southeast1"
 }

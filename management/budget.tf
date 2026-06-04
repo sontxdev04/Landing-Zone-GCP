@@ -1,8 +1,8 @@
-# Monthly billing budget with threshold alerts (skipped when billing_account_id is empty)
+# Monthly billing budget with threshold alerts (skipped when budget_billing_account_id is empty)
 
 resource "google_billing_budget" "gcp-sg-budget-monthly-001" {
-  count           = var.billing_account_id != "" ? 1 : 0
-  billing_account = var.billing_account_id
+  count           = var.budget_billing_account_id != "" ? 1 : 0
+  billing_account = var.budget_billing_account_id
   display_name    = "gcp-sg-budget-monthly-001"
 
   budget_filter {

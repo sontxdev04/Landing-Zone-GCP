@@ -11,7 +11,7 @@ output "dashboard_availability_id" {
 }
 
 output "budget_id" {
-  description = "Resource ID of the monthly cost budget (null when billing_account_id is empty)"
+  description = "Resource ID of the monthly cost budget (null when budget_billing_account_id is empty)"
   value       = try(google_billing_budget.gcp-sg-budget-monthly-001[0].id, null)
 }
 

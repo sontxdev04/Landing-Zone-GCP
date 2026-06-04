@@ -51,7 +51,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-allow-vm-external-ip-bast
     rules {
       values {
         allowed_values = [
-          "projects/${module.lz-prj-sh-access.project_id}/zones/asia-southeast1-b/instances/gcp-sg-vm-bastion-001",
+          "projects/${module.lz-prj-sh-access.project_id}/zones/${var.zone_sg_b}/instances/gcp-sg-vm-bastion-001",
         ]
       }
     }

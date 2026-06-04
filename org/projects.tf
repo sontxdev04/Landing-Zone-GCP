@@ -37,7 +37,7 @@ module "lz-prj-hub-net" {
   name              = local.project_id_hub_net
   random_project_id = false
   org_id            = var.org_id
-  billing_account   = var.billing_account_id
+  billing_account   = var.billing_account_id_2
   folder_id         = module.folders-platform.ids["fldr-connectivity"]
 
   activate_apis = [
@@ -47,6 +47,7 @@ module "lz-prj-hub-net" {
     "logging.googleapis.com",
     "monitoring.googleapis.com",
     "orgpolicy.googleapis.com",
+    "dns.googleapis.com",
   ]
 
   labels = merge(
@@ -66,7 +67,7 @@ module "lz-prj-sh-vpc" {
   name              = local.project_id_sh_vpc
   random_project_id = false
   org_id            = var.org_id
-  billing_account   = var.billing_account_id
+  billing_account   = var.billing_account_id_2
   folder_id         = module.folders-platform.ids["fldr-connectivity"]
 
   activate_apis = [
@@ -94,7 +95,7 @@ module "lz-prj-sh-access" {
   name              = local.project_id_sh_access
   random_project_id = false
   org_id            = var.org_id
-  billing_account   = var.billing_account_id
+  billing_account   = var.billing_account_id_2
   folder_id         = module.folders-platform.ids["fldr-connectivity"]
 
   activate_apis = [
@@ -124,7 +125,7 @@ module "lz-prj-astronomy-shop" {
   name              = local.project_id_astronomy_shop
   random_project_id = false
   org_id            = var.org_id
-  billing_account   = var.billing_account_id
+  billing_account   = var.billing_account_id_2
   folder_id         = module.folders-root.ids["fldr-workload"]
 
   activate_apis = [
@@ -152,7 +153,7 @@ module "gcp-platform-management" {
   name              = "gcp-platform-management"
   random_project_id = true
   org_id            = var.org_id
-  billing_account   = var.billing_account_id
+  billing_account   = var.billing_account_id_1
   folder_id         = module.folders-platform.ids["fldr-management"]
 
   activate_apis = [
@@ -182,7 +183,7 @@ module "gcp-platform-security" {
   name              = "gcp-platform-security"
   random_project_id = true
   org_id            = var.org_id
-  billing_account   = var.billing_account_id
+  billing_account   = var.billing_account_id_1
   folder_id         = module.folders-platform.ids["fldr-management"]
 
   activate_apis = [

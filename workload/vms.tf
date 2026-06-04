@@ -4,6 +4,12 @@ data "google_project" "gcp-sg-prj-sh-access-001" {
   project_id = local.org.project_id_sh_access
 }
 
+# Bastion service account (created manually via gcloud — see README §6.1)
+data "google_service_account" "sa-sh-access" {
+  account_id = "gcp-sg-sa-sh-access-001"
+  project    = local.org.project_id_sh_access
+}
+
 # Startup script: install Google Cloud Ops Agent (logging + monitoring)
 locals {
   ops_agent_startup_script = <<-EOT
@@ -18,13 +24,13 @@ locals {
 # Bastion Host (example workload VM)
 resource "google_compute_instance" "gcp-sg-vm-bastion-001" {
   name         = "gcp-sg-vm-bastion-001"
-  machine_type = "e2-micro"
-  zone         = "asia-southeast1-b"
+  machine_type = var.bastion_machine_type
+  zone         = var.zone_sg_b
   project      = data.google_project.gcp-sg-prj-sh-access-001.project_id
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-12"
+      image = var.bastion_image
       size  = 20
       type  = "pd-standard"
     }
@@ -43,7 +49,7 @@ resource "google_compute_instance" "gcp-sg-vm-bastion-001" {
   }
 
   service_account {
-    email  = local.sec.sa_sh_access_email
+    email  = data.google_service_account.sa-sh-access.email
     scopes = ["cloud-platform"]
   }
 

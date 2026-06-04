@@ -42,7 +42,7 @@ resource "google_monitoring_notification_channel" "gcp-sg-monitoring-email-001" 
   type         = "email"
   project      = data.google_project.gcp-sg-prj-management-001.project_id
   labels = {
-    email_address = var.user_email
+    email_address = var.alert_notification_email
   }
 }
 

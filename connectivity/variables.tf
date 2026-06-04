@@ -1,3 +1,9 @@
+# Service account that Terraform impersonates when applying this stack (created manually — see README §6.1).
+variable "tf_runner_sa" {
+  description = "Email of the TF Runner SA dedicated to the connectivity stack"
+  type        = string
+}
+
 variable "onprem_vpn_public_ip_0" {
   description = "Public IP of the on-premises VPN gateway (interface 0)"
   type        = string
