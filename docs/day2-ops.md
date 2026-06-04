@@ -215,14 +215,14 @@ flowchart LR
 
 VM được khai báo trong [workload/vms.tf](../workload/vms.tf) (hiện file có sẵn khung mẫu ở dạng chú thích).
 
-1. **Sao chép khung mẫu** trong [workload/vms.tf](../workload/vms.tf) và điền tên, `machine_type`, `zone` (vd `asia-southeast1-b`), project (`local.org.project_id_astronomy_shop`).
+1. **Sao chép khung mẫu** trong [workload/vms.tf](../workload/vms.tf) và điền tên, `machine_type`, `zone` (vd `asia-southeast1-b`), project (`local.org.project_id_sample_app`).
 2. **Gắn mạng** qua `local.conn.snet_shared_access_id` (Shared VPC) và **tuyệt đối không** thêm khối `access_config` → đảm bảo VM không có IP ngoài (tuân thủ Org Policy `vmExternalIpAccess = deny_all`).
 3. **Bật Shielded VM** (`enable_secure_boot`, `enable_vtpm`, `enable_integrity_monitoring`) — bắt buộc bởi Org Policy `compute.requireShieldedVm`.
 4. **Bật OS Login** qua `metadata = { enable-oslogin = "TRUE" }` — bắt buộc bởi `compute.requireOsLogin`.
 5. Chạy `terraform apply` trong thư mục `workload`.
 
 > [!NOTE]
-> VM cần một **Runtime SA** (khác với Runner SA chạy Terraform) để ghi log/metric. Các Runtime SA này được tạo bằng `./scripts/03-runtime-sa.sh --astro` (xem bảng `RUNTIME_SA_BINDINGS` trong [scripts/roles.sh](../scripts/roles.sh)), gắn sẵn `roles/monitoring.metricWriter` và `roles/logging.logWriter`.
+> VM cần một **Runtime SA** (khác với Runner SA chạy Terraform) để ghi log/metric. Các Runtime SA này được tạo bằng `./scripts/03-runtime-sa.sh --app` (xem bảng `RUNTIME_SA_BINDINGS` trong [scripts/roles.sh](../scripts/roles.sh)), gắn sẵn `roles/monitoring.metricWriter` và `roles/logging.logWriter`.
 
 ---
 
@@ -310,7 +310,7 @@ Dùng tên thay vì IP cứng giúp workload không phụ thuộc địa chỉ I
 
 ## 7. 🚨 Quan Trắc & Phản Ứng Cảnh Báo
 
-Project `management` là **Metrics Scope trung tâm** thu thập metric của mọi project (astronomy-shop, hub-net, sh-vpc). Ba Alert Policy được cấu hình sẵn trong [management/monitoring.tf](../management/monitoring.tf):
+Project `management` là **Metrics Scope trung tâm** thu thập metric của mọi project (sample-app, hub-net, sh-vpc). Ba Alert Policy được cấu hình sẵn trong [management/monitoring.tf](../management/monitoring.tf):
 
 | Alert | Điều kiện | Yêu cầu | Tự đóng |
 | :--- | :--- | :--- | :--- |
@@ -405,7 +405,7 @@ Trước khi bàn giao landing zone cho workload Production thật, rà soát to
 | Xem output stack | `terraform output` / `terraform output -raw <name>` |
 | Mở khóa state | `terraform force-unlock <LOCK_ID>` |
 | SSH vào VM qua IAP | `gcloud compute ssh <vm> --zone=asia-southeast1-b --tunnel-through-iap` |
-| Tạo Runtime SA cho VM | `./scripts/03-runtime-sa.sh --astro --tools` |
+| Tạo Runtime SA cho VM | `./scripts/03-runtime-sa.sh --app --tools` |
 | Phân quyền sau apply org | `./scripts/02-post-org-roles.sh` |
 | Liệt kê phiên bản state | `gsutil ls -a gs://<STATE_BUCKET>/terraform/<stack>/default.tfstate` |
 

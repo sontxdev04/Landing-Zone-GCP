@@ -6,3 +6,6 @@
 
 # TF Runner SA cho stack workload (giữ nguyên nếu dùng SEED_PROJECT mặc định).
 tf_runner_sa = "sa-tf-wl-001@gcp-platform-bootstrap-001.iam.gserviceaccount.com"
+
+# Tạo VM mẫu (e2-small) để dashboard monitoring có dữ liệu. Đặt false để bỏ qua.
+enable_sample_vm = true

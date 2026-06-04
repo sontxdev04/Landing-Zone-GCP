@@ -21,9 +21,9 @@ output "project_id_sh_vpc" {
   value       = module.lz-prj-sh-vpc.project_id
 }
 
-output "project_id_astronomy_shop" {
-  description = "Project ID of the astronomy-shop workload project"
-  value       = module.lz-prj-astronomy-shop.project_id
+output "project_id_sample_app" {
+  description = "Project ID of the sample-app workload project"
+  value       = module.lz-prj-sample-app.project_id
 }
 
 output "project_id_management" {

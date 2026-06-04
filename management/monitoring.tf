@@ -5,15 +5,15 @@ data "google_project" "gcp-sg-prj-management-001" {
   project_id = local.org.project_id_management
 }
 
-data "google_project" "gcp-sg-prj-astronomy-shop-001" {
-  project_id = local.org.project_id_astronomy_shop
+data "google_project" "gcp-sg-prj-sample-app-001" {
+  project_id = local.org.project_id_sample_app
 }
 
 # Metrics Scope — attach all projects' metrics to the management project (management is its own scope already)
 
-resource "google_monitoring_monitored_project" "gcp-sg-metricscope-astronomy-shop-001" {
+resource "google_monitoring_monitored_project" "gcp-sg-metricscope-sample-app-001" {
   metrics_scope = local.org.project_id_management
-  name          = local.org.project_id_astronomy_shop
+  name          = local.org.project_id_sample_app
 }
 
 
@@ -51,7 +51,7 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-cpu-001" {
   conditions {
     display_name = "VM CPU > 80%"
     condition_threshold {
-      filter          = "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\" AND resource.labels.project_id = \"${data.google_project.gcp-sg-prj-astronomy-shop-001.project_id}\""
+      filter          = "resource.type = \"gce_instance\" AND metric.type = \"compute.googleapis.com/instance/cpu/utilization\" AND resource.labels.project_id = \"${data.google_project.gcp-sg-prj-sample-app-001.project_id}\""
       duration        = "300s"
       comparison      = "COMPARISON_GT"
       threshold_value = 0.8
@@ -69,7 +69,7 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-cpu-001" {
     auto_close = "604800s"
   }
 
-  depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-astronomy-shop-001]
+  depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-sample-app-001]
 }
 
 # Alert: VM memory > 80% (requires Ops Agent on the instance)
@@ -81,7 +81,7 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-memory-001" {
   conditions {
     display_name = "VM memory > 80%"
     condition_threshold {
-      filter          = "resource.type = \"gce_instance\" AND metric.type = \"agent.googleapis.com/memory/percent_used\" AND metric.label.state = \"used\" AND resource.labels.project_id = \"${data.google_project.gcp-sg-prj-astronomy-shop-001.project_id}\""
+      filter          = "resource.type = \"gce_instance\" AND metric.type = \"agent.googleapis.com/memory/percent_used\" AND metric.label.state = \"used\" AND resource.labels.project_id = \"${data.google_project.gcp-sg-prj-sample-app-001.project_id}\""
       duration        = "300s"
       comparison      = "COMPARISON_GT"
       threshold_value = 80
@@ -99,7 +99,7 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-memory-001" {
     auto_close = "604800s"
   }
 
-  depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-astronomy-shop-001]
+  depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-sample-app-001]
 }
 
 # Alert: VM disk > 85% (requires Ops Agent on the instance)
@@ -111,7 +111,7 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-disk-001" {
   conditions {
     display_name = "VM disk > 85%"
     condition_threshold {
-      filter          = "resource.type = \"gce_instance\" AND metric.type = \"agent.googleapis.com/disk/percent_used\" AND metric.label.state = \"used\" AND resource.labels.project_id = \"${data.google_project.gcp-sg-prj-astronomy-shop-001.project_id}\""
+      filter          = "resource.type = \"gce_instance\" AND metric.type = \"agent.googleapis.com/disk/percent_used\" AND metric.label.state = \"used\" AND resource.labels.project_id = \"${data.google_project.gcp-sg-prj-sample-app-001.project_id}\""
       duration        = "300s"
       comparison      = "COMPARISON_GT"
       threshold_value = 85
@@ -129,5 +129,5 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-disk-001" {
     auto_close = "604800s"
   }
 
-  depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-astronomy-shop-001]
+  depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-sample-app-001]
 }

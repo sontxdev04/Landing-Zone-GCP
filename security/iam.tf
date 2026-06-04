@@ -23,7 +23,7 @@ locals {
   # ── Cloud IAP — SSH tunnel access (no bastion host required) ─────────────────
   # Usage: gcloud compute ssh <VM> --project <PROJECT> --zone asia-southeast1-b --tunnel-through-iap
   iap_projects = [
-    local.org.project_id_astronomy_shop,
+    local.org.project_id_sample_app,
     local.org.project_id_hub_net,
     local.org.project_id_sh_vpc,
   ]
@@ -43,17 +43,17 @@ resource "google_organization_iam_member" "user_org_roles" {
   member   = each.value.member
 }
 
-# Scoped log view reader — read-only access to the astronomy-shop log view
-resource "google_project_iam_member" "gcp-sg-logview-astronomy-shop-reader-001" {
+# Scoped log view reader — read-only access to the sample-app log view
+resource "google_project_iam_member" "gcp-sg-logview-sample-app-reader-001" {
   for_each = toset(var.admin_principals)
   project  = local.org.project_id_management
   role     = "roles/logging.viewAccessor"
   member   = each.value
 
   condition {
-    title       = "read-astronomy-shop-log-view-only"
-    description = "Grants log view access scoped to the astronomy-shop log view"
-    expression  = "resource.name == \"projects/${local.org.project_id_management}/locations/asia-southeast1/buckets/gcp-sg-logbkt-fldr-platform-001/views/gcp-sg-logview-astronomy-shop-001\""
+    title       = "read-sample-app-log-view-only"
+    description = "Grants log view access scoped to the sample-app log view"
+    expression  = "resource.name == \"projects/${local.org.project_id_management}/locations/asia-southeast1/buckets/gcp-sg-logbkt-fldr-platform-001/views/gcp-sg-logview-sample-app-001\""
   }
 }
 

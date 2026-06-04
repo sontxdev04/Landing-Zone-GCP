@@ -64,7 +64,7 @@ Tài nguyên được tổ chức phân cấp dưới Organization để **cô l
 │       └── 📦 lz-prj-sh-vpc-<suffix>       ← Shared VPC Host Project
 │
 ├── 📁 fldr-workload                       ← Môi trường ứng dụng (đội App)
-│   └── 📦 lz-prj-astronomy-shop-<suffix>   ← Service Project dùng Shared VPC
+│   └── 📦 lz-prj-sample-app-<suffix>   ← Service Project dùng Shared VPC
 │
 └── 📁 fldr-sandbox                        ← Khu thử nghiệm cô lập (chưa có project)
 ```
@@ -83,7 +83,7 @@ Tài nguyên được tổ chức phân cấp dưới Organization để **cô l
 
 | Nhóm project | Billing Account | Lý do |
 | :--- | :--- | :--- |
-| `lz-prj-hub-net`, `lz-prj-sh-vpc`, `lz-prj-astronomy-shop` | **Billing #2** (workload) | Chi phí vận hành ứng dụng & mạng phục vụ ứng dụng — quy về ngân sách sản phẩm. |
+| `lz-prj-hub-net`, `lz-prj-sh-vpc`, `lz-prj-sample-app` | **Billing #2** (workload) | Chi phí vận hành ứng dụng & mạng phục vụ ứng dụng — quy về ngân sách sản phẩm. |
 | `gcp-platform-management`, `gcp-platform-security` | **Billing #1** (nền tảng) | Chi phí nền tảng dùng chung (log, bảo mật) — quy về ngân sách hạ tầng trung tâm. |
 
 Việc tách billing giúp **phân bổ chi phí (cost allocation)** rõ ràng và cho phép áp ngân sách/cảnh báo độc lập cho từng miền.
@@ -142,7 +142,7 @@ flowchart TD
     end
     style SharedVPCProject fill:#1a202c,stroke:#e2e8f0,stroke-width:1px
 
-    subgraph WorkloadProject["📦 lz-prj-astronomy-shop (Service Project)"]
+    subgraph WorkloadProject["📦 lz-prj-sample-app (Service Project)"]
         VM["🖥️ Workload VM<br/>(IP nội bộ, KHÔNG IP ngoài)"]:::project
     end
     style WorkloadProject fill:#1a202c,stroke:#e2e8f0,stroke-width:1px
@@ -305,7 +305,7 @@ resource "google_compute_router_nat" "gcp-sg-nat-001" {
 ```mermaid
 flowchart TD
     Host["📦 Host Project: lz-prj-sh-vpc<br/>SỞ HỮU mạng gcp-sg-vpc-shared-001"]
-    Svc["📦 Service Project: lz-prj-astronomy-shop<br/>DÙNG mạng, chạy VM"]
+    Svc["📦 Service Project: lz-prj-sample-app<br/>DÙNG mạng, chạy VM"]
     Host -->|"attachment"| Svc
 ```
 
@@ -313,7 +313,7 @@ Lợi ích cốt lõi: **đội mạng kiểm soát subnet/firewall/route ở Ho
 
 Trong code, việc này gồm hai tài nguyên:
 - `google_compute_shared_vpc_host_project` — bật chế độ Host cho `lz-prj-sh-vpc`.
-- `google_compute_shared_vpc_service_project` — gắn `lz-prj-astronomy-shop` làm service project.
+- `google_compute_shared_vpc_service_project` — gắn `lz-prj-sample-app` làm service project.
 
 ### 7.2 VPC Peering: Hub ↔ Shared
 

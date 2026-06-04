@@ -111,7 +111,7 @@ flowchart TD
     end
 
     subgraph WORKLOAD_F["📁 fldr-workload"]
-        ASTRO["📦 astronomy-shop<br/>Service Project"]
+        APP["📦 sample-app<br/>Service Project"]
     end
 
     SANDBOX["📁 fldr-sandbox"]
@@ -121,14 +121,14 @@ flowchart TD
     ORG --> SANDBOX
 
     HUB <-->|"VPC Peering"| SHVPC
-    SHVPC -.->|"Shared VPC<br/>attachment"| ASTRO
+    SHVPC -.->|"Shared VPC<br/>attachment"| APP
     HUB <-->|"HA VPN (tùy chọn)"| ONPREM["🏠 On-premises"]
     SHVPC -->|"Cloud NAT (egress)"| INTERNET["🌐 Internet"]
-    ADMIN["👤 Admin"] -->|"Cloud IAP (ingress)"| ASTRO
+    ADMIN["👤 Admin"] -->|"Cloud IAP (ingress)"| APP
 
     MGMT -. "thu thập logs/metrics" .-> HUB
     MGMT -. "thu thập logs/metrics" .-> SHVPC
-    MGMT -. "thu thập logs/metrics" .-> ASTRO
+    MGMT -. "thu thập logs/metrics" .-> APP
 ```
 
 > 💡 Truy cập quản trị đi qua **Cloud IAP** (không cần Bastion Host, không cần IP Public); chiều ra Internet đi qua **Cloud NAT**. Kết nối lai (Hybrid) tới Datacenter on-prem qua **HA VPN** được bật tùy chọn khi khai báo IP/secret.
@@ -144,7 +144,7 @@ Mỗi stack là một thư mục Terraform **độc lập hoàn toàn** — có 
 | 1️⃣ | [`org/`](org/) | **Nền móng tổ chức** | Cây Folder, Project Factory (5 project), 7 Org Policies guardrails |
 | 2️⃣ | [`connectivity/`](connectivity/) | **Mạng Hub-and-Spoke** | 2 VPC, Shared VPC, Peering, Cloud NAT, DNS nội bộ, HA VPN |
 | 3️⃣ | [`security/`](security/) | **Bảo mật & phân quyền** | Org Firewall Policies, IAM cho admin, IAP & Log View access |
-| 4️⃣ | [`workload/`](workload/) | **Tài nguyên ứng dụng** | VM/workload mẫu gắn vào Shared VPC (Astronomy Shop) |
+| 4️⃣ | [`workload/`](workload/) | **Tài nguyên ứng dụng** | VM/workload mẫu gắn vào Shared VPC (sample-app) |
 | 5️⃣ | [`management/`](management/) | **Quan trắc & tài chính** | Log Sinks, Log Views, Dashboards, Alert Policies, Budget |
 
 ```mermaid

@@ -73,7 +73,7 @@ create_sa() { # $1=account id  $2=project  $3=display name
 resolve_project() { # $1=PROJECT_KEY
   case "$1" in
     MGMT)    echo "$PRJ_MGMT" ;;
-    ASTRO)   echo "$PRJ_ASTRO" ;;
+    APP)   echo "$PRJ_APP" ;;
     HUB_NET) echo "$PRJ_HUB_NET" ;;
     SH_VPC)  echo "$PRJ_SH_VPC" ;;
     *) echo "[ERROR] PROJECT_KEY khong hop le: '$1' (roles.sh)" >&2; return 1 ;;

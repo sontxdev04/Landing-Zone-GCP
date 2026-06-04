@@ -68,11 +68,11 @@ STATE_UPSTREAM_BINDINGS=(
 # ─────────────────────────────────────────────────────────────────────────────
 # [6] Role cấp PROJECT (gán SAU apply org)   cột:  <PROJECT_KEY>  <SA>  <role>
 #     → dùng ở 02-post-org-roles.sh (Bước J)
-#     PROJECT_KEY ∈ MGMT | ASTRO | HUB_NET | SH_VPC
+#     PROJECT_KEY ∈ MGMT | APP | HUB_NET | SH_VPC
 # ─────────────────────────────────────────────────────────────────────────────
 POSTORG_PROJECT_BINDINGS=(
   "MGMT      $SA_SEC  roles/resourcemanager.projectIamAdmin"   # J1: set IAM log view
-  "ASTRO     $SA_WL   roles/compute.instanceAdmin.v1"          # J2: VM astronomy-shop
+  "APP     $SA_WL   roles/compute.instanceAdmin.v1"          # J2: VM sample-app
   "MGMT      $SA_MGMT roles/logging.admin"                     # J3: Log Sinks/Buckets/Views
   "MGMT      $SA_MGMT roles/monitoring.admin"                  # J3: Monitoring
   "MGMT      $SA_MGMT roles/storage.admin"                     # J3
@@ -82,18 +82,18 @@ POSTORG_PROJECT_BINDINGS=(
   #     nen SA cua stack can quyen 'serviceusage.services.use' tren project do
   #     (khong nam trong networkAdmin/instanceAdmin/storage.admin/...).
   "HUB_NET   $SA_CONN roles/serviceusage.serviceUsageConsumer" # connectivity billing_project = hub-net
-  "ASTRO     $SA_WL   roles/serviceusage.serviceUsageConsumer" # workload billing_project = astronomy-shop
+  "APP     $SA_WL   roles/serviceusage.serviceUsageConsumer" # workload billing_project = sample-app
   "MGMT      $SA_MGMT roles/serviceusage.serviceUsageConsumer" # management billing_project = management
   "MGMT      $SA_SEC  roles/serviceusage.serviceUsageConsumer" # security billing_project = management
   # J5: security gan IAP/OS-login binding (google_project_iam_member) len 3 project
-  #     astro/hub-net/sh-vpc → can projectIamAdmin tren ca 3 (ngoai MGMT da co o J1).
-  "ASTRO     $SA_SEC  roles/resourcemanager.projectIamAdmin"
+  #     app/hub-net/sh-vpc → can projectIamAdmin tren ca 3 (ngoai MGMT da co o J1).
+  "APP     $SA_SEC  roles/resourcemanager.projectIamAdmin"
   "HUB_NET   $SA_SEC  roles/resourcemanager.projectIamAdmin"
   "SH_VPC    $SA_SEC  roles/resourcemanager.projectIamAdmin"
-  # J6: management gom astro/hub-net/sh-vpc vao metric scope cua project management
+  # J6: management gom app/hub-net/sh-vpc vao metric scope cua project management
   #     (google_monitoring_monitored_project). Quyen monitoring.metricsScopes.link
   #     phai co tren CA scoping project (MGMT, da co o J3) LAN tung project bi them.
-  "ASTRO     $SA_MGMT roles/monitoring.admin"
+  "APP     $SA_MGMT roles/monitoring.admin"
   "HUB_NET   $SA_MGMT roles/monitoring.admin"
   "SH_VPC    $SA_MGMT roles/monitoring.admin"
 )
@@ -106,12 +106,12 @@ POSTORG_BILLING_BINDINGS=(
 # ─────────────────────────────────────────────────────────────────────────────
 # [8] RUNTIME SA cho VM/workload (Phase B)   → dùng ở 03-runtime-sa.sh
 #     cột:  <nhóm>  <account_id>  <PROJECT_KEY>  <actAs>  |  <display name>
-#       nhóm  ∈ core (luôn tạo) | astro (cần cờ --astro) | tools (cần cờ --tools)
+#       nhóm  ∈ core (luôn tạo) | app (cần cờ --app) | tools (cần cờ --tools)
 #       actAs ∈ yes (cấp sa-tf-wl-001 quyền actAs SA này) | no
 #     Role gán cố định cho mọi runtime SA: xem RUNTIME_FIXED_ROLES bên dưới.
 # ─────────────────────────────────────────────────────────────────────────────
 RUNTIME_SA_BINDINGS=(
-  "astro gcp-sg-sa-astronomy-shop-001 ASTRO     yes | Astronomy-shop workload runtime SA"
+  "app gcp-sg-sa-sample-app-001 APP     yes | Sample-app workload runtime SA"
   "tools gcp-sg-sa-hub-net-001        HUB_NET   no  | hub-net runtime SA"
   "tools gcp-sg-sa-sh-vpc-001         SH_VPC    no  | sh-vpc runtime SA"
 )

@@ -1,6 +1,4 @@
-# Remote state — reads org stack outputs (apply org stack first)
-# NOTE: connectivity remote state removed — bastion host (which needed conn outputs) has been replaced by Cloud IAP.
-# Re-add connectivity remote state here when workload VMs need subnet/VPC references.
+# Remote state — reads org + connectivity stack outputs (apply org & connectivity first)
 
 data "terraform_remote_state" "org" {
   backend = "gcs"
@@ -10,7 +8,17 @@ data "terraform_remote_state" "org" {
   }
 }
 
+# Connectivity outputs — Shared VPC / subnet refs cho VM workload
+data "terraform_remote_state" "connectivity" {
+  backend = "gcs"
+  config = {
+    bucket = "<STATE_BUCKET>"
+    prefix = "terraform/connectivity"
+  }
+}
+
 # Convenience local aliases
 locals {
-  org = data.terraform_remote_state.org.outputs
+  org  = data.terraform_remote_state.org.outputs
+  conn = data.terraform_remote_state.connectivity.outputs
 }

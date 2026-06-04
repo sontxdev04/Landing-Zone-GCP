@@ -268,6 +268,19 @@ Lần lượt các `prefix` tương ứng cho từng stack:
 > | `*/backend.tf` | 5 (cả 5 stack) |
 > | `connectivity,security,workload,management /remote.tf` | 4 |
 
+**Cách nhanh (copy-paste, không cần sửa tay):** sau khi đã `source scripts/config.sh` (có sẵn `$STATE_BUCKET`), chạy 1 lệnh thay toàn bộ placeholder trong cả 9 file:
+
+```bash
+grep -rl '<STATE_BUCKET>' */backend.tf */remote.tf \
+  | xargs sed -i "s|<STATE_BUCKET>|$STATE_BUCKET|g"
+```
+
+Kiểm tra không còn placeholder sót:
+
+```bash
+grep -rn '<STATE_BUCKET>' */backend.tf */remote.tf || echo "OK — đã thay hết"
+```
+
 ### 5.2 Tạo `terraform.tfvars` từ mẫu & điền biến bắt buộc
 
 File `terraform.tfvars` bị `.gitignore` (không commit giá trị thật), nên khi clone source bạn sẽ **không có sẵn** nó. Mỗi stack đi kèm một file mẫu `terraform.tfvars.example`. Copy mẫu → `terraform.tfvars` cho từng stack rồi điền giá trị:
@@ -285,7 +298,7 @@ Sau đó mở từng `terraform.tfvars` và điền các **biến BẮT BUỘC**
 | `org/` | `org_id`, `billing_account_id_1`, `billing_account_id_2` | billing lấy từ `gcloud billing accounts list` |
 | `connectivity/` | — | chỉ VPN là tùy chọn (xem §5.3) |
 | `security/` | `org_id`, `admin_principals` | `admin_principals` rỗng = **không ai có quyền admin** |
-| `workload/` | — | dùng giá trị mặc định |
+| `workload/` | — | `enable_sample_vm` (mặc định `true`) tạo VM mẫu cho dashboard |
 | `management/` | `org_id`, `alert_notification_email`, `budget_billing_account_id` | để trống `budget_billing_account_id` sẽ bỏ qua budget |
 
 > [!IMPORTANT]
@@ -386,15 +399,15 @@ Gán role cấp project cho `sa-tf-sec` / `sa-tf-wl` / `sa-tf-mgmt`:
 ./scripts/02-post-org-roles.sh
 ```
 
-Tạo Runtime SA cho workload (astronomy-shop) và các tool (hub-net, sh-vpc):
+Tạo Runtime SA cho workload (sample-app) và các tool (hub-net, sh-vpc):
 
 ```bash
-./scripts/03-runtime-sa.sh --astro --tools
+./scripts/03-runtime-sa.sh --app --tools
 ```
 
 > [!TIP]
 > Cờ của `03-runtime-sa.sh` là tùy chọn:
-> - `--astro` → chỉ tạo Runtime SA cho `astronomy-shop`.
+> - `--app` → chỉ tạo Runtime SA cho `sample-app`.
 > - `--tools` → chỉ tạo Runtime SA cho `hub-net` & `sh-vpc`.
 > - Dùng cả hai nếu muốn tạo tất cả.
 
@@ -432,7 +445,10 @@ terraform apply
 
 ### 6.4 Lớp 3 — Stack `workload`
 
-Triển khai VM private trong project `astronomy-shop` (gắn vào Shared VPC, không IP public).
+Triển khai VM mẫu private trong project `sample-app` (gắn vào Shared VPC, không IP public). VM này dùng máy nhỏ `e2-small` và tự cài **Google Cloud Ops Agent** để dashboard monitoring (CPU/memory/disk) ở stack `management` có dữ liệu hiển thị.
+
+> [!NOTE]
+> Bật/tắt VM mẫu qua biến `enable_sample_vm` trong [workload/terraform.tfvars](../workload/terraform.tfvars) (mặc định `true`). Đặt `false` nếu chưa cần VM.
 
 ```bash
 cd ../workload
@@ -524,9 +540,9 @@ Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
 | `terraform apply` lỗi `403 USER_PROJECT_DENIED` / `serviceUsageConsumer` ở stack hạ nguồn (connectivity/security/workload/management) | Provider đặt `user_project_override=true` + `billing_project=<project>`; Runner SA thiếu `serviceusage.services.use` trên billing_project đó | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/serviceusage.serviceUsageConsumer` cho từng SA. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại stack |
 | `connectivity` lỗi `403 ... 'compute.firewalls.create' permission` | `roles/compute.networkAdmin` KHÔNG quản lý firewall (chỉ đọc); quyền tạo firewall nằm ở `roles/compute.securityAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.securityAdmin` cho `sa-tf-conn-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
 | `security` lỗi `403 ... 'compute.organizations.setFirewallPolicy'` khi tạo `firewall_policy_association` | `orgFirewallPolicyAdmin` chỉ tạo/sửa policy & rules, KHÔNG associate vào org; permission `compute.organizations.setFirewallPolicy` nằm trong `roles/compute.orgSecurityResourceAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.orgSecurityResourceAdmin` cho `sa-tf-sec-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
-| `security` lỗi `403` khi set IAM (`google_project_iam_member`) trên astro/hub-net/sh-vpc | SA_SEC chỉ có `projectIamAdmin` trên MGMT, chưa có trên 3 project IAP | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/resourcemanager.projectIamAdmin` cho `sa-tf-sec-001` trên ASTRO/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
+| `security` lỗi `403` khi set IAM (`google_project_iam_member`) trên app/hub-net/sh-vpc | SA_SEC chỉ có `projectIamAdmin` trên MGMT, chưa có trên 3 project IAP | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/resourcemanager.projectIamAdmin` cho `sa-tf-sec-001` trên APP/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
 | `management` lỗi `403 Service Usage API ... SERVICE_DISABLED` trên project `gcp-platform-management-*` (khi tạo log bucket `enable_destination_api`) | Provider stack đặt `billing_project=management` + `user_project_override=true` nên mọi call cần Service Usage API **bật trên project management**, nhưng `activate_apis` thiếu `serviceusage.googleapis.com` | Đã xử lý: thêm `serviceusage.googleapis.com` vào `activate_apis` của module management ([org/projects.tf](../org/projects.tf)). Chạy lại `cd org && terraform apply` rồi `apply` lại management |
-| `management` lỗi `403 ... MonitoredProject ... caller does not have permission` (tạo `google_monitoring_monitored_project`) | Để gom project vào metric scope cần `monitoring.metricsScopes.link` (trong `roles/monitoring.admin`) trên **CẢ** scoping project (MGMT) **LẪN** project bị gom (astro/hub-net/sh-vpc); SA_MGMT chỉ có trên MGMT | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/monitoring.admin` cho `sa-tf-mgmt-001` trên ASTRO/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
+| `management` lỗi `403 ... MonitoredProject ... caller does not have permission` (tạo `google_monitoring_monitored_project`) | Để gom project vào metric scope cần `monitoring.metricsScopes.link` (trong `roles/monitoring.admin`) trên **CẢ** scoping project (MGMT) **LẪN** project bị gom (app/hub-net/sh-vpc); SA_MGMT chỉ có trên MGMT | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/monitoring.admin` cho `sa-tf-mgmt-001` trên APP/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
 | `management` lỗi `400 Error creating Budget: Request contains an invalid argument` | `currency_code` của budget hardcode `USD` nhưng billing account dùng **VND** — phải khớp loại tiền của billing account | Đã xử lý: đổi `currency_code = "VND"` + `units` tương đương trong [management/budget.tf](../management/budget.tf). Kiểm tra currency: `gcloud billing accounts describe billingAccounts/<ID> --format='value(currencyCode)'` |
 | `management` lỗi `400 ... AlertPolicy ... project ... is not monitored by the account` | Race/propagation: alert policy validate ngay khi metric scope vừa link xong, backend monitoring chưa propagate project vào scope (dù đã có `depends_on`) | Chỉ cần **`apply` lại lần nữa** — metric scope đã tồn tại & propagate, alert policy sẽ tạo thành công |
 | `Permission denied` khi tạo tài nguyên cấp Org | Tài khoản Phase A thiếu quyền Org Admin / billing | Cấp đủ quyền ở §2.2 rồi đăng nhập lại |

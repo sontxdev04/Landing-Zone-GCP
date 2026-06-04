@@ -9,8 +9,8 @@ data "google_project" "gcp-sg-prj-sh-vpc-001" {
   project_id = local.org.project_id_sh_vpc
 }
 
-data "google_project" "gcp-sg-prj-astronomy-shop-001" {
-  project_id = local.org.project_id_astronomy_shop
+data "google_project" "gcp-sg-prj-sample-app-001" {
+  project_id = local.org.project_id_sample_app
 }
 
 # Hub VPC — central transit / VPN termination

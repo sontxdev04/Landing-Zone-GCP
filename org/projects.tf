@@ -10,9 +10,9 @@ locals {
 
   prefix = "lz"
 
-  project_id_hub_net        = "${local.prefix}-prj-hub-net-${local.name_suffix}"
-  project_id_sh_vpc         = "${local.prefix}-prj-sh-vpc-${local.name_suffix}"
-  project_id_astronomy_shop = "${local.prefix}-prj-astronomy-shop-${local.name_suffix}"
+  project_id_hub_net    = "${local.prefix}-prj-hub-net-${local.name_suffix}"
+  project_id_sh_vpc     = "${local.prefix}-prj-sh-vpc-${local.name_suffix}"
+  project_id_sample_app = "${local.prefix}-prj-sample-app-${local.name_suffix}"
 
   network_labels = {
     managed_by  = "terraform"
@@ -85,14 +85,14 @@ module "lz-prj-sh-vpc" {
 }
 
 
-# Astronomy-shop workload service project (Workload folder)
-resource "time_static" "lz-prj-astronomy-shop-timestamp" {}
+# Sample-app workload service project (Workload folder)
+resource "time_static" "lz-prj-sample-app-timestamp" {}
 
-module "lz-prj-astronomy-shop" {
+module "lz-prj-sample-app" {
   source  = "terraform-google-modules/project-factory/google"
   version = "17.1.0"
 
-  name              = local.project_id_astronomy_shop
+  name              = local.project_id_sample_app
   random_project_id = false
   org_id            = var.org_id
   billing_account   = var.billing_account_id_2
@@ -108,7 +108,7 @@ module "lz-prj-astronomy-shop" {
 
   labels = merge(
     local.infra_labels,
-    { created_date = formatdate("YYYY-MM-DD_hh-mm-ss", timeadd(time_static.lz-prj-astronomy-shop-timestamp.rfc3339, "7h")) }
+    { created_date = formatdate("YYYY-MM-DD_hh-mm-ss", timeadd(time_static.lz-prj-sample-app-timestamp.rfc3339, "7h")) }
   )
   deletion_policy = "DELETE"
 }
