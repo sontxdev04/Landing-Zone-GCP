@@ -1,18 +1,21 @@
-# Workload stack — compute resources for workload projects
-#
-# SSH Access via Cloud IAP (no bastion host, no external IPs needed):
+# =============================================================================
+# WORKLOAD · Compute — VM mẫu cho project workload
+# -----------------------------------------------------------------------------
+# Mục đích : Tạo VM mẫu gắn Shared VPC (không IP public) để dashboard
+#            monitoring có dữ liệu. Bật/tắt qua biến enable_sample_vm.
+# -----------------------------------------------------------------------------
+# SSH qua Cloud IAP (không cần bastion host, không cần IP ngoài):
 #   gcloud compute ssh <INSTANCE_NAME> \
 #     --project=<PROJECT_ID> \
 #     --zone=asia-southeast1-b \
 #     --tunnel-through-iap
 #
-# Prerequisites:
-#   1. User must have roles/iap.tunnelResourceAccessor on the project (granted in security/iam.tf)
-#   2. OS Login must be enabled (enforced org-wide via org policy)
-#   3. The org-level firewall policy already allows IAP range (35.235.240.0/20) on port 22
+# Điều kiện tiên quyết:
+#   1. User cần roles/iap.tunnelResourceAccessor trên project (cấp ở security/iam.tf)
+#   2. OS Login được bật (bắt buộc toàn Org qua org policy)
+#   3. Hierarchical firewall policy đã cho phép dải IAP (35.235.240.0/20) trên port 22
+# =============================================================================
 
-# VM mẫu — gắn vào Shared VPC (không IP public), cài Ops Agent để dashboard
-# monitoring (CPU/memory/disk) có dữ liệu. Bật/tắt qua biến enable_sample_vm.
 # Lưu ý: VM dùng Compute Engine default SA với scope mặc định (đã có quyền ghi
 # monitoring/logging). Nếu org chặn default SA grants, cần cấp cho SA của VM hai
 # role roles/monitoring.metricWriter và roles/logging.logWriter để Ops Agent gửi metric.

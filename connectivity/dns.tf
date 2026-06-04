@@ -1,4 +1,9 @@
-# Cloud DNS — private zone for internal name resolution across the landing zone
+# =============================================================================
+# CONNECTIVITY · Cloud DNS — private zone phân giải tên nội bộ
+# -----------------------------------------------------------------------------
+# Mục đích : Zone private (internal.lz.local.) phân giải tên trong landing zone,
+#            gắn cả Hub và Shared VPC để dùng chung không gian tên.
+# =============================================================================
 
 resource "google_dns_managed_zone" "gcp-sg-dns-internal-001" {
   name        = "gcp-sg-dns-internal-001"
@@ -17,4 +22,4 @@ resource "google_dns_managed_zone" "gcp-sg-dns-internal-001" {
   }
 }
 
-# Add internal DNS records here as workload services are deployed.
+# Thêm bản ghi DNS nội bộ vào đây khi triển khai workload thực tế.

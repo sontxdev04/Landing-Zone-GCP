@@ -1,6 +1,10 @@
-# Cloud Routers — shared routing plane for VPN (BGP) and NAT
+# =============================================================================
+# CONNECTIVITY · Cloud Routers
+# -----------------------------------------------------------------------------
+# Mục đích : Router hub chạy phiên BGP cho VPN; router NAT phục vụ Cloud NAT.
+# =============================================================================
 
-# Cloud Router in hub VPC (ASN 65003) for VPN BGP sessions
+# Cloud Router trong hub VPC (ASN 65003) cho phiên BGP của VPN
 resource "google_compute_router" "gcp-sg-router-hub-001" {
   name    = "gcp-sg-router-hub-001"
   project = data.google_project.gcp-sg-prj-hub-net-001.project_id
@@ -14,12 +18,12 @@ resource "google_compute_router" "gcp-sg-router-hub-001" {
 
     advertised_ip_ranges {
       range       = "10.20.0.0/20"
-      description = "shared-prod VPC subnets"
+      description = "Dải subnet của Shared VPC prod"
     }
   }
 }
 
-# Cloud Router for NAT in prod shared VPC
+# Cloud Router cho NAT trong Shared VPC prod
 resource "google_compute_router" "gcp-sg-router-nat-001" {
   name    = "gcp-sg-router-nat-001"
   project = data.google_project.gcp-sg-prj-sh-vpc-001.project_id

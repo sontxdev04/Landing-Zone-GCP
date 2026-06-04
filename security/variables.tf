@@ -1,16 +1,21 @@
+# =============================================================================
+# SECURITY · Biến đầu vào của stack
+# -----------------------------------------------------------------------------
+# Mục đích : Khai báo org id, runner SA và danh sách principal nhận quyền admin.
+# =============================================================================
 variable "org_id" {
-  description = "GCP Organization ID"
+  description = "ID của GCP Organization"
   type        = string
 }
 
-# Service account that Terraform impersonates when applying this stack (created manually — see README §6.1).
+# SA mà Terraform mạo danh khi apply stack này (tạo thủ công — xem README §6.1).
 variable "tf_runner_sa" {
-  description = "Email of the TF Runner SA dedicated to the security stack"
+  description = "Email của TF Runner SA dành riêng cho stack security"
   type        = string
 }
 
-# Accepts any IAM principal with full prefix, e.g. "group:grp-sre@company.com" or "user:alice@company.com".
+# Nhận principal IAM đầy đủ tiền tố, ví dụ "group:grp-sre@company.com" hoặc "user:alice@company.com".
 variable "admin_principals" {
-  description = "IAM principals (groups preferred) that receive org-level admin roles"
+  description = "Các principal IAM (ưu tiên group) nhận quyền admin cấp org"
   type        = list(string)
 }

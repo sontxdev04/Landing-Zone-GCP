@@ -1,4 +1,9 @@
-# Centralized log export — org + folder sinks into management project (hot 90d) + GCS archive (365d)
+# =============================================================================
+# MANAGEMENT · Xuất log tập trung
+# -----------------------------------------------------------------------------
+# Mục đích : Sink log cấp org + folder về project management (hot 90 ngày)
+#            và lưu trữ GCS (archive 365 ngày).
+# =============================================================================
 
 locals {
   central_logging_project = local.org.project_id_management
@@ -6,7 +11,7 @@ locals {
   log_region              = "asia-southeast1"
 }
 
-# Organization-level logs → hot log bucket
+# Log cấp Organization → hot log bucket
 module "gcp-sg-logexp-org-001" {
   source  = "terraform-google-modules/log-export/google"
   version = "10.0.0"
@@ -41,7 +46,7 @@ module "gcp-sg-logbkt-org-001" {
   log_sink_writer_identity = module.gcp-sg-logexp-org-001.writer_identity
 }
 
-# Organization-level logs → GCS archive (cold)
+# Log cấp Organization → GCS archive (cold)
 module "gcp-sg-logexp-org-gcs-001" {
   source  = "terraform-google-modules/log-export/google"
   version = "10.0.0"
@@ -80,7 +85,7 @@ module "gcp-sg-gcsbkt-log-org-001" {
   log_sink_writer_identity = module.gcp-sg-logexp-org-gcs-001.writer_identity
 }
 
-# Platform folder logs (incl. children) → hot log bucket
+# Log folder Platform (gồm cả con) → hot log bucket
 module "gcp-sg-logexp-fldr-platform-001" {
   source  = "terraform-google-modules/log-export/google"
   version = "10.0.0"

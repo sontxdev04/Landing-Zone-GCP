@@ -1,6 +1,11 @@
-# Centralized monitoring — management project is the single Metrics Scope for all projects
+# =============================================================================
+# MANAGEMENT · Monitoring tập trung
+# -----------------------------------------------------------------------------
+# Mục đích : Project management là Metrics Scope duy nhất cho tất cả project;
+#            khai báo kênh thông báo và các alert policy CPU/memory/disk.
+# =============================================================================
 
-# Data sources — project references
+# Data source — tham chiếu project
 data "google_project" "gcp-sg-prj-management-001" {
   project_id = local.org.project_id_management
 }
@@ -9,7 +14,8 @@ data "google_project" "gcp-sg-prj-sample-app-001" {
   project_id = local.org.project_id_sample_app
 }
 
-# Metrics Scope — attach all projects' metrics to the management project (management is its own scope already)
+# Metrics Scope — gắn metric của mọi project vào project management
+# (bản thân management đã là scope riêng)
 
 resource "google_monitoring_monitored_project" "gcp-sg-metricscope-sample-app-001" {
   metrics_scope = local.org.project_id_management
@@ -27,7 +33,7 @@ resource "google_monitoring_monitored_project" "gcp-sg-metricscope-sh-vpc-001" {
   name          = local.org.project_id_sh_vpc
 }
 
-# Notification channels (central — management project)
+# Kênh thông báo (tập trung — project management)
 
 resource "google_monitoring_notification_channel" "gcp-sg-monitoring-email-001" {
   display_name = "gcp-sg-monitoring-email-001"
@@ -38,11 +44,7 @@ resource "google_monitoring_notification_channel" "gcp-sg-monitoring-email-001" 
   }
 }
 
-# NOTE: Bastion uptime check removed — bastion host replaced by Cloud IAP.
-# Add uptime checks for workload HTTP endpoints here as needed.
-
-
-# Alert: VM CPU > 80% for 5 minutes (prod env)
+# Alert: VM CPU > 80% trong 5 phút (môi trường prod)
 resource "google_monitoring_alert_policy" "gcp-sg-alert-cpu-001" {
   display_name = "gcp-sg-alert-cpu-001"
   project      = data.google_project.gcp-sg-prj-management-001.project_id
@@ -72,7 +74,7 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-cpu-001" {
   depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-sample-app-001]
 }
 
-# Alert: VM memory > 80% (requires Ops Agent on the instance)
+# Alert: VM memory > 80% (cần Ops Agent trên instance)
 resource "google_monitoring_alert_policy" "gcp-sg-alert-memory-001" {
   display_name = "gcp-sg-alert-memory-001"
   project      = data.google_project.gcp-sg-prj-management-001.project_id
@@ -102,7 +104,7 @@ resource "google_monitoring_alert_policy" "gcp-sg-alert-memory-001" {
   depends_on = [google_monitoring_monitored_project.gcp-sg-metricscope-sample-app-001]
 }
 
-# Alert: VM disk > 85% (requires Ops Agent on the instance)
+# Alert: VM disk > 85% (cần Ops Agent trên instance)
 resource "google_monitoring_alert_policy" "gcp-sg-alert-disk-001" {
   display_name = "gcp-sg-alert-disk-001"
   project      = data.google_project.gcp-sg-prj-management-001.project_id

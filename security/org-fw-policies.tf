@@ -1,4 +1,9 @@
-# Hierarchical (org-level) firewall policy — baseline guardrails evaluated above per-VPC rules
+# =============================================================================
+# SECURITY · Hierarchical Firewall Policy (Tầng 1 — cấp Organization)
+# -----------------------------------------------------------------------------
+# Mục đích : Định nghĩa guardrail firewall cấp Org, đánh giá TRƯỚC firewall
+#            của từng VPC; project con không thể vô hiệu hóa.
+# =============================================================================
 
 resource "google_compute_firewall_policy" "gcp-sg-org-fw-policy-001" {
   parent      = "organizations/${var.org_id}"
@@ -12,7 +17,7 @@ resource "google_compute_firewall_policy_association" "gcp-sg-org-fw-policy-asso
   name              = "gcp-sg-org-fw-policy-assoc-001"
 }
 
-# Delegate RFC1918 to lower-level (VPC) firewall rules
+# Ủy quyền RFC1918 xuống firewall cấp VPC
 resource "google_compute_firewall_policy_rule" "gcp-sg-fwp-delegate-rfc1918-ingress-001" {
   firewall_policy = google_compute_firewall_policy.gcp-sg-org-fw-policy-001.id
   description     = "Delegate RFC1918 ingress to VPC firewall rules"
@@ -43,7 +48,7 @@ resource "google_compute_firewall_policy_rule" "gcp-sg-fwp-delegate-rfc1918-egre
   }
 }
 
-# Always allow SSH/RDP from IAP
+# Luôn cho phép SSH/RDP từ IAP
 resource "google_compute_firewall_policy_rule" "gcp-sg-fwp-allow-iap-ssh-rdp-001" {
   firewall_policy = google_compute_firewall_policy.gcp-sg-org-fw-policy-001.id
   description     = "Always allow SSH and RDP from Identity-Aware Proxy"
@@ -60,7 +65,7 @@ resource "google_compute_firewall_policy_rule" "gcp-sg-fwp-allow-iap-ssh-rdp-001
   }
 }
 
-# Always allow Google LB + health-check ranges
+# Luôn cho phép dải Google LB + health-check
 resource "google_compute_firewall_policy_rule" "gcp-sg-fwp-allow-google-lb-hc-001" {
   firewall_policy = google_compute_firewall_policy.gcp-sg-org-fw-policy-001.id
   description     = "Always allow Google load balancer and health-check ranges"
@@ -82,7 +87,7 @@ resource "google_compute_firewall_policy_rule" "gcp-sg-fwp-allow-google-lb-hc-00
   }
 }
 
-# Deny known TOR exit nodes (Threat Intelligence)
+# Chặn các TOR exit node đã biết (Threat Intelligence)
 resource "google_compute_firewall_policy_rule" "gcp-sg-fwp-deny-tor-ingress-001" {
   firewall_policy = google_compute_firewall_policy.gcp-sg-org-fw-policy-001.id
   description     = "Deny ingress from TOR exit nodes"

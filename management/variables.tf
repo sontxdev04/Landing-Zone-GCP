@@ -1,23 +1,30 @@
+# =============================================================================
+# MANAGEMENT · Biến đầu vào của stack
+# -----------------------------------------------------------------------------
+# Mục đích : Khai báo Org ID, runner SA, email cảnh báo và billing account
+#            cho ngân sách theo tháng.
+# =============================================================================
+
 variable "org_id" {
   description = "GCP Organization ID"
   type        = string
 }
 
-# Service account that Terraform impersonates when applying this stack (created manually — see README §6.1).
+# SA mà Terraform mạo danh khi apply stack này (tạo thủ công — xem README §6.1).
 variable "tf_runner_sa" {
-  description = "Email of the TF Runner SA dedicated to the management stack"
+  description = "Email của TF Runner SA dành riêng cho stack management"
   type        = string
 }
 
-# Destination email for Cloud Monitoring alerts and budget notifications.
+# Email nhận cảnh báo Cloud Monitoring và thông báo ngân sách.
 variable "alert_notification_email" {
-  description = "Email address that receives monitoring alerts and budget threshold notifications"
+  description = "Địa chỉ email nhận cảnh báo monitoring và ngưỡng ngân sách"
   type        = string
 }
 
-# Billing account whose spend is tracked by the monthly cost budget.
-# Typically set to one of org.billing_account_id_1/_2 (or a separate dedicated one).
+# Billing account được ngân sách tháng theo dõi chi tiêu.
+# Thường đặt bằng một trong org.billing_account_id_1/_2 (hoặc một account riêng).
 variable "budget_billing_account_id" {
-  description = "Billing account ID that the monthly cost budget tracks spend for"
+  description = "Billing account ID mà ngân sách tháng theo dõi chi tiêu"
   type        = string
 }

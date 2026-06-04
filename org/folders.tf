@@ -1,6 +1,11 @@
-# Folder hierarchy (terraform-google-modules/folders) — apply this stack first
+# =============================================================================
+# ORG · Cây thư mục (Folder Hierarchy)
+# -----------------------------------------------------------------------------
+# Mục đích : Tạo phân cấp folder dưới Organization để cô lập ranh giới và
+#            ủy quyền quản trị theo nhóm chức năng. Apply stack này đầu tiên.
+# =============================================================================
 
-# Level 1: top-level folders under the organization
+# Cấp 1: các folder cấp cao nhất nằm trực tiếp dưới Organization
 module "folders-root" {
   source  = "terraform-google-modules/folders/google"
   version = "5.1.0"
@@ -14,7 +19,7 @@ module "folders-root" {
   deletion_protection = false
 }
 
-# Level 2: subfolders of "platform" (shared infrastructure) — aligned with VIB layout
+# Cấp 2: folder con của "platform" (hạ tầng dùng chung)
 module "folders-platform" {
   source  = "terraform-google-modules/folders/google"
   version = "5.1.0"

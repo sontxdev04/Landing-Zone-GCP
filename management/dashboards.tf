@@ -1,4 +1,8 @@
-# Cloud Monitoring dashboards (Ops/Monitoring team) — simple common views
+# =============================================================================
+# MANAGEMENT · Cloud Monitoring dashboards
+# -----------------------------------------------------------------------------
+# Mục đích : Các dashboard dùng chung cho đội Ops/Monitoring (view đơn giản).
+# =============================================================================
 
 # Dashboard: Infrastructure Overview — VM CPU / Memory / Disk / Network
 resource "google_monitoring_dashboard" "gcp-sg-dashboard-infra-001" {
@@ -74,7 +78,7 @@ resource "google_monitoring_dashboard" "gcp-sg-dashboard-infra-001" {
   })
 }
 
-# Dashboard: Availability — VM availability and network error rates
+# Dashboard: Availability — tình trạng khả dụng VM và tỉ lệ lỗi mạng
 resource "google_monitoring_dashboard" "gcp-sg-dashboard-availability-001" {
   project = data.google_project.gcp-sg-prj-management-001.project_id
 

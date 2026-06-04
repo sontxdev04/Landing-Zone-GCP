@@ -1,6 +1,11 @@
-# VPCs
+# =============================================================================
+# CONNECTIVITY · VPC Networks
+# -----------------------------------------------------------------------------
+# Mục đích : Tạo Hub VPC (transit/VPN) và Shared VPC (workload). Cả hai dùng
+#            routing_mode GLOBAL để sẵn sàng mở rộng đa region.
+# =============================================================================
 
-# Data sources — project references
+# Data source — tham chiếu tới các project
 data "google_project" "gcp-sg-prj-hub-net-001" {
   project_id = local.org.project_id_hub_net
 }
@@ -13,7 +18,7 @@ data "google_project" "gcp-sg-prj-sample-app-001" {
   project_id = local.org.project_id_sample_app
 }
 
-# Hub VPC — central transit / VPN termination
+# Hub VPC — trung tâm transit / điểm chấm dứt VPN
 resource "google_compute_network" "gcp-sg-vpc-hub-001" {
   name                    = "gcp-sg-vpc-hub-001"
   project                 = data.google_project.gcp-sg-prj-hub-net-001.project_id
@@ -21,7 +26,7 @@ resource "google_compute_network" "gcp-sg-vpc-hub-001" {
   routing_mode            = "GLOBAL"
 }
 
-# Shared VPC — prod workloads
+# Shared VPC — chứa workload prod
 resource "google_compute_network" "gcp-sg-vpc-shared-001" {
   name                    = "gcp-sg-vpc-shared-001"
   project                 = data.google_project.gcp-sg-prj-sh-vpc-001.project_id

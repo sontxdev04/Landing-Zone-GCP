@@ -1,5 +1,8 @@
-# Workload stack outputs
-# NOTE: bastion_public_ip removed — bastion host replaced by Cloud IAP.
+# =============================================================================
+# WORKLOAD · Outputs
+# -----------------------------------------------------------------------------
+# Mục đích : Xuất tên và IP nội bộ của VM mẫu (null khi enable_sample_vm=false).
+# =============================================================================
 
 output "sample_vm_name" {
   description = "Tên VM mẫu (null nếu enable_sample_vm=false)"

@@ -1,3 +1,9 @@
+# =============================================================================
+# ORG · Providers & ràng buộc phiên bản
+# -----------------------------------------------------------------------------
+# Mục đích : Khóa phiên bản Terraform/provider và cấu hình impersonation.
+# Phụ thuộc: var.tf_runner_sa — SA mà Terraform mạo danh khi apply stack này.
+# =============================================================================
 terraform {
   required_version = "1.14.6"
 
@@ -21,6 +27,7 @@ terraform {
   }
 }
 
+# Mạo danh SA runner của stack org — mọi tài nguyên được tạo dưới danh tính này.
 provider "google" {
   impersonate_service_account = var.tf_runner_sa
   region                      = "asia-southeast1"

@@ -1,6 +1,12 @@
-# Cloud NAT — outbound internet access for private VMs (Cloud Routers live in routers.tf)
+# =============================================================================
+# CONNECTIVITY · Cloud NAT
+# -----------------------------------------------------------------------------
+# Mục đích : Cấp đường egress ra Internet cho VM không có IP ngoài.
+#            Một chiều (egress-only) — Internet không thể chủ động kết nối vào.
+#            Cloud Router đặt ở routers.tf.
+# =============================================================================
 
-# Cloud NAT for prod (app) subnet — outbound internet for private VMs
+# Cloud NAT cho subnet app (prod) — egress Internet cho VM nội bộ
 resource "google_compute_router_nat" "gcp-sg-nat-001" {
   name                               = "gcp-sg-nat-001"
   project                            = data.google_project.gcp-sg-prj-sh-vpc-001.project_id

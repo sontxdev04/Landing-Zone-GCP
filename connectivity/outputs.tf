@@ -1,4 +1,8 @@
-# Connectivity stack outputs — consumed by downstream stacks via remote_state
+# =============================================================================
+# CONNECTIVITY · Outputs — dữ liệu liên-stack
+# -----------------------------------------------------------------------------
+# Mục đích : Xuất self_link của Shared VPC/subnet để stack workload gắn VM.
+# =============================================================================
 
 output "vpc_shared_self_link" {
   description = "Self link của Shared VPC network (host project sh-vpc)"

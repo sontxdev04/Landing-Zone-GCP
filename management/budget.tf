@@ -1,4 +1,9 @@
-# Monthly billing budget with threshold alerts (skipped when budget_billing_account_id is empty)
+# =============================================================================
+# MANAGEMENT · Ngân sách chi phí theo tháng
+# -----------------------------------------------------------------------------
+# Mục đích : Ngân sách billing theo tháng kèm cảnh báo ngưỡng
+#            (bỏ qua khi budget_billing_account_id rỗng).
+# =============================================================================
 
 resource "google_billing_budget" "gcp-sg-budget-monthly-001" {
   count           = var.budget_billing_account_id != "" ? 1 : 0
@@ -11,8 +16,8 @@ resource "google_billing_budget" "gcp-sg-budget-monthly-001" {
 
   amount {
     specified_amount {
-      currency_code = "VND"     # phai khop currency cua billing account (VND), neu khong API tra 400
-      units         = "2500000" # ~100 USD/thang
+      currency_code = "VND"     # phải khớp currency của billing account (VND), nếu không API trả 400
+      units         = "2500000" # ~100 USD/tháng
     }
   }
 

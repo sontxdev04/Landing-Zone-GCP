@@ -1,6 +1,11 @@
-# Subnets
+# =============================================================================
+# CONNECTIVITY · Subnets
+# -----------------------------------------------------------------------------
+# Mục đích : Khai báo subnet hub & app. Mọi subnet bật Private Google Access
+#            và VPC Flow Logs; tỉ lệ flow_sampling khác nhau theo mức nhạy cảm.
+# =============================================================================
 
-# Hub subnet (10.0.0.0/24) — hub-net project, VPN/Router termination
+# Subnet hub (10.0.0.0/24) — project hub-net, nơi chấm dứt VPN/Router
 resource "google_compute_subnetwork" "gcp-sg-snet-hub-001" {
   name                     = "gcp-sg-snet-hub-001"
   ip_cidr_range            = "10.0.0.0/24"
@@ -16,7 +21,7 @@ resource "google_compute_subnetwork" "gcp-sg-snet-hub-001" {
   }
 }
 
-# App subnet (10.20.1.0/24) — prod shared VPC workloads
+# Subnet app (10.20.1.0/24) — workload trong Shared VPC prod
 resource "google_compute_subnetwork" "gcp-sg-snet-app-001" {
   name                     = "gcp-sg-snet-app-001"
   ip_cidr_range            = "10.20.1.0/24"

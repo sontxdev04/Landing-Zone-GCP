@@ -1,4 +1,12 @@
-# Org policy: require OS Login on all VMs
+# =============================================================================
+# ORG · Organization Policies — guardrail cấp tổ chức
+# -----------------------------------------------------------------------------
+# Mục đích : Áp các lan can (guardrail) không thể vượt qua ở cấp Organization;
+#            kể cả Owner của project con cũng không thể vi phạm.
+# Phụ thuộc: depends_on module.lz-prj-hub-net — tạo project TRƯỚC khi siết policy.
+# =============================================================================
+
+# Yêu cầu OS Login trên mọi VM
 resource "google_org_policy_policy" "gcp-sg-org-policy-require-oslogin-001" {
   name   = "organizations/${var.org_id}/policies/compute.requireOsLogin"
   parent = "organizations/${var.org_id}"
@@ -12,7 +20,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-require-oslogin-001" {
   depends_on = [module.lz-prj-hub-net]
 }
 
-# Org policy: skip default VPC creation in new projects
+# Không tạo VPC mặc định khi tạo project mới
 resource "google_org_policy_policy" "gcp-sg-org-policy-skip-default-network-001" {
   name   = "organizations/${var.org_id}/policies/compute.skipDefaultNetworkCreation"
   parent = "organizations/${var.org_id}"
@@ -26,7 +34,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-skip-default-network-001"
   depends_on = [module.lz-prj-hub-net]
 }
 
-# Org policy: deny external IP on all VMs across the organization
+# Cấm IP ngoài trên mọi VM trong toàn Organization
 resource "google_org_policy_policy" "gcp-sg-org-policy-deny-vm-external-ip-001" {
   name   = "organizations/${var.org_id}/policies/compute.vmExternalIpAccess"
   parent = "organizations/${var.org_id}"
@@ -41,9 +49,9 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-deny-vm-external-ip-001" 
   depends_on = [module.lz-prj-hub-net]
 }
 
-# No project-level exceptions — all VM access goes through Cloud IAP (no external IPs needed).
+# Không ngoại lệ cấp project — mọi truy cập VM đi qua Cloud IAP (không cần IP ngoài).
 
-# Org policy: disable Service Account key creation across the organization
+# Tắt khả năng tạo khóa Service Account trong toàn Organization
 resource "google_org_policy_policy" "gcp-sg-org-policy-disable-sa-key-001" {
   name   = "organizations/${var.org_id}/policies/iam.disableServiceAccountKeyCreation"
   parent = "organizations/${var.org_id}"
@@ -58,7 +66,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-disable-sa-key-001" {
 }
 
 
-# Org policy: require Shielded VM on all instances
+# Yêu cầu Shielded VM trên mọi instance
 resource "google_org_policy_policy" "gcp-sg-org-policy-require-shielded-vm-001" {
   name   = "organizations/${var.org_id}/policies/compute.requireShieldedVm"
   parent = "organizations/${var.org_id}"
@@ -72,7 +80,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-require-shielded-vm-001" 
   depends_on = [module.lz-prj-hub-net]
 }
 
-# Org policy: enforce uniform bucket-level access on all Cloud Storage buckets
+# Bắt buộc uniform bucket-level access trên mọi Cloud Storage bucket
 resource "google_org_policy_policy" "gcp-sg-org-policy-uniform-bucket-access-001" {
   name   = "organizations/${var.org_id}/policies/storage.uniformBucketLevelAccess"
   parent = "organizations/${var.org_id}"
@@ -86,7 +94,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-uniform-bucket-access-001
   depends_on = [module.lz-prj-hub-net]
 }
 
-# Org policy: restrict resource locations to asia-southeast1
+# Giới hạn vị trí tài nguyên trong asia-southeast1
 resource "google_org_policy_policy" "gcp-sg-org-policy-restrict-locations-001" {
   name   = "organizations/${var.org_id}/policies/gcp.resourceLocations"
   parent = "organizations/${var.org_id}"

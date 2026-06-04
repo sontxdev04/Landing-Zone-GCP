@@ -1,4 +1,9 @@
-# Remote state — reads org + connectivity stack outputs (apply org & connectivity first)
+# =============================================================================
+# WORKLOAD · Remote state — đọc output của org + connectivity
+# -----------------------------------------------------------------------------
+# Mục đích : Nạp output từ state org (project ID) và connectivity (Shared VPC,
+#            subnet) để gắn VM. Apply org & connectivity TRƯỚC.
+# =============================================================================
 
 data "terraform_remote_state" "org" {
   backend = "gcs"
@@ -8,7 +13,7 @@ data "terraform_remote_state" "org" {
   }
 }
 
-# Connectivity outputs — Shared VPC / subnet refs cho VM workload
+# Output connectivity — tham chiếu Shared VPC / subnet cho VM workload
 data "terraform_remote_state" "connectivity" {
   backend = "gcs"
   config = {
@@ -17,7 +22,7 @@ data "terraform_remote_state" "connectivity" {
   }
 }
 
-# Convenience local aliases
+# Bí danh local cho tiện tham chiếu
 locals {
   org  = data.terraform_remote_state.org.outputs
   conn = data.terraform_remote_state.connectivity.outputs

@@ -1,4 +1,11 @@
-# Projects — prefix + random suffix ensures globally unique IDs across stacks
+# =============================================================================
+# ORG · Projects — tạo các project nền tảng & workload
+# -----------------------------------------------------------------------------
+# Mục đích : Tạo toàn bộ project qua project-factory; tên = prefix + hậu tố
+#            ngẫu nhiên để đảm bảo ID duy nhất toàn cầu, có thể tái triển khai.
+# =============================================================================
+
+# Hậu tố ngẫu nhiên 4 ký tự — đảm bảo project ID duy nhất toàn cầu
 resource "random_string" "name_suffix" {
   length  = 4
   upper   = false
@@ -26,7 +33,9 @@ locals {
   }
 }
 
-# Hub network project (Connectivity)
+# ────────────────────────────────────────────────────────────────────────
+# Hub network project (stack Connectivity)
+# ────────────────────────────────────────────────────────────────────────
 resource "time_static" "lz-prj-hub-net-timestamp" {}
 
 module "lz-prj-hub-net" {
@@ -56,7 +65,9 @@ module "lz-prj-hub-net" {
   deletion_policy = "DELETE"
 }
 
-# Shared VPC prod host project (Connectivity)
+# ────────────────────────────────────────────────────────────────────────
+# Shared VPC host project — prod (stack Connectivity)
+# ────────────────────────────────────────────────────────────────────────
 resource "time_static" "lz-prj-sh-vpc-timestamp" {}
 
 module "lz-prj-sh-vpc" {
@@ -85,7 +96,9 @@ module "lz-prj-sh-vpc" {
 }
 
 
-# Sample-app workload service project (Workload folder)
+# ────────────────────────────────────────────────────────────────────────
+# Sample-app workload service project (folder Workload)
+# ────────────────────────────────────────────────────────────────────────
 resource "time_static" "lz-prj-sample-app-timestamp" {}
 
 module "lz-prj-sample-app" {
@@ -113,7 +126,9 @@ module "lz-prj-sample-app" {
   deletion_policy = "DELETE"
 }
 
-# Central management project: logging, monitoring, and audit archive
+# ────────────────────────────────────────────────────────────────────────
+# Project quản lý trung tâm: logging, monitoring và audit archive
+# ────────────────────────────────────────────────────────────────────────
 resource "time_static" "gcp-platform-management-timestamp" {}
 
 module "gcp-platform-management" {
@@ -144,7 +159,9 @@ module "gcp-platform-management" {
   deletion_policy = "DELETE"
 }
 
-# Security tooling project: KMS, Secret Manager, Security Command Center (Platform / management)
+# ────────────────────────────────────────────────────────────────────────
+# Project công cụ bảo mật: KMS, Secret Manager, Security Command Center
+# ────────────────────────────────────────────────────────────────────────
 resource "time_static" "gcp-platform-security-timestamp" {}
 
 module "gcp-platform-security" {
