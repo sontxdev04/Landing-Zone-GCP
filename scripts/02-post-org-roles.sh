@@ -24,9 +24,11 @@ echo "==> Lấy project_id thật từ output của stack org"
 pushd "${REPO_ROOT}/org" >/dev/null
 PRJ_MGMT="$(terraform output -raw project_id_management)"
 PRJ_ASTRO="$(terraform output -raw project_id_astronomy_shop)"
+PRJ_HUB_NET="$(terraform output -raw project_id_hub_net)"
+PRJ_SH_VPC="$(terraform output -raw project_id_sh_vpc)"
 popd >/dev/null
-export PRJ_MGMT PRJ_ASTRO
-echo "    PRJ_MGMT=$PRJ_MGMT  PRJ_ASTRO=$PRJ_ASTRO"
+export PRJ_MGMT PRJ_ASTRO PRJ_HUB_NET PRJ_SH_VPC
+echo "    PRJ_MGMT=$PRJ_MGMT  PRJ_ASTRO=$PRJ_ASTRO  PRJ_HUB_NET=$PRJ_HUB_NET  PRJ_SH_VPC=$PRJ_SH_VPC"
 
 echo "==> Bước J: gán role project-level + billing (danh sách trong roles.sh bảng [6]/[7])"
 apply_project_bindings "${POSTORG_PROJECT_BINDINGS[@]}"

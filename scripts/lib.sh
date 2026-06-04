@@ -36,7 +36,7 @@ grant_on_sa() { # $1=SA mục tiêu  $2=project của SA  $3=member  $4=role
 # Cho SA "thấy" được state bucket (cần cho terraform init).
 grant_bucket_reader() { # $1=SA email
   gcloud storage buckets add-iam-policy-binding "gs://$STATE_BUCKET" \
-    --member="serviceAccount:$1" --role="roles/storage.legacyBucketReader"
+    --member="serviceAccount:$1" --role="roles/storage.legacyBucketReader" --condition=None
 }
 
 # Gán quyền trên state bucket GIỚI HẠN theo prefix terraform/<stack>/ (IAM Condition).
@@ -46,9 +46,26 @@ grant_state() { # $1=SA email  $2=role  $3=stack prefix  $4=title điều kiện
     --condition="expression=resource.name.startsWith(\"projects/_/buckets/${STATE_BUCKET}/objects/terraform/$3/\"),title=$4"
 }
 
-# Tạo service account (bỏ qua lỗi nếu đã tồn tại — idempotent).
+# Tạo service account (idempotent — bỏ qua nếu đã tồn tại, không in ERROR rác).
+# Sau khi tạo, CHỜ SA lan truyền (eventual consistency) trước khi trả về, để
+# lệnh add-iam-policy-binding ngay sau đó không gặp lỗi "does not exist".
 create_sa() { # $1=account id  $2=project  $3=display name
-  gcloud iam service-accounts create "$1" --project="$2" --display-name="$3" || true
+  local _email="$1@$2.iam.gserviceaccount.com"
+  if gcloud iam service-accounts describe "$_email" --project="$2" >/dev/null 2>&1; then
+    echo "    SA '$_email' da ton tai — bo qua."
+    return 0
+  fi
+  gcloud iam service-accounts create "$1" --project="$2" --display-name="$3"
+  # Poll cho tới khi SA hien dien (toi da ~60s) truoc khi gan role.
+  local _i
+  for _i in $(seq 1 12); do
+    if gcloud iam service-accounts describe "$_email" --project="$2" >/dev/null 2>&1; then
+      return 0
+    fi
+    echo "    Cho SA '$_email' san sang... ($_i/12)"
+    sleep 5
+  done
+  echo "[WARNING] SA '$_email' tao xong nhung chua thay sau 60s — van tiep tuc." >&2
 }
 
 # Map PROJECT_KEY (trong roles.sh) → project_id thật.

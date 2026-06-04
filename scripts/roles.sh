@@ -16,14 +16,17 @@
 # ─────────────────────────────────────────────────────────────────────────────
 ORG_ROLE_BINDINGS=(
   "$SA_ORG  roles/resourcemanager.organizationAdmin"   # tạo Folder/Project
+  "$SA_ORG  roles/resourcemanager.folderCreator"       # quyền resourcemanager.folders.create (organizationAdmin KHÔNG có)
   "$SA_ORG  roles/resourcemanager.projectCreator"
   "$SA_ORG  roles/serviceusage.serviceUsageAdmin"
   "$SA_ORG  roles/orgpolicy.policyAdmin"               # Org Policies
   "$SA_CONN roles/compute.xpnAdmin"                     # Shared VPC
-  "$SA_CONN roles/compute.networkAdmin"                # VPC/Subnet/FW/Router/NAT/VPN
+  "$SA_CONN roles/compute.networkAdmin"                # VPC/Subnet/Router/NAT/VPN (KHONG gom firewall)
+  "$SA_CONN roles/compute.securityAdmin"               # Firewall rules (networkAdmin KHONG quan ly duoc firewall, chi doc)
   "$SA_CONN roles/dns.admin"
   "$SA_SEC  roles/resourcemanager.organizationAdmin"   # Org IAM cho admin_principals
-  "$SA_SEC  roles/compute.orgFirewallPolicyAdmin"
+  "$SA_SEC  roles/compute.orgFirewallPolicyAdmin"       # tao/sua org firewall policy + rules
+  "$SA_SEC  roles/compute.orgSecurityResourceAdmin"     # compute.organizations.setFirewallPolicy → ASSOCIATE policy vao org
   "$SA_MGMT roles/logging.admin"                       # Log Sinks org+folder
 )
 
@@ -74,6 +77,25 @@ POSTORG_PROJECT_BINDINGS=(
   "MGMT      $SA_MGMT roles/monitoring.admin"                  # J3: Monitoring
   "MGMT      $SA_MGMT roles/storage.admin"                     # J3
   "MGMT      $SA_MGMT roles/resourcemanager.projectIamAdmin"   # J3: bucketWriter cho sink
+  # J4: serviceUsageConsumer trên billing_project cua moi stack ha nguon.
+  #     Cac stack dat user_project_override=true + billing_project=<project>,
+  #     nen SA cua stack can quyen 'serviceusage.services.use' tren project do
+  #     (khong nam trong networkAdmin/instanceAdmin/storage.admin/...).
+  "HUB_NET   $SA_CONN roles/serviceusage.serviceUsageConsumer" # connectivity billing_project = hub-net
+  "ASTRO     $SA_WL   roles/serviceusage.serviceUsageConsumer" # workload billing_project = astronomy-shop
+  "MGMT      $SA_MGMT roles/serviceusage.serviceUsageConsumer" # management billing_project = management
+  "MGMT      $SA_SEC  roles/serviceusage.serviceUsageConsumer" # security billing_project = management
+  # J5: security gan IAP/OS-login binding (google_project_iam_member) len 3 project
+  #     astro/hub-net/sh-vpc → can projectIamAdmin tren ca 3 (ngoai MGMT da co o J1).
+  "ASTRO     $SA_SEC  roles/resourcemanager.projectIamAdmin"
+  "HUB_NET   $SA_SEC  roles/resourcemanager.projectIamAdmin"
+  "SH_VPC    $SA_SEC  roles/resourcemanager.projectIamAdmin"
+  # J6: management gom astro/hub-net/sh-vpc vao metric scope cua project management
+  #     (google_monitoring_monitored_project). Quyen monitoring.metricsScopes.link
+  #     phai co tren CA scoping project (MGMT, da co o J3) LAN tung project bi them.
+  "ASTRO     $SA_MGMT roles/monitoring.admin"
+  "HUB_NET   $SA_MGMT roles/monitoring.admin"
+  "SH_VPC    $SA_MGMT roles/monitoring.admin"
 )
 
 # [7] Role BILLING (gán SAU apply org)      cột:  <billing account>  <SA>  <role>

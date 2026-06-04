@@ -134,6 +134,7 @@ module "gcp-platform-management" {
     "storage.googleapis.com",
     "billingbudgets.googleapis.com",
     "cloudresourcemanager.googleapis.com",
+    "serviceusage.googleapis.com",
   ]
 
   labels = merge(

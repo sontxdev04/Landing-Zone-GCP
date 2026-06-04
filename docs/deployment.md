@@ -193,7 +193,7 @@ Chạy script:
 
 | Bước | Hành động |
 |:----:|:----------|
-| **B** | Tạo **Seed Project** (`gcp-platform-bootstrap-001`) + bật các API cần thiết. |
+| **B** | Tạo **Seed Project** (ví dụ: `gcp-platform-bootstrap-001` được cấu hình qua biến `$SEED_PROJECT`) + bật các API cần thiết. |
 | **C** | Tạo **State Bucket** (`gs://$STATE_BUCKET`) + bật **Object Versioning**. |
 | **D** | Tạo **5 TF Runner SA**: org, conn, sec, wl, mgmt. |
 | **E** | Gán role **tối thiểu** cấp Org + Billing cho từng SA. |
@@ -208,19 +208,19 @@ Chạy script:
 Xác nhận Seed Project đã được tạo:
 
 ```bash
-gcloud projects describe gcp-platform-bootstrap-001
+gcloud projects describe $SEED_PROJECT
 ```
 
 Xác nhận State Bucket tồn tại và đã bật versioning:
 
 ```bash
-gcloud storage buckets describe gs://$STATE_BUCKET --format="default(versioning)"
+gcloud storage buckets describe gs://$STATE_BUCKET --format="value(versioning_enabled)"
 ```
 
 Xác nhận đủ 5 Runner SA:
 
 ```bash
-gcloud iam service-accounts list --project gcp-platform-bootstrap-001
+gcloud iam service-accounts list --project $SEED_PROJECT
 ```
 
 Kết quả mong đợi: thấy `sa-tf-org-001`, `sa-tf-conn-001`, `sa-tf-sec-001`, `sa-tf-wl-001`, `sa-tf-mgmt-001`.
@@ -291,15 +291,15 @@ Sau đó mở từng `terraform.tfvars` và điền các **biến BẮT BUỘC**
 > [!IMPORTANT]
 > Đặc biệt nhớ điền `org_id` ở **3 stack** `org/`, `security/`, `management/`. Bỏ trống sẽ khiến `terraform apply` lỗi ngay từ stack đầu tiên.
 
-Mỗi stack đã khai báo sẵn `tf_runner_sa` tương ứng — **thường không cần sửa** nếu bạn dùng Seed Project mặc định:
+Mặc định đã trỏ đúng tên SA: `sa-tf-{org,conn,sec,wl,mgmt}-001@<SEED_PROJECT>.iam.gserviceaccount.com`. Điền giá trị tương ứng với `$SEED_PROJECT` của bạn.
 
 | Stack | `tf_runner_sa` mong đợi |
 |:------|:------------------------|
-| `org/` | `sa-tf-org-001@...` |
-| `connectivity/` | `sa-tf-conn-001@...` |
-| `security/` | `sa-tf-sec-001@...` |
-| `workload/` | `sa-tf-wl-001@...` |
-| `management/` | `sa-tf-mgmt-001@...` |
+| `org/` | `sa-tf-org-001@$SEED_PROJECT.iam.gserviceaccount.com` |
+| `connectivity/` | `sa-tf-conn-001@$SEED_PROJECT.iam.gserviceaccount.com` |
+| `security/` | `sa-tf-sec-001@$SEED_PROJECT.iam.gserviceaccount.com` |
+| `workload/` | `sa-tf-wl-001@$SEED_PROJECT.iam.gserviceaccount.com` |
+| `management/` | `sa-tf-mgmt-001@$SEED_PROJECT.iam.gserviceaccount.com` |
 
 > [!NOTE]
 > Cơ chế impersonation nằm ở `providers.tf` của mỗi stack: provider Google nhận `impersonate_service_account = var.tf_runner_sa`. Nhờ vậy Terraform tự mượn quyền SA mà **không cần file key tĩnh**.
@@ -518,10 +518,52 @@ Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
 | Stack đọc nhầm/không thấy output của `org` (`remote_state`) | Quên sửa `bucket` trong `remote.tf` (vẫn còn `<STATE_BUCKET>`) | Sửa `bucket` trong `remote.tf` của 4 stack hạ nguồn (xem §5.1) |
 | `terraform apply` lỗi `org_id` rỗng / billing | Chưa điền biến bắt buộc trong `terraform.tfvars` | Copy từ `.example` và điền `org_id`, `billing_account_id_*` (xem §5.2) |
 | Script `02`/`03` báo không lấy được `terraform output` | Chưa `apply` stack `org` trước đó | Apply `org` thành công rồi mới chạy script hậu-org |
+| Script `03` lỗi `Service account ... does not exist` ngay sau khi `Created service account` | SA vừa tạo chưa lan truyền (eventual consistency) khi gán role | Đã xử lý: `create_sa` ([scripts/lib.sh](../scripts/lib.sh)) poll chờ SA sẵn sàng (~60s) trước khi gán role. Chỉ cần chạy lại script (idempotent) |
+| `terraform apply` lỗi `Error 403: Organization Policy API has not been used in project ...` (`SERVICE_DISABLED`) | Seed Project chưa bật `orgpolicy.googleapis.com` (project này là quota project cho mọi API call qua impersonation) | Đã xử lý: Bước B của [01-bootstrap.sh](../scripts/01-bootstrap.sh) bật sẵn `orgpolicy.googleapis.com`. Chạy lại `01-bootstrap.sh` rồi `apply` lại |
+| `terraform apply` lỗi `Error 409: Requested entity already exists` (org policy) | Lần apply trước tạo policy thành công trên Org nhưng batch lỗi nên state chưa lưu | `terraform import 'google_org_policy_policy.<tên>' 'organizations/<ORG_ID>/policies/<constraint>'` cho từng policy bị báo, rồi `apply` lại (xem §8.1) |
+| `terraform apply` lỗi `403 USER_PROJECT_DENIED` / `serviceUsageConsumer` ở stack hạ nguồn (connectivity/security/workload/management) | Provider đặt `user_project_override=true` + `billing_project=<project>`; Runner SA thiếu `serviceusage.services.use` trên billing_project đó | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/serviceusage.serviceUsageConsumer` cho từng SA. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại stack |
+| `connectivity` lỗi `403 ... 'compute.firewalls.create' permission` | `roles/compute.networkAdmin` KHÔNG quản lý firewall (chỉ đọc); quyền tạo firewall nằm ở `roles/compute.securityAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.securityAdmin` cho `sa-tf-conn-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
+| `security` lỗi `403 ... 'compute.organizations.setFirewallPolicy'` khi tạo `firewall_policy_association` | `orgFirewallPolicyAdmin` chỉ tạo/sửa policy & rules, KHÔNG associate vào org; permission `compute.organizations.setFirewallPolicy` nằm trong `roles/compute.orgSecurityResourceAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.orgSecurityResourceAdmin` cho `sa-tf-sec-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
+| `security` lỗi `403` khi set IAM (`google_project_iam_member`) trên astro/hub-net/sh-vpc | SA_SEC chỉ có `projectIamAdmin` trên MGMT, chưa có trên 3 project IAP | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/resourcemanager.projectIamAdmin` cho `sa-tf-sec-001` trên ASTRO/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
+| `management` lỗi `403 Service Usage API ... SERVICE_DISABLED` trên project `gcp-platform-management-*` (khi tạo log bucket `enable_destination_api`) | Provider stack đặt `billing_project=management` + `user_project_override=true` nên mọi call cần Service Usage API **bật trên project management**, nhưng `activate_apis` thiếu `serviceusage.googleapis.com` | Đã xử lý: thêm `serviceusage.googleapis.com` vào `activate_apis` của module management ([org/projects.tf](../org/projects.tf)). Chạy lại `cd org && terraform apply` rồi `apply` lại management |
+| `management` lỗi `403 ... MonitoredProject ... caller does not have permission` (tạo `google_monitoring_monitored_project`) | Để gom project vào metric scope cần `monitoring.metricsScopes.link` (trong `roles/monitoring.admin`) trên **CẢ** scoping project (MGMT) **LẪN** project bị gom (astro/hub-net/sh-vpc); SA_MGMT chỉ có trên MGMT | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/monitoring.admin` cho `sa-tf-mgmt-001` trên ASTRO/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
+| `management` lỗi `400 Error creating Budget: Request contains an invalid argument` | `currency_code` của budget hardcode `USD` nhưng billing account dùng **VND** — phải khớp loại tiền của billing account | Đã xử lý: đổi `currency_code = "VND"` + `units` tương đương trong [management/budget.tf](../management/budget.tf). Kiểm tra currency: `gcloud billing accounts describe billingAccounts/<ID> --format='value(currencyCode)'` |
+| `management` lỗi `400 ... AlertPolicy ... project ... is not monitored by the account` | Race/propagation: alert policy validate ngay khi metric scope vừa link xong, backend monitoring chưa propagate project vào scope (dù đã có `depends_on`) | Chỉ cần **`apply` lại lần nữa** — metric scope đã tồn tại & propagate, alert policy sẽ tạo thành công |
 | `Permission denied` khi tạo tài nguyên cấp Org | Tài khoản Phase A thiếu quyền Org Admin / billing | Cấp đủ quyền ở §2.2 rồi đăng nhập lại |
 
 > [!NOTE]
 > Tài liệu vận hành thường ngày (cập nhật, mở rộng subnet, thêm quyền, gỡ bỏ tài nguyên) nằm ở [day2-ops.md](./day2-ops.md).
+
+---
+
+<a id="8.1"></a>
+
+### 8.1. Import Org Policy đã tồn tại (lỗi `409 already exists`)
+
+Khi `terraform apply` stack `org` bị gián đoạn (ví dụ vừa bật Org Policy API),
+một số `google_org_policy_policy` có thể đã được **tạo thật trên Organization**
+nhưng **chưa kịp ghi vào Terraform state**. Lần apply sau, Terraform tưởng chúng
+chưa tồn tại nên tạo lại → GCP trả `Error 409: Requested entity already exists`.
+
+Cách xử lý: **import** từng policy bị báo lỗi vào state (không tạo mới), rồi apply lại.
+
+Cú pháp ID import: `organizations/<ORG_ID>/policies/<constraint>`. Tra `<constraint>`
+trong trường `name` của resource tại [org/org-policies.tf](../org/org-policies.tf).
+
+```bash
+cd org
+# Ví dụ với 4 policy thường gặp (thay <ORG_ID> bằng ORG_ID của bạn):
+terraform import 'google_org_policy_policy.gcp-sg-org-policy-require-oslogin-001'        'organizations/<ORG_ID>/policies/compute.requireOsLogin'
+terraform import 'google_org_policy_policy.gcp-sg-org-policy-skip-default-network-001'   'organizations/<ORG_ID>/policies/compute.skipDefaultNetworkCreation'
+terraform import 'google_org_policy_policy.gcp-sg-org-policy-deny-vm-external-ip-001'    'organizations/<ORG_ID>/policies/compute.vmExternalIpAccess'
+terraform import 'google_org_policy_policy.gcp-sg-org-policy-disable-sa-key-001'         'organizations/<ORG_ID>/policies/iam.disableServiceAccountKeyCreation'
+
+terraform apply   # apply lại, các policy đã import sẽ không bị tạo lại
+```
+
+> [!TIP]
+> Chỉ import đúng những policy mà Terraform báo `409`. Các policy còn lại đã nằm
+> trong state nên không cần import.
 
 ---
 

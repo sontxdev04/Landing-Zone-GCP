@@ -23,8 +23,30 @@ source "${SCRIPT_DIR}/roles.sh"
 _lz_check_placeholders || exit 1
 
 echo "==> Bước B: Tạo Seed Project & bật API"
-gcloud projects create "$SEED_PROJECT" \
-    --organization="$ORG_ID" --name="GCP Platform Bootstrap" || true
+# Project ID là duy nhất TOÀN CẦU. Phải phân biệt 3 trường hợp:
+#   - Đã tồn tại trong ĐÚNG org của bạn  → bỏ qua, chạy tiếp (idempotent).
+#   - Chưa tồn tại                       → tạo mới.
+#   - Tồn tại nhưng KHÔNG thuộc org bạn / không truy cập được (người khác chiếm
+#     tên, hoặc thuộc org khác) → DỪNG ngay với thông báo rõ ràng (không '|| true'
+#     che lỗi để rồi loạt bước sau bị 'permission denied' khó hiểu).
+_seed_parent="$(gcloud projects describe "$SEED_PROJECT" \
+    --format="value(parent.id)" 2>/dev/null || true)"
+if [[ -z "$_seed_parent" ]]; then
+  # Không describe được: hoặc chưa tồn tại, hoặc tồn tại nhưng bạn không có quyền.
+  if ! gcloud projects create "$SEED_PROJECT" \
+        --organization="$ORG_ID" --name="GCP Platform Bootstrap"; then
+    echo "[ERROR] Khong tao duoc Seed Project '$SEED_PROJECT'." >&2
+    echo "        Co the project ID nay da bi NGUOI KHAC tao (project ID la duy nhat toan cau)." >&2
+    echo "        Hay doi SEED_PROJECT trong scripts/config.sh sang ten khac roi chay lai." >&2
+    exit 1
+  fi
+elif [[ "$_seed_parent" != "$ORG_ID" ]]; then
+  echo "[ERROR] Seed Project '$SEED_PROJECT' DA TON TAI nhung thuoc parent '$_seed_parent', KHONG phai org '$ORG_ID' cua ban." >&2
+  echo "        Hay doi SEED_PROJECT trong scripts/config.sh sang ten khac (duy nhat) roi chay lai." >&2
+  exit 1
+else
+  echo "    Seed Project '$SEED_PROJECT' da ton tai trong org $ORG_ID — bo qua buoc tao."
+fi
 gcloud billing projects link "$SEED_PROJECT" --billing-account="$BILLING_ACCOUNT_1"
 gcloud services enable \
     storage.googleapis.com \
@@ -33,14 +55,19 @@ gcloud services enable \
     cloudresourcemanager.googleapis.com \
     cloudbilling.googleapis.com \
     serviceusage.googleapis.com \
+    orgpolicy.googleapis.com \
     --project="$SEED_PROJECT"
-gcloud auth application-default set-quota-project "$SEED_PROJECT"
+gcloud auth application-default set-quota-project "$SEED_PROJECT" || echo "[WARNING] Khong the set quota project cho ADC (thuong do ADC dang dung tai khoan khac hoac cho dong bo). Ban co the tu chay lai lenh nay sau."
 
 echo "==> Bước C: Tạo GCS State Bucket với Object Versioning"
-gcloud storage buckets create "gs://$STATE_BUCKET" \
-    --project="$SEED_PROJECT" \
-    --location="$REGION" \
-    --uniform-bucket-level-access || true
+if gcloud storage buckets describe "gs://$STATE_BUCKET" >/dev/null 2>&1; then
+  echo "    Bucket 'gs://$STATE_BUCKET' da ton tai — bo qua buoc tao."
+else
+  gcloud storage buckets create "gs://$STATE_BUCKET" \
+      --project="$SEED_PROJECT" \
+      --location="$REGION" \
+      --uniform-bucket-level-access
+fi
 gcloud storage buckets update "gs://$STATE_BUCKET" --versioning
 
 echo "==> Bước D: Tạo 5 TF Runner SA"

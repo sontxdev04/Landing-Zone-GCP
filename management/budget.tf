@@ -11,8 +11,8 @@ resource "google_billing_budget" "gcp-sg-budget-monthly-001" {
 
   amount {
     specified_amount {
-      currency_code = "USD"
-      units         = "100"
+      currency_code = "VND" # phai khop currency cua billing account (VND), neu khong API tra 400
+      units         = "2500000" # ~100 USD/thang
     }
   }
 
