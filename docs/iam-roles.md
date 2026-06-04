@@ -247,6 +247,24 @@ Admin được cấp `roles/logging.viewAccessor` **giới hạn** đúng vào l
 
 Ngoài 5 Runner SA phục vụ IaC, dự án còn tạo các **Runtime Service Account** gắn vào VM/workload (Phase B — script [scripts/03-runtime-sa.sh](../scripts/03-runtime-sa.sh)):
 
+### ❓ Tại sao lại có Runtime SA riêng cho từng project?
+
+Cần phân biệt rõ **hai loại danh tính máy** trong landing zone — chúng phục vụ hai mục đích hoàn toàn khác nhau:
+
+| | 🏗️ **Runner SA** (5 cái) | 🤖 **Runtime SA** (theo project) |
+|:--|:--|:--|
+| **Ai dùng** | Terraform khi `apply` hạ tầng | Chính VM / workload khi đang chạy |
+| **Khi nào hoạt động** | Lúc triển khai (deploy time) | Lúc vận hành (run time), 24/7 |
+| **Đặt ở đâu** | Seed Project (tập trung) | Trong chính project workload |
+| **Quyền** | Tạo/sửa/xóa tài nguyên | Tối thiểu để gửi telemetry |
+
+Lý do **mỗi project workload có một Runtime SA riêng** thay vì dùng chung một SA hay dùng *Default Compute SA* của Google:
+
+- 🎯 **Least Privilege theo từng project** — VM của `sample-app` chỉ có đúng quyền của `sample-app`. Nếu một VM bị xâm nhập, kẻ tấn công không thể dùng danh tính đó để đụng tới project khác — **cô lập blast radius** xuống từng project.
+- 🔍 **Audit rõ ràng** — mọi hành động trong Cloud Audit Log gắn đích danh `gcp-sg-sa-sample-app-001`, biết ngay request đến từ workload nào, không bị trộn lẫn.
+- 🚫 **Tránh Default Compute SA** — SA mặc định của Compute Engine có quyền `Editor` quá rộng trên toàn project; Org Policy `iam.automaticIamGrantsForDefaultServiceAccounts` chặn nó, nên ta **chủ động** cấp SA tự quản lý với quyền tối thiểu.
+- ♻️ **Vòng đời độc lập** — xóa/tạo lại workload của một project không ảnh hưởng danh tính của project khác.
+
 | Nhóm | Account ID | Project | `actAs` | Vai trò |
 |:-----|:-----------|:--------|:-------:|:--------|
 | `app` | `gcp-sg-sa-sample-app-001` | sample-app | ✅ | Runtime SA cho workload Sample-app |
@@ -266,6 +284,18 @@ Mọi Runtime SA đều nhận **role cố định** tối thiểu để gửi t
 ## ⚙️ Quản lý phân quyền ở đâu?
 
 Toàn bộ ma trận phân quyền tách bạch **dữ liệu** và **logic** để dễ bảo trì:
+
+### ❓ Tại sao phân quyền bootstrap bằng script tay mà không dùng Terraform?
+
+Đây là một lựa chọn thiết kế có chủ đích, không phải thiếu sót. Các quyền **gốc** (Org/Billing/Token Creator/State bucket) được cấp qua [scripts/01-bootstrap.sh](../scripts/01-bootstrap.sh) chứ không qua Terraform vì:
+
+- 🔄 **Bài toán "con gà – quả trứng" (chicken-and-egg)** — Terraform muốn chạy thì phải *đã có* một Runner SA đủ quyền và một State bucket để lưu state. Nhưng chính những thứ đó (SA, quyền Org, bucket) lại là cái cần được tạo đầu tiên. Không thể dùng Terraform để tạo ra chính điều kiện để Terraform chạy → phải có một bước bootstrap bằng `gcloud` nằm **ngoài** vòng đời Terraform.
+- 🔑 **Tránh quyền Org-Admin nằm trong state** — Nếu cấp quyền cấp tổ chức bằng Terraform, những binding cực kỳ nhạy cảm (`organizationAdmin`…) sẽ bị ghi vào file state. Ta giữ chúng ngoài state để giảm bề mặt rủi ro.
+- 🥚 **Trách nhiệm một lần (one-time)** — Bootstrap là thao tác thiết lập nền móng, chạy **một lần** bởi Org Admin lúc khởi tạo; nó không thuộc chu kỳ `plan/apply` lặp lại của hạ tầng thường ngày.
+- 🧩 **Ranh giới quyền sạch** — Con người (Org Admin) làm bước bootstrap một lần; sau đó mọi thứ do SA đảm nhiệm. Giới hạn rõ "việc của người" vs "việc của máy".
+
+> [!NOTE]
+> Để nhất quán, quyền **cấp project** sau khi apply `org/` cũng được gom vào script ([scripts/02-post-org-roles.sh](../scripts/02-post-org-roles.sh)) thay vì nằm rải rác trong Terraform — toàn bộ bản đồ IAM "runner" nằm một chỗ ([scripts/roles.sh](../scripts/roles.sh)), dễ audit. Ngược lại, quyền cho **con người** (admin_principals) lại được quản lý bằng Terraform trong [security/iam.tf](../security/iam.tf), vì chúng nằm *trong* phạm vi hạ tầng đã được bootstrap và cần thay đổi theo thời gian như một phần của IaC.
 
 | File | Vai trò |
 |:-----|:--------|
