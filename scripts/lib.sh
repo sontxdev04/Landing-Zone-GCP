@@ -16,9 +16,32 @@ grant_org() { # $1=SA email  $2=role
 }
 
 # Gán role cấp Project cho 1 service account.
+# Chạy qua impersonation SA org (sa-tf-org-001) vì SA này là OWNER của mọi
+# project (nó tạo project qua impersonation ở stack org). Tài khoản người dùng
+# Phase A KHÔNG tự có quyền setIamPolicy trên các project mới → phải mượn quyền
+# owner. Nếu $SA_ORG trống (chưa source config.sh) thì chạy bằng identity hiện tại.
+#
+# RETRY: khi member là 1 SA vừa được tạo (vd runtime SA ở 03-runtime-sa.sh),
+# identity impersonated (SA_ORG) có thể chưa "thấy" SA đó do eventual
+# consistency → lỗi "does not exist". Thử lại tối đa ~60s thay vì fail ngay.
 grant_project() { # $1=project id  $2=SA email  $3=role
-  gcloud projects add-iam-policy-binding "$1" \
-    --member="serviceAccount:$2" --role="$3" --condition=None
+  local _i _out
+  for _i in $(seq 1 12); do
+    if _out="$(gcloud projects add-iam-policy-binding "$1" \
+        --member="serviceAccount:$2" --role="$3" --condition=None \
+        ${SA_ORG:+--impersonate-service-account="$SA_ORG"} 2>&1)"; then
+      return 0
+    fi
+    if grep -qiE "does not exist|NOT_FOUND" <<< "$_out"; then
+      echo "    Member SA '$2' chua hien dien voi identity gan role... ($_i/12)"
+      sleep 5
+      continue
+    fi
+    echo "$_out" >&2   # lỗi khác (quyền, role sai...) → in ra và thoát
+    return 1
+  done
+  echo "$_out" >&2
+  return 1
 }
 
 # Gán role trên Billing Account.
@@ -28,9 +51,14 @@ grant_billing() { # $1=billing account  $2=SA email  $3=role
 }
 
 # Gán role TRÊN chính một service account (impersonation: tokenCreator / serviceAccountUser).
-grant_on_sa() { # $1=SA mục tiêu  $2=project của SA  $3=member  $4=role
+# $5 (tùy chọn) = SA để impersonate khi gọi. Ở Phase A bootstrap (token creator
+# trên runner SA của seed project — owned by admin) KHÔNG truyền $5. Ở Phase B
+# (03-runtime-sa.sh) SA mục tiêu nằm trong project owned by SA_ORG còn người dùng
+# không có iam.serviceAccounts.getIamPolicy trên SA đó → truyền $5=$SA_ORG.
+grant_on_sa() { # $1=SA mục tiêu  $2=project của SA  $3=member  $4=role  [$5=impersonate SA]
   gcloud iam service-accounts add-iam-policy-binding "$1" \
-    --project="$2" --member="$3" --role="$4"
+    --project="$2" --member="$3" --role="$4" \
+    ${5:+--impersonate-service-account="$5"}
 }
 
 # Cho SA "thấy" được state bucket (cần cho terraform init).

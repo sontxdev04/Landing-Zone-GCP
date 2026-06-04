@@ -62,7 +62,7 @@ for entry in "${RUNTIME_SA_BINDINGS[@]}"; do
     grant_project "$prj" "$email" "$role"
   done
   if [[ "$actas" == "yes" ]]; then
-    grant_on_sa "$email" "$prj" "serviceAccount:$SA_WL" "roles/iam.serviceAccountUser"
+    grant_on_sa "$email" "$prj" "serviceAccount:$SA_WL" "roles/iam.serviceAccountUser" "$SA_ORG"
   fi
 done
 

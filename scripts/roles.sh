@@ -73,6 +73,10 @@ STATE_UPSTREAM_BINDINGS=(
 POSTORG_PROJECT_BINDINGS=(
   "MGMT      $SA_SEC  roles/resourcemanager.projectIamAdmin"   # J1: set IAM log view
   "APP     $SA_WL   roles/compute.instanceAdmin.v1"          # J2: VM sample-app
+  # J2b: VM o project app dung SUBNET nam o project host sh-vpc (Shared VPC).
+  #      Tao instance can 'compute.subnetworks.use' → nam trong compute.networkUser
+  #      tren PROJECT HOST. instanceAdmin.v1 tren app KHONG bao gom quyen nay.
+  "SH_VPC    $SA_WL   roles/compute.networkUser"
   "MGMT      $SA_MGMT roles/logging.admin"                     # J3: Log Sinks/Buckets/Views
   "MGMT      $SA_MGMT roles/monitoring.admin"                  # J3: Monitoring
   "MGMT      $SA_MGMT roles/storage.admin"                     # J3
