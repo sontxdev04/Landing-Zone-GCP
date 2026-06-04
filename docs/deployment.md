@@ -580,12 +580,33 @@ Thu hồi:
 terraform destroy
 ```
 
+> [!WARNING]
+> **Lỗi thường gặp:** `Error trying to delete bucket <tên> without force_destroy set to true`. GCS bucket lưu trữ log audit (ARCHIVE) **còn object** nên Terraform từ chối xóa để tránh mất nhật ký. Đây là cơ chế bảo vệ, không phải hỏng. Mọi tài nguyên khác của `management` vẫn destroy bình thường, chỉ còn bucket này vướng lại.
+
+**Cách xử lý — xóa object trong bucket trước, rồi destroy lại.**
+
+Bucket nằm trong project `management`, và do toàn bộ stack chạy qua **impersonation**, tài khoản cá nhân của bạn **không có quyền** trên bucket (sẽ gặp `storage.objects.list access denied`). Phải xóa bằng chính Runner SA của stack (`sa-tf-mgmt-001`):
+
+```bash
+gcloud storage rm --recursive gs://<TÊN_BUCKET_ARCHIVE> \
+  --impersonate-service-account=sa-tf-mgmt-001@$SEED_PROJECT.iam.gserviceaccount.com
+```
+
+Sau đó chạy lại:
+
+```bash
+terraform destroy
+```
+
 > [!TIP]
-> Nếu destroy báo lỗi GCS bucket *"not empty"* (log archive còn object), bucket có thể cần `force_destroy` hoặc bạn xóa thủ công object trước:
+> Tên bucket archive có dạng `<prefix>-logbkt-gcs-<suffix>` (ví dụ `lz-logbkt-gcs-0nei`). Email SA đầy đủ là `sa-tf-mgmt-001@<SEED_PROJECT>.iam.gserviceaccount.com` — nếu chưa `source scripts/config.sh` thì thay `$SEED_PROJECT` bằng giá trị thật.
+
+> [!NOTE]
+> **Nếu lỡ nhấn `Ctrl+C` giữa chừng** và lần destroy sau báo `Error acquiring the state lock` (Error 412 `conditionNotMet`): đó là lock cũ chưa kịp nhả. Gỡ bằng Lock ID hiện trong thông báo (chỉ làm khi `Who:` đúng là máy bạn, không có ai chạy song song):
 > ```bash
-> gcloud storage rm --recursive gs://<TÊN_BUCKET_ARCHIVE>
+> terraform force-unlock <LOCK_ID>
 > ```
-> rồi chạy lại `terraform destroy`.
+> rồi `terraform destroy` lại.
 
 ### 8.2 Lớp 4 — Destroy `workload`
 
