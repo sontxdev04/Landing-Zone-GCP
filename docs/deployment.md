@@ -661,6 +661,12 @@ terraform destroy
 
 Terraform **không** quản lý các tài nguyên Phase A (Seed Project, State Bucket, 5 Runner SA) — chúng được tạo thủ công bằng [scripts/01-bootstrap.sh](../scripts/01-bootstrap.sh). Nếu muốn xóa nốt, làm **thủ công** và **sau cùng** (vì State Bucket chứa state của mọi stack — chỉ xóa khi đã destroy hết):
 
+> [!IMPORTANT]
+> Sau khi destroy `org`, các project (vd `gcp-platform-management-*`) đã bị xóa — nhưng `gcloud` có thể vẫn đặt **quota project** là một trong số đó, khiến lệnh tiếp theo lỗi `HTTPError 404: The requested project was not found`. Hãy **trỏ `gcloud` về Seed Project** (project vẫn còn sống, đang chứa State Bucket) trước khi xóa bucket:
+> ```bash
+> gcloud config set project $SEED_PROJECT
+> ```
+
 Xóa State Bucket (kèm toàn bộ state — **không thể hoàn tác**):
 
 ```bash
