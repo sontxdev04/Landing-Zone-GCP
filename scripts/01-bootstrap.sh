@@ -68,7 +68,7 @@ apply_state_bindings "roles/storage.objectAdmin"  own-state      "${STATE_OWN_BI
 apply_state_bindings "roles/storage.objectViewer" read-upstream  "${STATE_UPSTREAM_BINDINGS[@]}"
 
 echo ""
-echo "✅ Phase A (Bước B→G) hoàn tất."
+echo "==> Phase A (Buoc B->G) hoan tat."
 echo "   Tiếp theo (thủ công):"
 echo "   - Bước H: sửa 5 tệp backend.tf → bucket = \"$STATE_BUCKET\""
 echo "   - Bước I: kiểm tra tf_runner_sa trong 5 tệp terraform.tfvars"

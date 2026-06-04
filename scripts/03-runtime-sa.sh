@@ -5,9 +5,8 @@
 # Các SA này KHÔNG dùng để chạy Terraform mà gắn vào VM/workload lúc runtime.
 # CHẠY SAU `terraform apply` của stack org. Phải chạy từ thư mục gốc landing-zone.
 #
-#   ./scripts/03-runtime-sa.sh            # chỉ B1 (bắt buộc)
-#   ./scripts/03-runtime-sa.sh --astro    # B1 + B2 (astronomy-shop)
-#   ./scripts/03-runtime-sa.sh --tools    # B1 + B3 (hub-net / sh-vpc tools)
+#   ./scripts/03-runtime-sa.sh --astro    # Tạo SA cho astronomy-shop
+#   ./scripts/03-runtime-sa.sh --tools    # Tạo SA cho hub-net / sh-vpc tools
 #   ./scripts/03-runtime-sa.sh --astro --tools
 # =============================================================================
 set -euo pipefail
@@ -34,12 +33,11 @@ done
 
 echo "==> Lấy project_id từ output của stack org"
 pushd "${REPO_ROOT}/org" >/dev/null
-PRJ_SH_ACCESS="$(terraform output -raw project_id_sh_access)"
 PRJ_ASTRO="$(terraform output -raw project_id_astronomy_shop)"
 PRJ_HUB_NET="$(terraform output -raw project_id_hub_net)"
 PRJ_SH_VPC="$(terraform output -raw project_id_sh_vpc)"
 popd >/dev/null
-export PRJ_SH_ACCESS PRJ_ASTRO PRJ_HUB_NET PRJ_SH_VPC
+export PRJ_ASTRO PRJ_HUB_NET PRJ_SH_VPC
 
 # Duyệt bảng RUNTIME_SA_BINDINGS (trong roles.sh). Mỗi dòng tạo 1 SA +
 # gán RUNTIME_FIXED_ROLES; nếu actAs=yes thì cấp sa-tf-wl-001 quyền actAs.
@@ -53,7 +51,7 @@ for entry in "${RUNTIME_SA_BINDINGS[@]}"; do
     core)  ;;
     astro) [[ "$DO_ASTRO" == "1" ]] || continue ;;
     tools) [[ "$DO_TOOLS" == "1" ]] || continue ;;
-    *) echo "❌ nhóm không hợp lệ: $grp (roles.sh)"; exit 1 ;;
+    *) echo "[ERROR] nhom khong hop le: $grp (roles.sh)"; exit 1 ;;
   esac
 
   prj="$(resolve_project "$key")"
@@ -69,4 +67,4 @@ for entry in "${RUNTIME_SA_BINDINGS[@]}"; do
 done
 
 echo ""
-echo "✅ Phase B hoàn tất."
+echo "==> Phase B hoan tat."

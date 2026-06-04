@@ -55,12 +55,11 @@ create_sa() { # $1=account id  $2=project  $3=display name
 # Các biến PRJ_* do script runner set TRƯỚC khi gọi (từ terraform output).
 resolve_project() { # $1=PROJECT_KEY
   case "$1" in
-    MGMT)      echo "$PRJ_MGMT" ;;
-    SH_ACCESS) echo "$PRJ_SH_ACCESS" ;;
-    ASTRO)     echo "$PRJ_ASTRO" ;;
-    HUB_NET)   echo "$PRJ_HUB_NET" ;;
-    SH_VPC)    echo "$PRJ_SH_VPC" ;;
-    *) echo "❌ PROJECT_KEY không hợp lệ: '$1' (roles.sh)" >&2; return 1 ;;
+    MGMT)    echo "$PRJ_MGMT" ;;
+    ASTRO)   echo "$PRJ_ASTRO" ;;
+    HUB_NET) echo "$PRJ_HUB_NET" ;;
+    SH_VPC)  echo "$PRJ_SH_VPC" ;;
+    *) echo "[ERROR] PROJECT_KEY khong hop le: '$1' (roles.sh)" >&2; return 1 ;;
   esac
 }
 

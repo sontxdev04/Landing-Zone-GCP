@@ -65,11 +65,10 @@ STATE_UPSTREAM_BINDINGS=(
 # ─────────────────────────────────────────────────────────────────────────────
 # [6] Role cấp PROJECT (gán SAU apply org)   cột:  <PROJECT_KEY>  <SA>  <role>
 #     → dùng ở 02-post-org-roles.sh (Bước J)
-#     PROJECT_KEY ∈ MGMT | SH_ACCESS | ASTRO | HUB_NET | SH_VPC
+#     PROJECT_KEY ∈ MGMT | ASTRO | HUB_NET | SH_VPC
 # ─────────────────────────────────────────────────────────────────────────────
 POSTORG_PROJECT_BINDINGS=(
   "MGMT      $SA_SEC  roles/resourcemanager.projectIamAdmin"   # J1: set IAM log view
-  "SH_ACCESS $SA_WL   roles/compute.instanceAdmin.v1"          # J2: VM sh-access
   "ASTRO     $SA_WL   roles/compute.instanceAdmin.v1"          # J2: VM astronomy-shop
   "MGMT      $SA_MGMT roles/logging.admin"                     # J3: Log Sinks/Buckets/Views
   "MGMT      $SA_MGMT roles/monitoring.admin"                  # J3: Monitoring
@@ -90,7 +89,6 @@ POSTORG_BILLING_BINDINGS=(
 #     Role gán cố định cho mọi runtime SA: xem RUNTIME_FIXED_ROLES bên dưới.
 # ─────────────────────────────────────────────────────────────────────────────
 RUNTIME_SA_BINDINGS=(
-  "core  gcp-sg-sa-sh-access-001      SH_ACCESS yes | Bastion host runtime SA"
   "astro gcp-sg-sa-astronomy-shop-001 ASTRO     yes | Astronomy-shop workload runtime SA"
   "tools gcp-sg-sa-hub-net-001        HUB_NET   no  | hub-net runtime SA"
   "tools gcp-sg-sa-sh-vpc-001         SH_VPC    no  | sh-vpc runtime SA"

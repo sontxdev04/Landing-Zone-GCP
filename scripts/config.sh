@@ -35,7 +35,7 @@ _lz_check_placeholders() {
   local bad=0 v
   for v in ORG_ID BILLING_ACCOUNT_1 BILLING_ACCOUNT_2 BILLING_ACCOUNT_BUDGET STATE_BUCKET; do
     case "${!v}" in
-      *"<"*">"*) echo "❌ Biến $v còn placeholder: '${!v}' — sửa trong scripts/config.sh"; bad=1 ;;
+      *"<"*">"*) echo "[ERROR] Bien $v con placeholder: '${!v}' — sua trong scripts/config.sh"; bad=1 ;;
     esac
   done
   return $bad
