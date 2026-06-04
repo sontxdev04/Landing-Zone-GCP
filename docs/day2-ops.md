@@ -1,8 +1,21 @@
+<div align="center">
+
 # 🛠️ Cẩm Nang Vận Hành — GCP Landing Zone Day-2 Operations
 
-> Tài liệu này là **sổ tay vận hành (runbook)** dành cho SRE và Cloud Platform Administrator chịu trách nhiệm duy trì landing zone *sau khi* đã triển khai xong. Nếu [architecture.md](./architecture.md) trả lời câu hỏi *"tại sao hạ tầng được dựng như thế này?"*, thì tài liệu này trả lời câu hỏi *"hằng ngày tôi thao tác với nó ra sao cho an toàn?"*.
+### *Sổ tay runbook: thay đổi có kiểm soát, mở rộng hạ tầng, phản ứng cảnh báo & quản lý state*
 
-Để nắm tổng quan dự án và sơ đồ kiến trúc, hãy đọc [README](../README.md). Để hiểu chiều sâu thiết kế mạng/bảo mật, đọc [architecture.md](./architecture.md). Để triển khai từ đầu, xem [deployment.md](./deployment.md). Tài liệu này tập trung vào **các tác vụ lặp lại sau triển khai**: thay đổi có kiểm soát, mở rộng hạ tầng, phản ứng cảnh báo, quản lý state và khắc phục sự cố.
+<br>
+
+🔄 **Everything as Code** &nbsp;•&nbsp; 💥 **Blast Radius Isolation** &nbsp;•&nbsp; 🔐 **Least Privilege at Runtime**
+
+</div>
+
+---
+
+> [!NOTE]
+> Tài liệu này là **sổ tay vận hành (runbook)** dành cho SRE và Cloud Platform Administrator chịu trách nhiệm duy trì landing zone *sau khi* đã triển khai xong. Nếu [architecture.md](./architecture.md) trả lời câu hỏi *"tại sao hạ tầng được dựng như thế này?"*, thì tài liệu này trả lời câu hỏi *"hằng ngày tôi thao tác với nó ra sao cho an toàn?"*.
+>
+> Để nắm tổng quan dự án và sơ đồ kiến trúc, hãy đọc [README](../README.md). Để hiểu chiều sâu thiết kế mạng/bảo mật, đọc [architecture.md](./architecture.md). Để triển khai từ đầu, xem [deployment.md](./deployment.md). Tài liệu này tập trung vào **các tác vụ lặp lại sau triển khai**: thay đổi có kiểm soát, mở rộng hạ tầng, phản ứng cảnh báo, quản lý state và khắc phục sự cố.
 
 ---
 

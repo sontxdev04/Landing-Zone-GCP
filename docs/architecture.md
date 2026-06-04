@@ -1,8 +1,21 @@
+<div align="center">
+
 # 🏛️ Thiết Kế Kiến Trúc — GCP Landing Zone
 
-> Tài liệu này đi sâu vào **lý do thiết kế** (the *why*) đằng sau từng quyết định kiến trúc, không chỉ liệt kê tài nguyên. Mục tiêu là giúp người vận hành hiểu được *tại sao* hạ tầng được dựng theo cách này, từ đó tự tin mở rộng, sửa đổi và khắc phục sự cố.
+### *Chiều sâu thiết kế: phân cấp tài nguyên, mạng Hub-and-Spoke, định tuyến BGP & firewall hai tầng*
 
-Nếu bạn cần cái nhìn tổng quan nhanh (sơ đồ tổng thể, danh sách tính năng), hãy đọc [README](../README.md). Tài liệu này tập trung vào **chiều sâu kỹ thuật**: nguyên lý phân cấp, kế hoạch địa chỉ IP, cơ chế định tuyến động BGP, thứ tự đánh giá firewall, và các đánh đổi (trade-off) thiết kế.
+<br>
+
+🗂️ **Resource Hierarchy** &nbsp;•&nbsp; 🌐 **Hub-and-Spoke** &nbsp;•&nbsp; 🔐 **HA VPN + BGP** &nbsp;•&nbsp; 🛡️ **Defense in Depth**
+
+</div>
+
+---
+
+> [!NOTE]
+> Tài liệu này đi sâu vào **lý do thiết kế** (the *why*) đằng sau từng quyết định kiến trúc, không chỉ liệt kê tài nguyên. Mục tiêu là giúp người vận hành hiểu được *tại sao* hạ tầng được dựng theo cách này, từ đó tự tin mở rộng, sửa đổi và khắc phục sự cố.
+>
+> Nếu bạn cần cái nhìn tổng quan nhanh (sơ đồ tổng thể, danh sách tính năng), hãy đọc [README](../README.md). Tài liệu này tập trung vào **chiều sâu kỹ thuật**: nguyên lý phân cấp, kế hoạch địa chỉ IP, cơ chế định tuyến động BGP, thứ tự đánh giá firewall, và các đánh đổi (trade-off) thiết kế.
 
 ---
 
@@ -332,10 +345,6 @@ Peering trong GCP **phải khai báo cả hai chiều** mới hoạt động. Qu
 
 > [!IMPORTANT]
 > Peering trong GCP **không bắc cầu (non-transitive)**. Nếu sau này thêm Spoke C peering với Hub, thì C **không** tự động thấy Shared VPC. Đây là tính năng bảo mật, không phải hạn chế — nó buộc mọi liên kết phải tường minh.
-
-### 7.3 Dấu vết lịch sử: vì sao không có Bastion?
-
-Trong code có chú thích: *"sh-access VPC removed along with bastion host. Access is via Cloud IAP."* Thiết kế ban đầu từng có một VPC riêng cho bastion host; nó đã bị loại bỏ hoàn toàn để chuyển sang **Cloud IAP** (§9.1) — giảm một VPC, một VM phải vá lỗi, và một bề mặt tấn công.
 
 ---
 
