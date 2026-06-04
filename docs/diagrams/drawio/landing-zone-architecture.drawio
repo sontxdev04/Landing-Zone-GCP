@@ -588,7 +588,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="6 - Firewall Two-Tier" id="6_Firewall_Two_Tier">
-    <mxGraphModel dx="4200" dy="2868" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2896" pageHeight="2009" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="717" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2896" pageHeight="2009" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -731,13 +731,10 @@
     </mxGraphModel>
   </diagram>
   <diagram name="7 - Zero External IP" id="7_Zero_External_IP">
-    <mxGraphModel dx="6061" dy="3681" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3061" pageHeight="1632" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="7000" dy="4780" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3061" pageHeight="1632" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="7_Zero_External_IP_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Zero External IP - Egress via NAT, Ingress via IAP&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Org Policy denies all public IPs - admin enters via Cloud IAP tunnel - VM reaches Internet one-way via Cloud NAT&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="80" y="56" width="2901" height="132" as="geometry" />
-        </mxCell>
         <mxCell id="7_Zero_External_IP_n2" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud Admin&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;gcloud compute ssh&lt;br/&gt;--tunnel-through-iap&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA4335;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
           <mxGeometry x="80" y="322" width="380" height="125" as="geometry" />
         </mxCell>
@@ -807,8 +804,8 @@
         <mxCell id="7_Zero_External_IP_n24" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#EA4335;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;" parent="1" source="7_Zero_External_IP_n10" target="7_Zero_External_IP_n16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="ZRt0uPD08DDh6uHpXgSj-1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Zero External IP - Egress via NAT, Ingress via IAP&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Org Policy denies all public IPs - admin enters via Cloud IAP tunnel - VM reaches Internet one-way via Cloud NAT&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="-73" y="-2" width="2901" height="132" as="geometry" />
+        <mxCell id="ZRt0uPD08DDh6uHpXgSj-1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Zero External IP - Egress via NAT, Ingress via IAP&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Org Policy denies all public IPs - admin enters via Cloud IAP tunnel - VM reaches Internet one-way via Cloud NAT&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="60" y="2" width="2901" height="132" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
