@@ -15,10 +15,6 @@ output "project_id_hub_net" {
   value       = module.lz-prj-hub-net.project_id
 }
 
-output "project_id_sh_access" {
-  description = "Project ID of the shared access project"
-  value       = module.lz-prj-sh-access.project_id
-}
 
 output "project_id_sh_vpc" {
   description = "Project ID of the shared VPC host project"
@@ -41,4 +37,22 @@ output "folder_id_platform" {
   value       = module.folders-root.ids["fldr-platform"]
 }
 
+output "folder_id_workload" {
+  description = "Top-level workload folder ID"
+  value       = module.folders-root.ids["fldr-workload"]
+}
 
+output "folder_id_sandbox" {
+  description = "Top-level sandbox folder ID"
+  value       = module.folders-root.ids["fldr-sandbox"]
+}
+
+output "folder_id_management" {
+  description = "Management sub-folder ID (child of platform)"
+  value       = module.folders-platform.ids["fldr-management"]
+}
+
+output "folder_id_connectivity" {
+  description = "Connectivity sub-folder ID (child of platform)"
+  value       = module.folders-platform.ids["fldr-connectivity"]
+}

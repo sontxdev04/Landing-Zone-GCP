@@ -66,6 +66,7 @@ resource "google_compute_vpn_tunnel" "gcp-sg-vpn-tunnel-002" {
 }
 
 # BGP interface for tunnel 0
+# count mirrors the tunnel — body executes only when vpn_enabled=1, so [0] is safe.
 resource "google_compute_router_interface" "gcp-sg-router-interface-001" {
   count      = length(google_compute_vpn_tunnel.gcp-sg-vpn-tunnel-001)
   name       = "gcp-sg-router-interface-001"
@@ -74,6 +75,7 @@ resource "google_compute_router_interface" "gcp-sg-router-interface-001" {
   region     = "asia-southeast1"
   ip_range   = "169.254.0.1/30"
   vpn_tunnel = google_compute_vpn_tunnel.gcp-sg-vpn-tunnel-001[0].name
+  depends_on = [google_compute_vpn_tunnel.gcp-sg-vpn-tunnel-001]
 }
 
 # BGP peer for tunnel 0
@@ -87,9 +89,11 @@ resource "google_compute_router_peer" "gcp-sg-router-peer-001" {
   peer_asn                  = 65002
   advertised_route_priority = 100
   interface                 = google_compute_router_interface.gcp-sg-router-interface-001[0].name
+  depends_on                = [google_compute_router_interface.gcp-sg-router-interface-001]
 }
 
 # BGP interface for tunnel 1
+# count mirrors the tunnel — body executes only when vpn_enabled=1, so [0] is safe.
 resource "google_compute_router_interface" "gcp-sg-router-interface-002" {
   count      = length(google_compute_vpn_tunnel.gcp-sg-vpn-tunnel-002)
   name       = "gcp-sg-router-interface-002"
@@ -98,7 +102,7 @@ resource "google_compute_router_interface" "gcp-sg-router-interface-002" {
   region     = "asia-southeast1"
   ip_range   = "169.254.1.1/30"
   vpn_tunnel = google_compute_vpn_tunnel.gcp-sg-vpn-tunnel-002[0].name
-  depends_on = [google_compute_router_interface.gcp-sg-router-interface-001]
+  depends_on = [google_compute_router_interface.gcp-sg-router-interface-001, google_compute_vpn_tunnel.gcp-sg-vpn-tunnel-002]
 }
 
 # BGP peer for tunnel 1
@@ -112,4 +116,5 @@ resource "google_compute_router_peer" "gcp-sg-router-peer-002" {
   peer_asn                  = 65002
   advertised_route_priority = 100
   interface                 = google_compute_router_interface.gcp-sg-router-interface-002[0].name
+  depends_on                = [google_compute_router_interface.gcp-sg-router-interface-002]
 }

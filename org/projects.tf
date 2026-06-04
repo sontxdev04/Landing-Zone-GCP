@@ -12,7 +12,6 @@ locals {
 
   project_id_hub_net        = "${local.prefix}-prj-hub-net-${local.name_suffix}"
   project_id_sh_vpc         = "${local.prefix}-prj-sh-vpc-${local.name_suffix}"
-  project_id_sh_access      = "${local.prefix}-prj-sh-access-${local.name_suffix}"
   project_id_astronomy_shop = "${local.prefix}-prj-astronomy-shop-${local.name_suffix}"
 
   network_labels = {
@@ -85,35 +84,6 @@ module "lz-prj-sh-vpc" {
   deletion_policy = "DELETE"
 }
 
-# Shared access project: Bastion host
-resource "time_static" "lz-prj-sh-access-timestamp" {}
-
-module "lz-prj-sh-access" {
-  source  = "terraform-google-modules/project-factory/google"
-  version = "17.1.0"
-
-  name              = local.project_id_sh_access
-  random_project_id = false
-  org_id            = var.org_id
-  billing_account   = var.billing_account_id_2
-  folder_id         = module.folders-platform.ids["fldr-connectivity"]
-
-  activate_apis = [
-    "compute.googleapis.com",
-    "iam.googleapis.com",
-    "cloudresourcemanager.googleapis.com",
-    "logging.googleapis.com",
-    "monitoring.googleapis.com",
-    "oslogin.googleapis.com",
-    "orgpolicy.googleapis.com",
-  ]
-
-  labels = merge(
-    local.infra_labels,
-    { created_date = formatdate("YYYY-MM-DD_hh-mm-ss", timeadd(time_static.lz-prj-sh-access-timestamp.rfc3339, "7h")) }
-  )
-  deletion_policy = "DELETE"
-}
 
 # Astronomy-shop workload service project (Workload folder)
 resource "time_static" "lz-prj-astronomy-shop-timestamp" {}

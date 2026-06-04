@@ -1,32 +1,6 @@
-# Firewall rules — owned by the Network team (references VPCs in this stack)
-
-# SSH: Internet → Bastion
-resource "google_compute_firewall" "gcp-sg-fw-allow-ssh-bastion-001" {
-  name          = "gcp-sg-fw-allow-ssh-bastion-001"
-  project       = data.google_project.gcp-sg-prj-sh-access-001.project_id
-  network       = google_compute_network.gcp-sg-vpc-shared-access-001.name
-  description   = "Allow SSH from internet to Bastion Host"
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["allow-ssh-external"]
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-}
-
-# SSH: Bastion → app VMs (tag your workload VMs with "app-vm")
-resource "google_compute_firewall" "gcp-sg-fw-allow-bastion-ssh-001" {
-  name          = "gcp-sg-fw-allow-bastion-ssh-001"
-  project       = data.google_project.gcp-sg-prj-sh-vpc-001.project_id
-  network       = google_compute_network.gcp-sg-vpc-shared-001.name
-  description   = "Allow SSH from Bastion to app VMs"
-  source_ranges = ["10.50.1.100/32"]
-  target_tags   = ["app-vm"]
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-}
+# Firewall rules — VPC-level rules
+# IAP SSH/RDP access (35.235.240.0/20 → port 22/3389) is already ALLOWED org-wide
+# via the hierarchical firewall policy at priority 1002 in security/org-fw-policies.tf.
 
 # VPN: On-prem networks → Hub VPC (traffic over HA VPN tunnel)
 resource "google_compute_firewall" "gcp-sg-fw-allow-vpn-hub-001" {
@@ -41,7 +15,7 @@ resource "google_compute_firewall" "gcp-sg-fw-allow-vpn-hub-001" {
   allow { protocol = "icmp" }
 }
 
-# Internal: Prod VPC
+# Internal: Prod VPC — allow traffic within the app subnet
 resource "google_compute_firewall" "gcp-sg-fw-allow-internal-001" {
   name          = "gcp-sg-fw-allow-internal-001"
   project       = data.google_project.gcp-sg-prj-sh-vpc-001.project_id

@@ -13,5 +13,5 @@ provider "google" {
   impersonate_service_account = var.tf_runner_sa
   region                      = "asia-southeast1"
   user_project_override       = true
-  billing_project             = local.org.project_id_sh_access
+  billing_project             = local.org.project_id_astronomy_shop
 }

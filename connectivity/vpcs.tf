@@ -1,5 +1,6 @@
-# Data sources — project references (passed as vars, same as org stack)
+# VPCs
 
+# Data sources — project references
 data "google_project" "gcp-sg-prj-hub-net-001" {
   project_id = local.org.project_id_hub_net
 }
@@ -8,15 +9,9 @@ data "google_project" "gcp-sg-prj-sh-vpc-001" {
   project_id = local.org.project_id_sh_vpc
 }
 
-data "google_project" "gcp-sg-prj-sh-access-001" {
-  project_id = local.org.project_id_sh_access
-}
-
 data "google_project" "gcp-sg-prj-astronomy-shop-001" {
   project_id = local.org.project_id_astronomy_shop
 }
-
-# VPCs
 
 # Hub VPC — central transit / VPN termination
 resource "google_compute_network" "gcp-sg-vpc-hub-001" {
@@ -30,14 +25,6 @@ resource "google_compute_network" "gcp-sg-vpc-hub-001" {
 resource "google_compute_network" "gcp-sg-vpc-shared-001" {
   name                    = "gcp-sg-vpc-shared-001"
   project                 = data.google_project.gcp-sg-prj-sh-vpc-001.project_id
-  auto_create_subnetworks = false
-  routing_mode            = "GLOBAL"
-}
-
-# Shared Access VPC — Bastion host
-resource "google_compute_network" "gcp-sg-vpc-shared-access-001" {
-  name                    = "gcp-sg-vpc-shared-access-001"
-  project                 = data.google_project.gcp-sg-prj-sh-access-001.project_id
   auto_create_subnetworks = false
   routing_mode            = "GLOBAL"
 }

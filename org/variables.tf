@@ -19,9 +19,3 @@ variable "billing_account_id_2" {
   type        = string
 }
 
-# The zone B of Singapore region (used by the bastion VM org policy exception).
-variable "zone_sg_b" {
-  description = "The zone B of Singapore region"
-  type        = string
-  default     = "asia-southeast1-b"
-}

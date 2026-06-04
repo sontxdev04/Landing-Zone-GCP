@@ -14,18 +14,7 @@ resource "google_dns_managed_zone" "gcp-sg-dns-internal-001" {
     networks {
       network_url = google_compute_network.gcp-sg-vpc-shared-001.id
     }
-    networks {
-      network_url = google_compute_network.gcp-sg-vpc-shared-access-001.id
-    }
   }
 }
 
-# Example A record: bastion host
-resource "google_dns_record_set" "gcp-sg-dns-bastion-001" {
-  name         = "bastion.${google_dns_managed_zone.gcp-sg-dns-internal-001.dns_name}"
-  project      = data.google_project.gcp-sg-prj-hub-net-001.project_id
-  managed_zone = google_dns_managed_zone.gcp-sg-dns-internal-001.name
-  type         = "A"
-  ttl          = 300
-  rrdatas      = ["10.50.1.100"]
-}
+# Add internal DNS records here as workload services are deployed.

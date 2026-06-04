@@ -1,4 +1,3 @@
-output "bastion_public_ip" {
-  description = "Public IP of Bastion Host (owned by connectivity; re-exported for monitoring uptime check)"
-  value       = local.conn.bastion_public_ip
-}
+# Workload stack outputs
+# NOTE: bastion_public_ip removed — bastion host replaced by Cloud IAP.
+# Add outputs here as workload VMs are created.

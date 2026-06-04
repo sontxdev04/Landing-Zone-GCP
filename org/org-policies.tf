@@ -41,27 +41,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-deny-vm-external-ip-001" 
   depends_on = [module.lz-prj-hub-net]
 }
 
-# Project-level exception: allow external IP for the Bastion Host in shared-access project
-resource "google_org_policy_policy" "gcp-sg-org-policy-allow-vm-external-ip-bastion-001" {
-  name   = "projects/${module.lz-prj-sh-access.project_id}/policies/compute.vmExternalIpAccess"
-  parent = "projects/${module.lz-prj-sh-access.project_id}"
-
-  spec {
-    inherit_from_parent = false
-    rules {
-      values {
-        allowed_values = [
-          "projects/${module.lz-prj-sh-access.project_id}/zones/${var.zone_sg_b}/instances/gcp-sg-vm-bastion-001",
-        ]
-      }
-    }
-  }
-
-  depends_on = [
-    google_org_policy_policy.gcp-sg-org-policy-deny-vm-external-ip-001,
-    module.lz-prj-sh-access,
-  ]
-}
+# No project-level exceptions — all VM access goes through Cloud IAP (no external IPs needed).
 
 # Org policy: disable Service Account key creation across the organization
 resource "google_org_policy_policy" "gcp-sg-org-policy-disable-sa-key-001" {
@@ -77,20 +57,6 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-disable-sa-key-001" {
   depends_on = [module.lz-prj-hub-net]
 }
 
-# Project-level exception: allow Service Account key creation in shared-access project
-resource "google_org_policy_policy" "gcp-sg-org-policy-allow-sa-key-sh-access-001" {
-  name   = "projects/${module.lz-prj-sh-access.project_id}/policies/iam.disableServiceAccountKeyCreation"
-  parent = "projects/${module.lz-prj-sh-access.project_id}"
-
-  spec {
-    inherit_from_parent = false
-    rules {
-      enforce = false
-    }
-  }
-
-  depends_on = [module.lz-prj-sh-access]
-}
 
 # Org policy: require Shielded VM on all instances
 resource "google_org_policy_policy" "gcp-sg-org-policy-require-shielded-vm-001" {
@@ -99,7 +65,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-require-shielded-vm-001" 
 
   spec {
     rules {
-      enforce = "TRUE"
+      enforce = true
     }
   }
 
@@ -113,7 +79,7 @@ resource "google_org_policy_policy" "gcp-sg-org-policy-uniform-bucket-access-001
 
   spec {
     rules {
-      enforce = "TRUE"
+      enforce = true
     }
   }
 
