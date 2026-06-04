@@ -139,11 +139,11 @@ Mọi tham số dùng chung được tập trung trong một file duy nhất: [s
 ### 3.1 Các giá trị BẮT BUỘC điền
 
 ```bash
-export ORG_ID="123456789012"                         # ID tổ chức GCP
-export BILLING_ACCOUNT_1="012345-6789AB-CDEF01"      # Billing cho Platform & Security
-export BILLING_ACCOUNT_2="012345-6789AB-CDEF01"      # Billing cho Network & Workload
-export BILLING_ACCOUNT_BUDGET="012345-6789AB-CDEF01" # Billing để theo dõi ngân sách (thường = BILLING_ACCOUNT_1)
-export STATE_BUCKET="gcp-sg-tfstate-yourcompany"     # Tên bucket lưu state — PHẢI duy nhất toàn cầu
+export ORG_ID="<ORG_ID>"                              # ID tổ chức GCP (gcloud organizations list)
+export BILLING_ACCOUNT_1="<BILLING_ACCOUNT_ID_1>"     # Billing cho Platform & Security
+export BILLING_ACCOUNT_2="<BILLING_ACCOUNT_ID_2>"     # Billing cho Network & Workload
+export BILLING_ACCOUNT_BUDGET="<BILLING_ACCOUNT_ID>"  # Billing để theo dõi ngân sách (thường = BILLING_ACCOUNT_1)
+export STATE_BUCKET="gcp-sg-tfstate-<UNIQUE_SUFFIX>"  # Tên bucket lưu state — PHẢI duy nhất toàn cầu
 ```
 
 ### 3.2 Ánh xạ nhóm (Group) → Runner SA
