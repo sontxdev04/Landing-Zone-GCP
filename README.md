@@ -236,7 +236,9 @@ landing-zone/
 │   ├── roles.sh        #   → bảng phân quyền (thêm/bớt role tại đây)
 │   ├── lib.sh          #   → hàm trợ giúp gcloud
 │   └── 01/02/03-*.sh   #   → các script chạy chính
-├── 📁 docs/            # Tài liệu chuyên sâu (kiến trúc, IAM, triển khai, Day-2)
+├── 📁 docs/            # Tài liệu dự án
+│   ├── guides/         #   → Tài liệu chuyên sâu (kiến trúc, IAM, triển khai, Day-2)
+│   └── diagrams/       #   → Sơ đồ kiến trúc (Mermaid) cho bài viết/tham khảo
 └── 📄 README.md        # Tài liệu tổng quan (bạn đang đọc)
 ```
 
@@ -248,10 +250,10 @@ landing-zone/
 
 | Tài liệu | Nội dung |
 |:---------|:---------|
-| **[🌐 Thiết kế Kiến trúc Mạng & Topology](docs/architecture.md)** | Cấu trúc cây Folder, sơ đồ Hub-and-Spoke, quy hoạch dải IP CIDR và firewall cấp cao |
-| **[🔑 Quản lý Danh tính & IAM Security](docs/iam-roles.md)** | Mô hình Impersonation, quyền của 5 SA Runner và cơ chế khóa prefix State bucket |
-| **[🚀 Cẩm nang Triển khai Từng Bước](docs/deployment.md)** | Hướng dẫn từng lệnh từ bootstrap ban đầu đến thứ tự apply hạ tầng |
-| **[🛠️ Vận hành & Checklist Day-2](docs/day2-ops.md)** | Xoay vòng, mở rộng hạ tầng (thêm project/subnet) và checklist trước Production |
+| **[🌐 Thiết kế Kiến trúc Mạng & Topology](docs/guides/architecture.md)** | Cấu trúc cây Folder, sơ đồ Hub-and-Spoke, quy hoạch dải IP CIDR và firewall cấp cao |
+| **[🔑 Quản lý Danh tính & IAM Security](docs/guides/iam-roles.md)** | Mô hình Impersonation, quyền của 5 SA Runner và cơ chế khóa prefix State bucket |
+| **[🚀 Cẩm nang Triển khai Từng Bước](docs/guides/deployment.md)** | Hướng dẫn từng lệnh từ bootstrap ban đầu đến thứ tự apply hạ tầng |
+| **[🛠️ Vận hành & Checklist Day-2](docs/guides/day2-ops.md)** | Xoay vòng, mở rộng hạ tầng (thêm project/subnet) và checklist trước Production |
 
 ---
 

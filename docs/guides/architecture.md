@@ -15,7 +15,7 @@
 > [!NOTE]
 > Tài liệu này đi sâu vào **lý do thiết kế** (the *why*) đằng sau từng quyết định kiến trúc, không chỉ liệt kê tài nguyên. Mục tiêu là giúp người vận hành hiểu được *tại sao* hạ tầng được dựng theo cách này, từ đó tự tin mở rộng, sửa đổi và khắc phục sự cố.
 >
-> Nếu bạn cần cái nhìn tổng quan nhanh (sơ đồ tổng thể, danh sách tính năng), hãy đọc [README](../README.md). Tài liệu này tập trung vào **chiều sâu kỹ thuật**: nguyên lý phân cấp, kế hoạch địa chỉ IP, cơ chế định tuyến động BGP, thứ tự đánh giá firewall, và các đánh đổi (trade-off) thiết kế.
+> Nếu bạn cần cái nhìn tổng quan nhanh (sơ đồ tổng thể, danh sách tính năng), hãy đọc [README](../../README.md). Tài liệu này tập trung vào **chiều sâu kỹ thuật**: nguyên lý phân cấp, kế hoạch địa chỉ IP, cơ chế định tuyến động BGP, thứ tự đánh giá firewall, và các đánh đổi (trade-off) thiết kế.
 
 ---
 
@@ -503,7 +503,7 @@ Lưu ý `allow-vpn-hub` cũng **conditional** giống VPN — nếu không cấu
 
 | Tài liệu | Nội dung |
 | :--- | :--- |
-| [README.md](../README.md) | Tổng quan dự án & hướng dẫn triển khai. |
+| [README.md](../../README.md) | Tổng quan dự án & hướng dẫn triển khai. |
 | [iam-roles.md](./iam-roles.md) | Mô hình IAM, Service Account & phân quyền chi tiết. |
 | [deployment.md](./deployment.md) | Quy trình triển khai từng stack theo thứ tự. |
 | [day2-ops.md](./day2-ops.md) | Vận hành & bảo trì sau triển khai. |
