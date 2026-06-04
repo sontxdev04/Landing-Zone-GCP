@@ -1,0 +1,8 @@
+# =============================================================================
+# workload/terraform.tfvars.example — MẪU cấu hình stack workload.
+# Cách dùng: cp terraform.tfvars.example terraform.tfvars rồi điền giá trị.
+# Lưu ý: terraform.tfvars bị .gitignore (KHÔNG commit giá trị thật).
+# =============================================================================
+
+# TF Runner SA cho stack workload (giữ nguyên nếu dùng SEED_PROJECT mặc định).
+tf_runner_sa = "sa-tf-wl-001@gcp-platform-bootstrap-001.iam.gserviceaccount.com"

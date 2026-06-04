@@ -235,15 +235,17 @@ Trước khi apply, mỗi stack cần biết **lưu state ở đâu** (backend) 
 
 ### 5.1 Trỏ Backend về State Bucket của bạn
 
-Mở file `backend.tf` trong **mỗi** thư mục stack: `org/`, `connectivity/`, `security/`, `workload/`, `management/`. Sửa giá trị `bucket` thành đúng tên `$STATE_BUCKET` của bạn. Giữ nguyên `prefix` (đã khớp tên thư mục stack).
+Trong source, giá trị `bucket` được để **placeholder `<STATE_BUCKET>`** — bạn **bắt buộc** thay bằng đúng tên `$STATE_BUCKET` của mình, nếu không `terraform init` sẽ lỗi.
+
+Mở file `backend.tf` trong **mỗi** thư mục stack: `org/`, `connectivity/`, `security/`, `workload/`, `management/`. Sửa `bucket` thành `$STATE_BUCKET`. Giữ nguyên `prefix` (đã khớp tên thư mục stack).
 
 Ví dụ với [org/backend.tf](../org/backend.tf):
 
 ```hcl
 terraform {
   backend "gcs" {
-    bucket = "gcp-sg-tfstate-yourcompany"   # ← đổi thành $STATE_BUCKET của bạn
-    prefix = "terraform/org"                # ← giữ nguyên (khớp tên stack)
+    bucket = "<STATE_BUCKET>"   # ← đổi thành $STATE_BUCKET của bạn (vd: gcp-sg-tfstate-yourcompany)
+    prefix = "terraform/org"    # ← giữ nguyên (khớp tên stack)
   }
 }
 ```
@@ -258,17 +260,46 @@ Lần lượt các `prefix` tương ứng cho từng stack:
 | `workload/` | `terraform/workload` |
 | `management/` | `terraform/management` |
 
-### 5.2 Kiểm tra `tf_runner_sa` trong từng tfvars
+> [!WARNING]
+> **Đừng quên `remote.tf`.** Bốn stack `connectivity/`, `security/`, `workload/`, `management/` còn có file `remote.tf` đọc state của stack `org` — trong đó cũng có `bucket = "<STATE_BUCKET>"`. Phải sửa **cả `remote.tf`** sang `$STATE_BUCKET` của bạn. Nếu chỉ sửa `backend.tf` mà bỏ sót `remote.tf`, stack sẽ đọc state từ bucket sai (hoặc bucket của người khác).
+>
+> | File phải sửa `bucket` | Số lượng |
+> |:--|:--|
+> | `*/backend.tf` | 5 (cả 5 stack) |
+> | `connectivity,security,workload,management /remote.tf` | 4 |
 
-Mỗi stack đã được khai báo sẵn Runner SA tương ứng trong file `terraform.tfvars`. Mở và xác nhận đúng (thường **không cần sửa** nếu bạn dùng Seed Project mặc định):
+### 5.2 Tạo `terraform.tfvars` từ mẫu & điền biến bắt buộc
+
+File `terraform.tfvars` bị `.gitignore` (không commit giá trị thật), nên khi clone source bạn sẽ **không có sẵn** nó. Mỗi stack đi kèm một file mẫu `terraform.tfvars.example`. Copy mẫu → `terraform.tfvars` cho từng stack rồi điền giá trị:
+
+```bash
+for d in org connectivity security workload management; do
+  cp "$d/terraform.tfvars.example" "$d/terraform.tfvars"
+done
+```
+
+Sau đó mở từng `terraform.tfvars` và điền các **biến BẮT BUỘC** (placeholder dạng `<...>` phải được thay hết):
+
+| Stack | Biến bắt buộc | Ghi chú |
+|:------|:--------------|:--------|
+| `org/` | `org_id`, `billing_account_id_1`, `billing_account_id_2` | billing lấy từ `gcloud billing accounts list` |
+| `connectivity/` | — | chỉ VPN là tùy chọn (xem §5.3) |
+| `security/` | `org_id`, `admin_principals` | `admin_principals` rỗng = **không ai có quyền admin** |
+| `workload/` | — | dùng giá trị mặc định |
+| `management/` | `org_id`, `alert_notification_email`, `budget_billing_account_id` | để trống `budget_billing_account_id` sẽ bỏ qua budget |
+
+> [!IMPORTANT]
+> Đặc biệt nhớ điền `org_id` ở **3 stack** `org/`, `security/`, `management/`. Bỏ trống sẽ khiến `terraform apply` lỗi ngay từ stack đầu tiên.
+
+Mỗi stack đã khai báo sẵn `tf_runner_sa` tương ứng — **thường không cần sửa** nếu bạn dùng Seed Project mặc định:
 
 | Stack | `tf_runner_sa` mong đợi |
 |:------|:------------------------|
-| [org/terraform.tfvars](../org/terraform.tfvars) | `sa-tf-org-001@...` |
-| [connectivity/terraform.tfvars](../connectivity/terraform.tfvars) | `sa-tf-conn-001@...` |
-| [security/terraform.tfvars](../security/terraform.tfvars) | `sa-tf-sec-001@...` |
-| [workload/terraform.tfvars](../workload/terraform.tfvars) | `sa-tf-wl-001@...` |
-| [management/terraform.tfvars](../management/terraform.tfvars) | `sa-tf-mgmt-001@...` |
+| `org/` | `sa-tf-org-001@...` |
+| `connectivity/` | `sa-tf-conn-001@...` |
+| `security/` | `sa-tf-sec-001@...` |
+| `workload/` | `sa-tf-wl-001@...` |
+| `management/` | `sa-tf-mgmt-001@...` |
 
 > [!NOTE]
 > Cơ chế impersonation nằm ở `providers.tf` của mỗi stack: provider Google nhận `impersonate_service_account = var.tf_runner_sa`. Nhờ vậy Terraform tự mượn quyền SA mà **không cần file key tĩnh**.
@@ -484,6 +515,8 @@ Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
 | `[ERROR] Bien ... con placeholder` khi chạy script | Còn giá trị `<...>` chưa thay trong [scripts/config.sh](../scripts/config.sh) | Điền hết các biến bắt buộc rồi chạy lại |
 | Tạo bucket thất bại (`already exists`/`conflict`) | Tên `STATE_BUCKET` đã có người dùng toàn cầu | Đổi sang tên bucket khác, độc nhất hơn |
 | `terraform init` không thấy backend | `backend.tf` chưa trỏ đúng `$STATE_BUCKET` | Sửa `bucket` trong `backend.tf` của stack (xem §5.1) |
+| Stack đọc nhầm/không thấy output của `org` (`remote_state`) | Quên sửa `bucket` trong `remote.tf` (vẫn còn `<STATE_BUCKET>`) | Sửa `bucket` trong `remote.tf` của 4 stack hạ nguồn (xem §5.1) |
+| `terraform apply` lỗi `org_id` rỗng / billing | Chưa điền biến bắt buộc trong `terraform.tfvars` | Copy từ `.example` và điền `org_id`, `billing_account_id_*` (xem §5.2) |
 | Script `02`/`03` báo không lấy được `terraform output` | Chưa `apply` stack `org` trước đó | Apply `org` thành công rồi mới chạy script hậu-org |
 | `Permission denied` khi tạo tài nguyên cấp Org | Tài khoản Phase A thiếu quyền Org Admin / billing | Cấp đủ quyền ở §2.2 rồi đăng nhập lại |
 

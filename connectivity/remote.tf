@@ -3,7 +3,7 @@
 data "terraform_remote_state" "org" {
   backend = "gcs"
   config = {
-    bucket = "gcp-sg-tf-state-54431047904-001"
+    bucket = "<STATE_BUCKET>"
     prefix = "terraform/org"
   }
 }

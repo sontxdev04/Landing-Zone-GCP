@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "gcp-sg-tf-state-54431047904-001"
+    bucket = "<STATE_BUCKET>"
     prefix = "terraform/security"
   }
 }

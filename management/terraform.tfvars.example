@@ -1,0 +1,18 @@
+# =============================================================================
+# management/terraform.tfvars.example — MẪU cấu hình stack management.
+# Cách dùng: cp terraform.tfvars.example terraform.tfvars rồi điền giá trị.
+# Lưu ý: terraform.tfvars bị .gitignore (KHÔNG commit giá trị thật).
+# =============================================================================
+
+# BẮT BUỘC — ID tổ chức GCP
+org_id = "<ORG_ID>"
+
+# BẮT BUỘC — email nhận cảnh báo monitoring & ngân sách
+alert_notification_email = "<ALERT_EMAIL>"
+
+# TF Runner SA cho stack management (giữ nguyên nếu dùng SEED_PROJECT mặc định).
+tf_runner_sa = "sa-tf-mgmt-001@gcp-platform-bootstrap-001.iam.gserviceaccount.com"
+
+# Billing account ID mà ngân sách hằng tháng theo dõi (thường = billing_account_id_1).
+# Để trống sẽ bỏ qua tài nguyên budget.
+budget_billing_account_id = "<BILLING_ACCOUNT_ID>"

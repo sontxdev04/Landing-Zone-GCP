@@ -1,0 +1,16 @@
+# =============================================================================
+# org/terraform.tfvars.example — MẪU cấu hình stack org.
+# Cách dùng: copy file này thành terraform.tfvars rồi điền giá trị thực tế.
+#   cp terraform.tfvars.example terraform.tfvars
+# Lưu ý: terraform.tfvars bị .gitignore (KHÔNG commit giá trị thật).
+# =============================================================================
+
+# BẮT BUỘC — ID tổ chức GCP (gcloud organizations list)
+org_id = "<ORG_ID>"
+
+# BẮT BUỘC — Billing account ID (gcloud billing accounts list)
+billing_account_id_1 = "<BILLING_ACCOUNT_ID_1>"   # Platform & Security
+billing_account_id_2 = "<BILLING_ACCOUNT_ID_2>"   # Networking & Workload
+
+# TF Runner SA cho stack org (tạo ở Phase A — giữ nguyên nếu dùng SEED_PROJECT mặc định).
+tf_runner_sa = "sa-tf-org-001@gcp-platform-bootstrap-001.iam.gserviceaccount.com"

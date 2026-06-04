@@ -1,0 +1,18 @@
+# =============================================================================
+# security/terraform.tfvars.example — MẪU cấu hình stack security.
+# Cách dùng: cp terraform.tfvars.example terraform.tfvars rồi điền giá trị.
+# Lưu ý: terraform.tfvars bị .gitignore (KHÔNG commit giá trị thật).
+# =============================================================================
+
+# BẮT BUỘC — ID tổ chức GCP
+org_id = "<ORG_ID>"
+
+# TF Runner SA cho stack security (giữ nguyên nếu dùng SEED_PROJECT mặc định).
+tf_runner_sa = "sa-tf-sec-001@gcp-platform-bootstrap-001.iam.gserviceaccount.com"
+
+# BẮT BUỘC — principal nhận quyền admin cấp org. Prefix bắt buộc "group:" hoặc "user:".
+# Để rỗng sẽ KHÔNG có ai được cấp quyền admin.
+admin_principals = [
+  # "group:grp-gcp-platform-admins@company.com",
+  # "user:alice@company.com",
+]
