@@ -167,14 +167,15 @@ export GRP_SRE="group:grp-gcp-sre@company.com"                 # → impersonate
 
 ### 3.3 Nạp biến vào shell hiện tại
 
-Sau khi điền xong [scripts/config.sh](../scripts/config.sh), **nạp nó vào shell** để mọi lệnh `$ORG_ID`, `$STATE_BUCKET`, `$SEED_PROJECT`… trong tài liệu này copy-paste được ngay (không phải thay tay):
+Sau khi điền xong [scripts/config.sh](../scripts/config.sh), **vào thư mục gốc repo rồi nạp nó vào shell** để mọi lệnh `$ORG_ID`, `$STATE_BUCKET`, `$SEED_PROJECT`… trong tài liệu này copy-paste được ngay (không phải thay tay):
 
 ```bash
+cd /duong/dan/toi/landing-zone   # ← thay bằng đường dẫn repo của bạn (nơi bạn clone)
 source scripts/config.sh
 ```
 
 > [!TIP]
-> Mỗi khi mở terminal mới, hãy `source scripts/config.sh` lại trước khi chạy các lệnh ở những bước sau.
+> Mỗi khi mở terminal mới, hãy `cd` về gốc repo và `source scripts/config.sh` lại trước khi chạy các lệnh ở những bước sau. Sau khi source, biến **`$LZ_ROOT`** (thư mục gốc repo) được đặt sẵn — mọi lệnh `cd "$LZ_ROOT/<stack>"` sau đây luôn nhảy đúng thư mục dù bạn đang đứng ở đâu.
 
 ---
 
@@ -192,7 +193,7 @@ Phase A dùng một script tự động để dựng toàn bộ "hạt giống".
 Đảm bảo bạn đang đứng ở thư mục gốc `landing-zone/`:
 
 ```bash
-cd /d/GCP/landing-zone
+cd "$LZ_ROOT"
 ```
 
 Chạy script:
@@ -352,6 +353,9 @@ onprem_network_cidrs   = []   # ví dụ ["192.168.0.0/16"]
 
 Apply các stack **đúng theo thứ tự** dưới đây. Từ đây Terraform chạy bằng quyền impersonate (không phải quyền cá nhân của bạn).
 
+> [!IMPORTANT]
+> **Mọi lệnh `cd` bên dưới đều đi từ thư mục gốc repo** thông qua biến `$LZ_ROOT` (được đặt sẵn khi `source scripts/config.sh` ở §3.3). Cách này **tránh lỗi `cd ..`** — dù bạn đang đứng ở đâu, lệnh vẫn nhảy đúng stack. Nếu mở terminal mới, nhớ `source scripts/config.sh` lại.
+
 ```mermaid
 flowchart LR
     org["1️⃣ org"] --> scripts["📜 02 + 03 scripts"]
@@ -371,7 +375,7 @@ Stack này tạo **cây Folder**, **5 project** (qua Project Factory) và **Orga
 Vào thư mục `org`:
 
 ```bash
-cd org
+cd "$LZ_ROOT/org"
 ```
 
 Khởi tạo backend & provider:
@@ -402,7 +406,7 @@ Sau khi `org` apply xong, các project mới có **ID thật** (sinh từ random
 Quay về thư mục gốc:
 
 ```bash
-cd ..
+cd "$LZ_ROOT"
 ```
 
 Gán role cấp project cho `sa-tf-sec` / `sa-tf-wl` / `sa-tf-mgmt`:
@@ -430,7 +434,7 @@ Hai stack này độc lập với nhau nên có thể chạy ở hai terminal kh
 **Terminal A — Connectivity** (VPC, Shared VPC, Peering, NAT, DNS, VPN):
 
 ```bash
-cd connectivity
+cd "$LZ_ROOT/connectivity"
 ```
 
 ```bash
@@ -444,7 +448,7 @@ terraform apply
 **Terminal B — Security** (Org Firewall Policies, IAM cho admin, IAP, Log View):
 
 ```bash
-cd security
+cd "$LZ_ROOT/security"
 ```
 
 ```bash
@@ -463,7 +467,7 @@ Triển khai VM mẫu private trong project `sample-app` (gắn vào Shared VPC,
 > Bật/tắt VM mẫu qua biến `enable_sample_vm` trong [workload/terraform.tfvars](../workload/terraform.tfvars) (mặc định `true`). Đặt `false` nếu chưa cần VM.
 
 ```bash
-cd ../workload
+cd "$LZ_ROOT/workload"
 ```
 
 ```bash
@@ -479,7 +483,7 @@ terraform apply
 Triển khai giám sát tập trung: Log Sinks, Log Views, Dashboards, Alert Policies và Budget.
 
 ```bash
-cd ../management
+cd "$LZ_ROOT/management"
 ```
 
 ```bash
@@ -511,10 +515,10 @@ Xem các project đã tạo (lọc theo tiền tố của dự án):
 gcloud projects list --filter="projectId:(lz-prj-* OR gcp-platform-*)"
 ```
 
-Lấy nhanh project ID thật từ output của stack `org` (chạy trong thư mục `org/`):
+Lấy nhanh project ID thật từ output của stack `org`:
 
 ```bash
-cd org && terraform output && cd ..
+(cd "$LZ_ROOT/org" && terraform output)
 ```
 
 Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
@@ -555,6 +559,7 @@ flowchart LR
 Nạp lại biến môi trường (nếu mở terminal mới) và đảm bảo vẫn đăng nhập tài khoản admin Phase A:
 
 ```bash
+cd /duong/dan/toi/landing-zone   # ← thư mục gốc repo của bạn
 source scripts/config.sh
 gcloud auth list
 ```
@@ -565,7 +570,7 @@ gcloud auth list
 ### 8.1 Lớp 5 — Destroy `management`
 
 ```bash
-cd management
+cd "$LZ_ROOT/management"
 ```
 
 Xem trước những gì sẽ bị xóa:
@@ -613,7 +618,7 @@ terraform destroy
 Stack này chứa VM mẫu `sample-app`. VM hiện **không bật** `deletion_protection` nên destroy được ngay.
 
 ```bash
-cd ../workload
+cd "$LZ_ROOT/workload"
 terraform destroy
 ```
 
@@ -627,14 +632,14 @@ Hai stack này độc lập nhau, nhưng **cả hai phải destroy trước `org
 **Security:**
 
 ```bash
-cd ../security
+cd "$LZ_ROOT/security"
 terraform destroy
 ```
 
 **Connectivity:**
 
 ```bash
-cd ../connectivity
+cd "$LZ_ROOT/connectivity"
 terraform destroy
 ```
 
@@ -646,7 +651,7 @@ terraform destroy
 Đây là bước cuối, xóa **5 project**, cây Folder và Organization Policies.
 
 ```bash
-cd ../org
+cd "$LZ_ROOT/org"
 terraform plan -destroy
 terraform destroy
 ```
@@ -718,7 +723,7 @@ gcloud org-policies list --organization=$ORG_ID
 | `connectivity` lỗi `403 ... 'compute.firewalls.create' permission` | `roles/compute.networkAdmin` KHÔNG quản lý firewall (chỉ đọc); quyền tạo firewall nằm ở `roles/compute.securityAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.securityAdmin` cho `sa-tf-conn-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
 | `security` lỗi `403 ... 'compute.organizations.setFirewallPolicy'` khi tạo `firewall_policy_association` | `orgFirewallPolicyAdmin` chỉ tạo/sửa policy & rules, KHÔNG associate vào org; permission `compute.organizations.setFirewallPolicy` nằm trong `roles/compute.orgSecurityResourceAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.orgSecurityResourceAdmin` cho `sa-tf-sec-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
 | `security` lỗi `403` khi set IAM (`google_project_iam_member`) trên app/hub-net/sh-vpc | SA_SEC chỉ có `projectIamAdmin` trên MGMT, chưa có trên 3 project IAP | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/resourcemanager.projectIamAdmin` cho `sa-tf-sec-001` trên APP/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
-| `management` lỗi `403 Service Usage API ... SERVICE_DISABLED` trên project `gcp-platform-management-*` (khi tạo log bucket `enable_destination_api`) | Provider stack đặt `billing_project=management` + `user_project_override=true` nên mọi call cần Service Usage API **bật trên project management**, nhưng `activate_apis` thiếu `serviceusage.googleapis.com` | Đã xử lý: thêm `serviceusage.googleapis.com` vào `activate_apis` của module management ([org/projects.tf](../org/projects.tf)). Chạy lại `cd org && terraform apply` rồi `apply` lại management |
+| `management` lỗi `403 Service Usage API ... SERVICE_DISABLED` trên project `gcp-platform-management-*` (khi tạo log bucket `enable_destination_api`) | Provider stack đặt `billing_project=management` + `user_project_override=true` nên mọi call cần Service Usage API **bật trên project management**, nhưng `activate_apis` thiếu `serviceusage.googleapis.com` | Đã xử lý: thêm `serviceusage.googleapis.com` vào `activate_apis` của module management ([org/projects.tf](../org/projects.tf)). Chạy lại `(cd "$LZ_ROOT/org" && terraform apply)` rồi `apply` lại management |
 | `management` lỗi `403 ... MonitoredProject ... caller does not have permission` (tạo `google_monitoring_monitored_project`) | Để gom project vào metric scope cần `monitoring.metricsScopes.link` (trong `roles/monitoring.admin`) trên **CẢ** scoping project (MGMT) **LẪN** project bị gom (app/hub-net/sh-vpc); SA_MGMT chỉ có trên MGMT | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/monitoring.admin` cho `sa-tf-mgmt-001` trên APP/HUB_NET/SH_VPC. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại |
 | `management` lỗi `400 Error creating Budget: Request contains an invalid argument` | `currency_code` của budget hardcode `USD` nhưng billing account dùng **VND** — phải khớp loại tiền của billing account | Đã xử lý: đổi `currency_code = "VND"` + `units` tương đương trong [management/budget.tf](../management/budget.tf). Kiểm tra currency: `gcloud billing accounts describe billingAccounts/<ID> --format='value(currencyCode)'` |
 | `management` lỗi `400 ... AlertPolicy ... project ... is not monitored by the account` | Race/propagation: alert policy validate ngay khi metric scope vừa link xong, backend monitoring chưa propagate project vào scope (dù đã có `depends_on`) | Chỉ cần **`apply` lại lần nữa** — metric scope đã tồn tại & propagate, alert policy sẽ tạo thành công |
@@ -744,7 +749,7 @@ Cú pháp ID import: `organizations/<ORG_ID>/policies/<constraint>`. Tra `<const
 trong trường `name` của resource tại [org/org-policies.tf](../org/org-policies.tf).
 
 ```bash
-cd org
+cd "$LZ_ROOT/org"
 # Ví dụ với 4 policy thường gặp (thay <ORG_ID> bằng ORG_ID của bạn):
 terraform import 'google_org_policy_policy.gcp-sg-org-policy-require-oslogin-001'        'organizations/<ORG_ID>/policies/compute.requireOsLogin'
 terraform import 'google_org_policy_policy.gcp-sg-org-policy-skip-default-network-001'   'organizations/<ORG_ID>/policies/compute.skipDefaultNetworkCreation'

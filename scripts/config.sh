@@ -23,6 +23,9 @@ export GRP_SRE="group:grp-gcp-sre@company.com"                 # impersonate sa-
 export SEED_PROJECT="gcp-platform-bootstrap-001"
 export REGION="asia-southeast1"
 
+# --- Thư mục gốc repo (tự suy ra từ vị trí file này — luôn đúng dù đứng ở đâu)
+export LZ_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 # --- Email tiện dụng của 5 TF Runner SA (suy ra từ SEED_PROJECT) ------------
 export SA_ORG="sa-tf-org-001@${SEED_PROJECT}.iam.gserviceaccount.com"
 export SA_CONN="sa-tf-conn-001@${SEED_PROJECT}.iam.gserviceaccount.com"
