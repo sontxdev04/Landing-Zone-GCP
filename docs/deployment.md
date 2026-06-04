@@ -26,7 +26,8 @@
 5. [Bước 3 — Cấu hình Backend & tfvars](#5)
 6. [Bước 4 — Phase B: Triển khai 5 stack tuần tự](#6)
 7. [Bước 5 — Kiểm tra sau triển khai](#7)
-8. [Phụ lục — Xử lý sự cố thường gặp](#8)
+8. [Bước 6 — Thu hồi hạ tầng (Destroy)](#8)
+9. [Phụ lục — Xử lý sự cố thường gặp](#9)
 
 ---
 
@@ -534,7 +535,145 @@ Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
 
 <a id="8"></a>
 
-## 8. 🛟 Phụ Lục — Xử Lý Sự Cố Thường Gặp
+## 8. 🧨 Bước 6 — Thu Hồi Hạ Tầng (Destroy)
+
+Khi cần **gỡ bỏ toàn bộ** landing zone (hoặc dọn môi trường lab), phải `terraform destroy` **ngược chiều phụ thuộc** — bắt đầu từ stack hạ nguồn (`management`) và kết thúc ở `org`. Làm sai thứ tự sẽ gây lỗi resolve `terraform_remote_state` (output không còn) và để lại tài nguyên mồ côi.
+
+```mermaid
+flowchart LR
+    mgmt["5️⃣ management"] --> wl["4️⃣ workload"] --> sec["3️⃣ security"]
+    sec --> conn["2️⃣ connectivity"] --> org["1️⃣ org"]
+    classDef d fill:#fce8e6,stroke:#d93025,color:#a50e0e;
+    class mgmt,wl,sec,conn,org d;
+```
+
+> [!CAUTION]
+> `terraform destroy` **xóa thật** tài nguyên trên GCP, không khôi phục được. Luôn chạy `terraform plan -destroy` để xem trước, và đảm bảo bạn đang đứng đúng stack/đúng project trước khi gõ `yes`. Các project được tạo với `deletion_policy = "DELETE"` nên khi destroy `org`, **toàn bộ 5 project sẽ bị xóa**.
+
+### 8.0 Chuẩn bị trước khi destroy
+
+Nạp lại biến môi trường (nếu mở terminal mới) và đảm bảo vẫn đăng nhập tài khoản admin Phase A:
+
+```bash
+source scripts/config.sh
+gcloud auth list
+```
+
+> [!WARNING]
+> **Cân nhắc nhật ký kiểm toán.** Stack `management` chứa Log Bucket nóng (retention 90 ngày) và GCS Archive (365 ngày). Khi destroy, **toàn bộ log tập trung sẽ mất vĩnh viễn**. Nếu cần lưu giữ, hãy export ra nơi khác (ví dụ tải GCS archive về) **trước khi** destroy stack này.
+
+### 8.1 Lớp 5 — Destroy `management`
+
+```bash
+cd management
+```
+
+Xem trước những gì sẽ bị xóa:
+
+```bash
+terraform plan -destroy
+```
+
+Thu hồi:
+
+```bash
+terraform destroy
+```
+
+> [!TIP]
+> Nếu destroy báo lỗi GCS bucket *"not empty"* (log archive còn object), bucket có thể cần `force_destroy` hoặc bạn xóa thủ công object trước:
+> ```bash
+> gcloud storage rm --recursive gs://<TÊN_BUCKET_ARCHIVE>
+> ```
+> rồi chạy lại `terraform destroy`.
+
+### 8.2 Lớp 4 — Destroy `workload`
+
+Stack này chứa VM mẫu `sample-app`. VM hiện **không bật** `deletion_protection` nên destroy được ngay.
+
+```bash
+cd ../workload
+terraform destroy
+```
+
+> [!NOTE]
+> Nếu về sau bạn tự thêm VM có `deletion_protection = true`, phải đặt về `false` và `terraform apply` một lần **trước khi** destroy, nếu không GCP sẽ chặn việc xóa.
+
+### 8.3 Lớp 3 & 2 — Destroy `security` và `connectivity`
+
+Hai stack này độc lập nhau, nhưng **cả hai phải destroy trước `org`**. Destroy `security` trước, sau đó `connectivity` (vì `connectivity` gỡ Shared VPC mà `workload` vừa rời khỏi).
+
+**Security:**
+
+```bash
+cd ../security
+terraform destroy
+```
+
+**Connectivity:**
+
+```bash
+cd ../connectivity
+terraform destroy
+```
+
+> [!WARNING]
+> Stack `connectivity` sẽ gỡ liên kết Shared VPC (`google_compute_shared_vpc_service_project`) và tắt host project. Việc này **chỉ thành công khi `workload` đã destroy xong** — nếu service project `sample-app` vẫn còn VM dùng subnet, GCP sẽ chặn gỡ Shared VPC. Hãy chắc chắn §8.2 đã hoàn tất.
+
+### 8.4 Lớp 1 — Destroy `org`
+
+Đây là bước cuối, xóa **5 project**, cây Folder và Organization Policies.
+
+```bash
+cd ../org
+terraform plan -destroy
+terraform destroy
+```
+
+> [!CAUTION]
+> Khi destroy `org`, Organization Policies (guardrails) cũng bị gỡ — tổ chức trở lại trạng thái **không có lan can bảo vệ**. Chỉ làm điều này khi bạn thực sự muốn tháo dỡ toàn bộ landing zone.
+
+> [!NOTE]
+> Project ở trạng thái `DELETE_REQUESTED` sẽ được GCP xóa hoàn toàn sau ~30 ngày (có thể khôi phục trong thời gian này bằng `gcloud projects undelete <PROJECT_ID>`).
+
+### 8.5 (Tùy chọn) Dọn nốt tài nguyên Bootstrap (Phase A)
+
+Terraform **không** quản lý các tài nguyên Phase A (Seed Project, State Bucket, 5 Runner SA) — chúng được tạo thủ công bằng [scripts/01-bootstrap.sh](../scripts/01-bootstrap.sh). Nếu muốn xóa nốt, làm **thủ công** và **sau cùng** (vì State Bucket chứa state của mọi stack — chỉ xóa khi đã destroy hết):
+
+Xóa State Bucket (kèm toàn bộ state — **không thể hoàn tác**):
+
+```bash
+gcloud storage rm --recursive gs://$STATE_BUCKET
+```
+
+Xóa Seed Project (việc này cũng xóa luôn 5 Runner SA bên trong):
+
+```bash
+gcloud projects delete $SEED_PROJECT
+```
+
+> [!CAUTION]
+> Chỉ xóa State Bucket khi **tất cả** stack đã destroy xong. Nếu xóa bucket khi state vẫn còn tài nguyên sống, bạn sẽ mất khả năng quản lý/destroy chúng bằng Terraform và phải dọn thủ công trên Console.
+
+### 8.6 Kiểm tra sau khi destroy
+
+Xác nhận các project đã chuyển sang trạng thái xóa:
+
+```bash
+gcloud projects list --filter="projectId:(lz-prj-* OR gcp-platform-*)"
+```
+
+Xác nhận Organization Policies đã được gỡ (danh sách rỗng là đúng):
+
+```bash
+gcloud org-policies list --organization=$ORG_ID
+```
+
+---
+
+<a id="9"></a>
+
+## 9. 🛟 Phụ Lục — Xử Lý Sự Cố Thường Gặp
 
 | Triệu chứng | Nguyên nhân thường gặp | Cách xử lý |
 |:------------|:-----------------------|:-----------|
@@ -547,7 +686,7 @@ Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
 | Script `02`/`03` báo không lấy được `terraform output` | Chưa `apply` stack `org` trước đó | Apply `org` thành công rồi mới chạy script hậu-org |
 | Script `03` lỗi `Service account ... does not exist` ngay sau khi `Created service account` | SA vừa tạo chưa lan truyền (eventual consistency) khi gán role | Đã xử lý: `create_sa` ([scripts/lib.sh](../scripts/lib.sh)) poll chờ SA sẵn sàng (~60s) trước khi gán role. Chỉ cần chạy lại script (idempotent) |
 | `terraform apply` lỗi `Error 403: Organization Policy API has not been used in project ...` (`SERVICE_DISABLED`) | Seed Project chưa bật `orgpolicy.googleapis.com` (project này là quota project cho mọi API call qua impersonation) | Đã xử lý: Bước B của [01-bootstrap.sh](../scripts/01-bootstrap.sh) bật sẵn `orgpolicy.googleapis.com`. Chạy lại `01-bootstrap.sh` rồi `apply` lại |
-| `terraform apply` lỗi `Error 409: Requested entity already exists` (org policy) | Lần apply trước tạo policy thành công trên Org nhưng batch lỗi nên state chưa lưu | `terraform import 'google_org_policy_policy.<tên>' 'organizations/<ORG_ID>/policies/<constraint>'` cho từng policy bị báo, rồi `apply` lại (xem §8.1) |
+| `terraform apply` lỗi `Error 409: Requested entity already exists` (org policy) | Lần apply trước tạo policy thành công trên Org nhưng batch lỗi nên state chưa lưu | `terraform import 'google_org_policy_policy.<tên>' 'organizations/<ORG_ID>/policies/<constraint>'` cho từng policy bị báo, rồi `apply` lại (xem §9.1) |
 | `terraform apply` lỗi `403 USER_PROJECT_DENIED` / `serviceUsageConsumer` ở stack hạ nguồn (connectivity/security/workload/management) | Provider đặt `user_project_override=true` + `billing_project=<project>`; Runner SA thiếu `serviceusage.services.use` trên billing_project đó | Đã xử lý: bảng [6] ([scripts/roles.sh](../scripts/roles.sh)) gán `roles/serviceusage.serviceUsageConsumer` cho từng SA. Chạy lại `./scripts/02-post-org-roles.sh` rồi `apply` lại stack |
 | `connectivity` lỗi `403 ... 'compute.firewalls.create' permission` | `roles/compute.networkAdmin` KHÔNG quản lý firewall (chỉ đọc); quyền tạo firewall nằm ở `roles/compute.securityAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.securityAdmin` cho `sa-tf-conn-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
 | `security` lỗi `403 ... 'compute.organizations.setFirewallPolicy'` khi tạo `firewall_policy_association` | `orgFirewallPolicyAdmin` chỉ tạo/sửa policy & rules, KHÔNG associate vào org; permission `compute.organizations.setFirewallPolicy` nằm trong `roles/compute.orgSecurityResourceAdmin` | Đã xử lý: bảng [1] ([scripts/roles.sh](../scripts/roles.sh)) gán thêm `roles/compute.orgSecurityResourceAdmin` cho `sa-tf-sec-001`. Chạy lại `./scripts/01-bootstrap.sh` rồi `apply` lại |
@@ -563,9 +702,9 @@ Sau đó, vào **Google Cloud Console** để kiểm tra trực quan:
 
 ---
 
-<a id="8.1"></a>
+<a id="9.1"></a>
 
-### 8.1. Import Org Policy đã tồn tại (lỗi `409 already exists`)
+### 9.1. Import Org Policy đã tồn tại (lỗi `409 already exists`)
 
 Khi `terraform apply` stack `org` bị gián đoạn (ví dụ vừa bật Org Policy API),
 một số `google_org_policy_policy` có thể đã được **tạo thật trên Organization**
