@@ -1,0 +1,1103 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.9 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.9" pages="9">
+  <diagram name="1 - Overview" id="1_Overview">
+    <mxGraphModel dx="4200" dy="2868" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2853" pageHeight="2597" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1_Overview_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Enterprise GCP Landing Zone - System Overview&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Hub-and-Spoke - Shared VPC - Zero External IP - Centralized Observability - 100% Terraform on asia-southeast1&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2693" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n2" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Organization (GCP Org Root)&lt;/b&gt;&lt;div style=&quot;font-size:16px;color:#F1F3F4;font-family:Helvetica;line-height:1.5;margin-top:4px&quot;&gt;7 Org Policy guardrails - asia-southeast1&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#1A73E8;fillStyle=solid;strokeColor=#1A73E8;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1099" y="236" width="434" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n2" vertex="1">
+          <mxGeometry x="12" y="34" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n4" value="&lt;b style=&quot;font-size:22px;color:#5F6368;font-family:Helvetica;font-weight:800&quot;&gt;Folder: sandbox (reserved - empty)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F3F4;strokeColor=#9AA0A6;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2329" y="252" width="394" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F1F3F4;fillStyle=solid;strokeColor=#9AA0A6;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n4" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n6" value="&lt;b style=&quot;font-size:22px;color:#1967D2;font-family:Helvetica;font-weight:800&quot;&gt;Folder: platform - Shared infra (Network &amp; SRE)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="105" y="1031" width="1445" height="972" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n6" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n8" value="&lt;b style=&quot;font-size:22px;color:#1967D2;font-family:Helvetica;font-weight:800&quot;&gt;Sub-folder: connectivity&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=1;dashPattern=8 5;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="139" y="1089" width="432" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n8" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n10" value="&lt;b style=&quot;font-size:22px;color:#B06000;font-family:Helvetica;font-weight:800&quot;&gt;Sub-folder: management&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF7E0;strokeColor=#F9AB00;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=1;dashPattern=8 5;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1098" y="1097" width="418" height="855" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FEF7E0;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n10" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n18" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;security&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Hierarchical Org Firewall Policy&lt;br/&gt;Admin IAM - IAP &amp; Log-View access&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA4335;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n10" vertex="1">
+          <mxGeometry x="34" y="593" width="350" height="182" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n18" vertex="1">
+          <mxGeometry x="12" y="64" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n12" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;hub-net - lz-prj-hub-net&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Hub VPC 10.0.0.0/24 - GLOBAL&lt;br/&gt;HA VPN - Cloud Router ASN 65003 - BGP&lt;br/&gt;Private Google Access - flow logs 0.5&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="173" y="1147" width="364" height="214" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n12" vertex="1">
+          <mxGeometry x="12" y="80" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n14" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;sh-vpc - lz-prj-sh-vpc&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Shared VPC Host 10.20.1.0/24&lt;br/&gt;Cloud NAT (egress) - Cloud DNS private&lt;br/&gt;flow logs 0.1 - Host mode ON&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="173" y="1720" width="364" height="214" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n14" vertex="1">
+          <mxGeometry x="12" y="80" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n16" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;management&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Log Sinks (org+folder) - Hot 90d&lt;br/&gt;GCS Archive 365d - Log Views&lt;br/&gt;3 Alerts - 2 Dashboards - Budget&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9AB00;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1132" y="1155" width="350" height="228" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FEF7E0;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n16" vertex="1">
+          <mxGeometry x="12" y="87" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n20" value="&lt;b style=&quot;font-size:22px;color:#188038;font-family:Helvetica;font-weight:800&quot;&gt;Folder: workload - App team&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F4EA;strokeColor=#34A853;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2320" y="936" width="453" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=actor;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n20" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n22" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;sample-app&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Service Project (Shared VPC)&lt;br/&gt;VM e2-small + Ops Agent&lt;br/&gt;No public IP - Shielded VM&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2354" y="994" width="385" height="258" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n23" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n22" vertex="1">
+          <mxGeometry x="12" y="102" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n24" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud Admin&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;gcloud ssh --tunnel-through-iap&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA4335;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2323" y="1729" width="434" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n25" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=actor;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n24" vertex="1">
+          <mxGeometry x="12" y="38" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n26" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;On-Premises Data Center&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;RFC1918 - peer ASN 65002&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9AA0A6;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="2386" width="407" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n27" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F1F3F4;fillStyle=solid;strokeColor=#9AA0A6;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n26" vertex="1">
+          <mxGeometry x="12" y="38" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n28" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Internet&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9AA0A6;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1227" y="2409" width="299" height="109" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n29" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#F1F3F4;fillStyle=solid;strokeColor=#9AA0A6;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1_Overview_n28" vertex="1">
+          <mxGeometry x="12" y="27" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n30" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.45;entryY=0;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n2" target="1_Overview_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n31" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n2" target="1_Overview_n20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n32" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#9AA0A6;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n2" target="1_Overview_n4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n33" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;VPC Peering (custom routes)&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;startArrow=block;startFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n12" target="1_Overview_n14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n34" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;Shared VPC attach&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n14" target="1_Overview_n22" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1667" y="1902" />
+              <mxPoint x="1667" y="1200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1_Overview_n35" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;startArrow=block;startFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n12" target="1_Overview_n26" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="153" y="1254" />
+              <mxPoint x="153" y="2097" />
+              <mxPoint x="284" y="2097" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="b_5DsKeLVfKw8Bka0FWf-1" value="&lt;span style=&quot;color: rgb(32, 33, 36); font-size: 15px; font-weight: 700;&quot;&gt;HA VPN (eBGP)&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];movable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" connectable="0" parent="1_Overview_n35">
+          <mxGeometry x="0.2737" y="1" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1_Overview_n36" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;Cloud NAT (egress)&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n14" target="1_Overview_n28" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n37" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;Cloud IAP - tcp 22/3389&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#EA4335;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n24" target="1_Overview_n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n38" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#9AA0A6;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n16" target="1_Overview_n12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n39" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#9AA0A6;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;exitX=0;exitY=0.8;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n16" target="1_Overview_n14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1_Overview_n40" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;logs &amp; metrics&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#9AA0A6;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="1_Overview_n16" target="1_Overview_n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2 - Resource Hierarchy" id="2_Resource_Hierarchy">
+    <mxGraphModel dx="3000" dy="2049" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2896" pageHeight="1921" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2_Resource_Hierarchy_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Resource Hierarchy &amp; Billing Split&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Folder tree - Project Factory v17.1.0 - platform vs workload billing - globally-unique project IDs&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2736" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n2" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Organization Root&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#1A73E8;fillStyle=solid;strokeColor=#1A73E8;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=75;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1289" y="236" width="380" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n2" vertex="1">
+          <mxGeometry x="12" y="8" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n4" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Folder: platform&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Shared infra - Network &amp; SRE&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="186" y="507" width="407" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n4" vertex="1">
+          <mxGeometry x="12" y="18" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n6" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Folder: workload&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Application - App team&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1261" y="507" width="407" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n6" vertex="1">
+          <mxGeometry x="12" y="18" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n8" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Folder: sandbox&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Isolated - empty (reserved)&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9AA0A6;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2335" y="507" width="407" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F1F3F4;fillStyle=solid;strokeColor=#9AA0A6;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n8" vertex="1">
+          <mxGeometry x="12" y="18" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n10" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Sub-folder: management&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Observability &amp; Security&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9AB00;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="870" width="380" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FEF7E0;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n10" vertex="1">
+          <mxGeometry x="12" y="16" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n12" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Sub-folder: connectivity&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Core Network Layer&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1042" y="835" width="380" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n12" vertex="1">
+          <mxGeometry x="12" y="16" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n14" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;gcp-platform-management&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;random_project_id = true&lt;br/&gt;logging - monitoring - bigquery&lt;br/&gt;pubsub - storage - billingbudgets&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9AB00;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="96" y="1271" width="407" height="157" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FEF7E0;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n14" vertex="1">
+          <mxGeometry x="12" y="52" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n16" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;gcp-platform-security&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;random_project_id = true&lt;br/&gt;cloudkms - secretmanager&lt;br/&gt;securitycenter - pubsub - iam&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9AB00;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="604" y="1749" width="407" height="157" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FEF7E0;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n16" vertex="1">
+          <mxGeometry x="12" y="52" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n18" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;lz-prj-hub-net-{suffix}&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Hub VPC - HA VPN - Router - NAT&lt;br/&gt;APIs: compute - dns - logging&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1052" y="1258" width="407" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n18" vertex="1">
+          <mxGeometry x="12" y="41" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n20" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;lz-prj-sh-vpc-{suffix}&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Shared VPC Host Project&lt;br/&gt;APIs: compute - monitoring&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1052" y="1613" width="407" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n20" vertex="1">
+          <mxGeometry x="12" y="38" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n22" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;lz-prj-sample-app-{suffix}&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Service Project (Shared VPC)&lt;br/&gt;APIs: compute - logging - monitoring&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2246" y="891" width="407" height="122" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n23" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n22" vertex="1">
+          <mxGeometry x="12" y="34" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="62sTvv20ZuZG0cVuzlkt-1" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;sketch=1;jiggle=2;curveFitting=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=8 5;strokeColor=#F9AB00;strokeWidth=2.5;align=center;verticalAlign=middle;spacingTop=2;fontFamily=Helvetica;fontSize=15;fontColor=#202124;fontStyle=1;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" edge="1" parent="1" source="2_Resource_Hierarchy_n24" target="2_Resource_Hierarchy_n16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="62sTvv20ZuZG0cVuzlkt-2" style="edgeStyle=orthogonalEdgeStyle;shape=connector;rounded=1;sketch=1;jiggle=2;curveFitting=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=8 5;strokeColor=#F9AB00;strokeWidth=2.5;align=center;verticalAlign=middle;spacingTop=2;fontFamily=Helvetica;fontSize=15;fontColor=#202124;fontStyle=1;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" edge="1" parent="1" source="2_Resource_Hierarchy_n24" target="2_Resource_Hierarchy_n14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n24" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Billing #1 - Platform&lt;/b&gt;&lt;div style=&quot;font-size:16px;color:#F1F3F4;font-family:Helvetica;line-height:1.5;margin-top:4px&quot;&gt;billing_account_id_1&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F9AB00;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="28" y="1715.5" width="394" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n25" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cylinder3;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n24" vertex="1">
+          <mxGeometry x="12" y="11" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n26" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Billing #2 - Workload&lt;/b&gt;&lt;div style=&quot;font-size:16px;color:#F1F3F4;font-family:Helvetica;line-height:1.5;margin-top:4px&quot;&gt;billing_account_id_2&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#A142F4;fillStyle=solid;strokeColor=#A142F4;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2238" y="1393" width="394" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n27" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cylinder3;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n26" vertex="1">
+          <mxGeometry x="12" y="11" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n28" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Globally-unique Project IDs&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;random 4-char suffix (random_string)&lt;br/&gt;e.g. lz-prj-hub-net-a3f9&lt;br/&gt;redeploy in parallel - no name clash&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E4F7FA;strokeColor=#12B5CB;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2307" y="1664" width="509" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n29" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="2_Resource_Hierarchy_n28" vertex="1">
+          <mxGeometry x="12" y="64" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n30" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n2" target="2_Resource_Hierarchy_n4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n31" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n2" target="2_Resource_Hierarchy_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n32" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#9AA0A6;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n2" target="2_Resource_Hierarchy_n8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n33" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n4" target="2_Resource_Hierarchy_n10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n34" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n4" target="2_Resource_Hierarchy_n12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n35" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#F9AB00;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n10" target="2_Resource_Hierarchy_n14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n36" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#F9AB00;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n10" target="2_Resource_Hierarchy_n16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n37" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n12" target="2_Resource_Hierarchy_n18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n38" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n12" target="2_Resource_Hierarchy_n20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="954" y="1678" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n39" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n6" target="2_Resource_Hierarchy_n22" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1465" y="741" />
+              <mxPoint x="2449" y="741" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n42" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n26" target="2_Resource_Hierarchy_n18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n43" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n26" target="2_Resource_Hierarchy_n20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2435" y="1550" />
+              <mxPoint x="1255" y="1550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2_Resource_Hierarchy_n44" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="2_Resource_Hierarchy_n26" target="2_Resource_Hierarchy_n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="3 - Five Stacks" id="3_Five_Stacks">
+    <mxGraphModel dx="3500" dy="2390" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3061" pageHeight="1979" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3_Five_Stacks_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Five Independent Stacks &amp; Apply Order&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Separate GCS backend - separate Runner Service Account - separate state prefix -&gt; isolated blast radius, parallel ops&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2901" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n2" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;1. org/&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Folders (terraform-google/folders 5.1.0)&lt;br/&gt;Project Factory 17.1.0 -&gt; 5 projects&lt;br/&gt;7 Org Policy guardrails&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A142F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="96" y="962" width="339" height="163" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F3E8FD;fillStyle=solid;strokeColor=#A142F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n2" vertex="1">
+          <mxGeometry x="12" y="54" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n4" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;2. connectivity/&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;2 GLOBAL VPCs - Shared VPC - Peering&lt;br/&gt;Cloud NAT - Cloud DNS - HA VPN+BGP&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A142F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="962" y="536" width="339" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F3E8FD;fillStyle=solid;strokeColor=#A142F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n4" vertex="1">
+          <mxGeometry x="12" y="47" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n6" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;3. security/&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Hierarchical Org Firewall Policy&lt;br/&gt;Admin IAM - IAP - Log-View access&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A142F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="962" y="1402" width="339" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F3E8FD;fillStyle=solid;strokeColor=#A142F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n6" vertex="1">
+          <mxGeometry x="12" y="47" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n8" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;4. workload/&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;VM e2-small + Ops Agent&lt;br/&gt;on Shared VPC - enable_sample_vm&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A142F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1828" y="954" width="339" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F3E8FD;fillStyle=solid;strokeColor=#A142F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n8" vertex="1">
+          <mxGeometry x="12" y="47" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n10" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;5. management/&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Log Sinks - Buckets - Views&lt;br/&gt;Dashboards - 3 Alerts - Budget&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A142F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2656" y="954" width="326" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F3E8FD;fillStyle=solid;strokeColor=#A142F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n10" vertex="1">
+          <mxGeometry x="12" y="47" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n12" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;org-runner&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;state prefix -&gt; org/&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="469" width="312" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n12" vertex="1">
+          <mxGeometry x="12" y="16" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n14" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;connectivity-runner&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;prefix -&gt; connectivity/&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="948" y="236" width="366" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n14" vertex="1">
+          <mxGeometry x="12" y="16" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n16" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;security-runner&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;prefix -&gt; security/&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="948" y="1812" width="366" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n16" vertex="1">
+          <mxGeometry x="12" y="16" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n18" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;workload-runner&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;prefix -&gt; workload/&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1828" y="469" width="339" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n18" vertex="1">
+          <mxGeometry x="12" y="16" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n20" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;management-runner&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;prefix -&gt; management/&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2645" y="469" width="332" height="87" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n20" vertex="1">
+          <mxGeometry x="12" y="16" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n22" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Why 5 stacks?&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Isolate blast radius - parallel ops&lt;br/&gt;Least-privilege - state isolation per prefix&lt;br/&gt;GCS backend - object versioning - per-prefix IAM lock&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E4F7FA;strokeColor=#12B5CB;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2612" y="1426" width="353" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n23" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="3_Five_Stacks_n22" vertex="1">
+          <mxGeometry x="12" y="71" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n24" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n2" target="3_Five_Stacks_n4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1044" y="1044" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n25" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n2" target="3_Five_Stacks_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n26" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n2" target="3_Five_Stacks_n8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n27" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n4" target="3_Five_Stacks_n8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1131" y="848" />
+              <mxPoint x="1916" y="848" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n28" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n4" target="3_Five_Stacks_n10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1131" y="807" />
+              <mxPoint x="2714" y="807" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n29" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n8" target="3_Five_Stacks_n10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n30" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;impersonate&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n12" target="3_Five_Stacks_n2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n31" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;impersonate&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n14" target="3_Five_Stacks_n4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n32" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;impersonate&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n16" target="3_Five_Stacks_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n33" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;impersonate&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n18" target="3_Five_Stacks_n8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n34" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;impersonate&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n20" target="3_Five_Stacks_n10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_Five_Stacks_n35" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#12B5CB;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="3_Five_Stacks_n8" target="3_Five_Stacks_n22" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1997" y="1274" />
+              <mxPoint x="2789" y="1274" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="4 - Hub-Spoke IPAM" id="4_Hub_Spoke_IPAM">
+    <mxGraphModel dx="3500" dy="2390" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2604" pageHeight="1659" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4_Hub_Spoke_IPAM_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Hub-and-Spoke + IP Address Plan (IPAM)&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;2 custom-mode GLOBAL VPCs - VPC Peering custom routes - Cloud Router advertises /20 -&gt; add subnets without touching BGP&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2444" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n2" value="&lt;b style=&quot;font-size:22px;color:#1967D2;font-family:Helvetica;font-weight:800&quot;&gt;lz-prj-hub-net&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="361" width="744" height="352" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n2" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n4" value="&lt;b style=&quot;font-size:22px;color:#174EA6;font-family:Helvetica;font-weight:800&quot;&gt;Hub VPC - gcp-sg-vpc-hub-001 (GLOBAL)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#D2E3FC;strokeColor=#1A73E8;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=1;dashPattern=8 5;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="114" y="419" width="676" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#D2E3FC;fillStyle=solid;strokeColor=#1A73E8;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n4" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n6" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;gcp-sg-snet-hub-001  10.0.0.0/24&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Flow Sampling 0.5 - 5s interval - metadata INCLUDE_ALL&lt;br/&gt;Private Google Access ON - routing GLOBAL&lt;br/&gt;HA VPN Gateway + Cloud Router ASN 65003 - transit only, NO compute&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="148" y="477" width="608" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n6" vertex="1">
+          <mxGeometry x="12" y="57" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n8" value="&lt;b style=&quot;font-size:22px;color:#188038;font-family:Helvetica;font-weight:800&quot;&gt;lz-prj-sh-vpc&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F4EA;strokeColor=#34A853;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1227" width="744" height="352" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n8" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n10" value="&lt;b style=&quot;font-size:22px;color:#174EA6;font-family:Helvetica;font-weight:800&quot;&gt;Shared VPC - gcp-sg-vpc-shared-001 (GLOBAL - Host)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#D2E3FC;strokeColor=#1A73E8;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=1;dashPattern=8 5;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="114" y="1285" width="676" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#D2E3FC;fillStyle=solid;strokeColor=#1A73E8;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n10" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n12" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;gcp-sg-snet-app-001  10.20.1.0/24&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Flow Sampling 0.1 - 5s interval&lt;br/&gt;Private Google Access ON&lt;br/&gt;Workload VMs + Cloud NAT egress&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="148" y="1343" width="608" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n12" vertex="1">
+          <mxGeometry x="12" y="57" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n14" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;IP Plan (IPAM)&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;snet-hub-001 -&gt; 10.0.0.0/24   (Hub - sampling 0.5)&lt;br/&gt;snet-app-001 -&gt; 10.20.1.0/24  (Shared - sampling 0.1)&lt;br/&gt;reserved     -&gt; 10.20.0.0/20  (16x /24 future subnets)&lt;br/&gt;BGP link-local -&gt; 169.254.0.0/16&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E4F7FA;strokeColor=#12B5CB;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1777" y="236" width="746" height="214" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n14" vertex="1">
+          <mxGeometry x="12" y="83" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n16" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Peering &amp; Routing&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;export &amp; import CUSTOM routes - NON-TRANSITIVE&lt;br/&gt;routing_mode = GLOBAL on both VPCs&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1777" y="734" width="746" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n16" vertex="1">
+          <mxGeometry x="12" y="50" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n18" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud Router advertisement&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;advertise_mode = CUSTOM - ALL_SUBNETS&lt;br/&gt;+ advertised range 10.20.0.0/20 (4096 IPs)&lt;br/&gt;-&gt; add subnets WITHOUT touching BGP&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF7E0;strokeColor=#F9AB00;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1777" y="1137" width="746" height="163" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FEF7E0;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="4_Hub_Spoke_IPAM_n18" vertex="1">
+          <mxGeometry x="12" y="57" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n20" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;VPC Peering - NON-TRANSITIVE - custom routes&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;startArrow=block;startFill=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="4_Hub_Spoke_IPAM_n4" target="4_Hub_Spoke_IPAM_n10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4_Hub_Spoke_IPAM_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#F9AB00;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="4_Hub_Spoke_IPAM_n12" target="4_Hub_Spoke_IPAM_n18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="5 - HA VPN + BGP" id="5_HA_VPN_BGP">
+    <mxGraphModel dx="3000" dy="2049" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2866" pageHeight="1605" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5_HA_VPN_BGP_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;HA VPN + BGP - Hybrid to On-Premises (dynamic routing)&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;2 redundant tunnels - eBGP 65003 &lt;-&gt; 65002 - auto-converge on tunnel failure - OPTIONAL (disabled by default)&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2706" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n2" value="&lt;b style=&quot;font-size:22px;color:#1967D2;font-family:Helvetica;font-weight:800&quot;&gt;GCP - Hub VPC - lz-prj-hub-net&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="176" y="236" width="624" height="627" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n2" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n4" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud Router - gcp-sg-router-hub-001&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;ASN 65003 - advertise CUSTOM&lt;br/&gt;ALL_SUBNETS + 10.20.0.0/20&lt;br/&gt;advertised_route_priority = 100&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="210" y="294" width="556" height="157" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n4" vertex="1">
+          <mxGeometry x="12" y="52" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n6" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;HA VPN Gateway - gcp-sg-vpn-hub-001&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;2 interfaces (iface0 - iface1)&lt;br/&gt;IKEv2 / IPsec&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="210" y="693" width="556" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n6" vertex="1">
+          <mxGeometry x="12" y="41" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n8" value="&lt;b style=&quot;font-size:22px;color:#188038;font-family:Helvetica;font-weight:800&quot;&gt;On-Premises Datacenter&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F4EA;strokeColor=#34A853;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2035" y="365" width="638" height="296" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n8" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n10" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;External VPN Gateway&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;gcp-sg-vpn-external-peer-001&lt;br/&gt;TWO_IPS_REDUNDANCY - ASN 65002&lt;br/&gt;two public IPs&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2069" y="423" width="570" height="204" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n10" vertex="1">
+          <mxGeometry x="12" y="75" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n12" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;VPN is OPTIONAL - disabled by default (vpn_enabled=0)&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Created only when on-prem public IPs&lt;br/&gt;+ 2 shared secrets are set in tfvars&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8E6;strokeColor=#EA4335;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1376" width="489" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n12" vertex="1">
+          <mxGeometry x="12" y="50" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n14" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;eBGP 65003 (GCP) &lt;-&gt; 65002 (on-prem)&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;If one tunnel fails -&gt; BGP auto-converges&lt;br/&gt;traffic shifts to surviving tunnel&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FD;strokeColor=#A142F4;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="1376" width="448" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F3E8FD;fillStyle=solid;strokeColor=#A142F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n14" vertex="1">
+          <mxGeometry x="12" y="50" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n16" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Tunnel specs&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Tunnel 0: iface0&lt;-&gt;peer0&lt;br/&gt;  BGP 169.254.0.1/30 &lt;-&gt; .2 - PSK #1&lt;br/&gt;Tunnel 1: iface1&lt;-&gt;peer1&lt;br/&gt;  BGP 169.254.1.1/30 &lt;-&gt; .2 - PSK #2&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E4F7FA;strokeColor=#12B5CB;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2311" y="1220" width="475" height="237" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="5_HA_VPN_BGP_n16" vertex="1">
+          <mxGeometry x="12" y="94" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n18" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;attach&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="5_HA_VPN_BGP_n4" target="5_HA_VPN_BGP_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n19" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;Tunnel 0 - BGP 169.254.0.1/30 - PSK #1&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="5_HA_VPN_BGP_n6" target="5_HA_VPN_BGP_n10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2354" y="703" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n20" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="5_HA_VPN_BGP_n6" target="5_HA_VPN_BGP_n10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2354" y="811" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y2Ar_ICyUjcJ8NJLoXOV-1" value="Tunnel 1 - BGP 169.254.1.1/30 - PSK #2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Helvetica;fontSize=15;fontColor=#202124;fontStyle=1;labelBackgroundColor=#FFFFFF;movable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" connectable="0" parent="5_HA_VPN_BGP_n20">
+          <mxGeometry x="-0.0564" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="5_HA_VPN_BGP_n10" target="5_HA_VPN_BGP_n14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5_HA_VPN_BGP_n22" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#EA4335;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="5_HA_VPN_BGP_n2" target="5_HA_VPN_BGP_n12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="6 - Firewall Two-Tier" id="6_Firewall_Two_Tier">
+    <mxGraphModel dx="4200" dy="2868" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2896" pageHeight="2009" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6_Firewall_Two_Tier_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Two-Tier Firewall - Defense in Depth&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Tier 1 Hierarchical Policy (Org, evaluated FIRST) -&gt; delegate RFC1918 -&gt; Tier 2 VPC rules -&gt; implicit DENY&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2736" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n2" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Ingress Packet&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#1A73E8;fillStyle=solid;strokeColor=#1A73E8;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=75;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1234" y="236" width="326" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n2" vertex="1">
+          <mxGeometry x="12" y="8" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n4" value="&lt;b style=&quot;font-size:22px;color:#5F6368;font-family:Helvetica;font-weight:800&quot;&gt;TIER 1 - Hierarchical Firewall Policy (Org level - evaluated FIRST)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F3F4;strokeColor=#9AA0A6;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="556" width="1633" height="532" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F1F3F4;fillStyle=solid;strokeColor=#9AA0A6;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n4" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n6" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;p.1000 / 1001 - goto_next&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Delegate RFC1918 ingress/egress&lt;br/&gt;10.0.0.0/8 - 172.16/12 - 192.168/16&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F9AB00;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="114" y="624" width="475" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FEF7E0;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n6" vertex="1">
+          <mxGeometry x="12" y="35" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n8" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;p.1002 - ALLOW IAP SSH/RDP&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;35.235.240.0/20 -&gt; tcp 22, 3389&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1204" y="614" width="475" height="109" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n8" vertex="1">
+          <mxGeometry x="12" y="27" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n10" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;p.1004 - ALLOW Google Load Balancer / Health Check&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;35.191/16 - 130.211/22 -&gt; tcp 80,443&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="114" y="940" width="475" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n10" vertex="1">
+          <mxGeometry x="12" y="30" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n12" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;p.1005 - DENY TOR exit nodes&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;src_threat_intelligences = iplist-tor-exit-nodes&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA4335;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1204" y="940" width="475" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n12" vertex="1">
+          <mxGeometry x="12" y="30" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n14" value="&lt;b style=&quot;font-size:22px;color:#5F6368;font-family:Helvetica;font-weight:800&quot;&gt;TIER 2 - VPC Firewall Rules (per-VPC - after Tier 1 delegates)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F3F4;strokeColor=#9AA0A6;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="1463" width="1633" height="466" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#F1F3F4;fillStyle=solid;strokeColor=#9AA0A6;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n14" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n16" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;gcp-sg-fw-allow-vpn-hub-001&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;on-prem CIDRs -&gt; Hub VPC (tcp/udp/icmp)&lt;br/&gt;CONDITIONAL (only if onprem CIDRs set)&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="114" y="1521" width="475" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n16" vertex="1">
+          <mxGeometry x="12" y="31" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n18" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;gcp-sg-fw-allow-internal-001&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;10.20.0.0/20 -&gt; Shared VPC&lt;br/&gt;tcp/udp/icmp/ipip&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1204" y="1521" width="475" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n18" vertex="1">
+          <mxGeometry x="12" y="31" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n20" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Everything else -&gt; Implicit DENY&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA4335;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="411" y="1819" width="970" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n20" vertex="1">
+          <mxGeometry x="12" y="11" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n22" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;ALLOW&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#34A853;fillStyle=solid;strokeColor=#34A853;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2395" y="850" width="271" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n23" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n22" vertex="1">
+          <mxGeometry x="12" y="11" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n24" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;DENY&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#EA4335;fillStyle=solid;strokeColor=#EA4335;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2065" y="1321" width="271" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n25" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n24" vertex="1">
+          <mxGeometry x="12" y="11" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n26" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud IAP = the ONLY admin door&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;IAM + OS Login verified before packet reaches VM&lt;br/&gt;Lower priority number = higher precedence&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E4F7FA;strokeColor=#12B5CB;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2395" y="1680" width="421" height="163" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n27" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=actor;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="6_Firewall_Two_Tier_n26" vertex="1">
+          <mxGeometry x="12" y="57" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n28" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n2" target="6_Firewall_Two_Tier_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n29" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n2" target="6_Firewall_Two_Tier_n8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n30" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n2" target="6_Firewall_Two_Tier_n10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="282" y="268" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n31" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n2" target="6_Firewall_Two_Tier_n12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1397" y="620" />
+              <mxPoint x="1326" y="620" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n32" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;goto_next&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#F9AB00;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n6" target="6_Firewall_Two_Tier_n14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n33" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n8" target="6_Firewall_Two_Tier_n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n34" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n10" target="6_Firewall_Two_Tier_n22" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="468" y="887" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n35" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#EA4335;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n12" target="6_Firewall_Two_Tier_n24" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1442" y="1160" />
+              <mxPoint x="2200" y="1160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n36" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n16" target="6_Firewall_Two_Tier_n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n37" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n18" target="6_Firewall_Two_Tier_n22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n38" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#EA4335;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n20" target="6_Firewall_Two_Tier_n24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6_Firewall_Two_Tier_n39" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#12B5CB;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="6_Firewall_Two_Tier_n14" target="6_Firewall_Two_Tier_n26" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="7 - Zero External IP" id="7_Zero_External_IP">
+    <mxGraphModel dx="6061" dy="3681" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3061" pageHeight="1632" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7_Zero_External_IP_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Zero External IP - Egress via NAT, Ingress via IAP&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Org Policy denies all public IPs - admin enters via Cloud IAP tunnel - VM reaches Internet one-way via Cloud NAT&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2901" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n2" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud Admin&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;gcloud compute ssh&lt;br/&gt;--tunnel-through-iap&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EA4335;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="80" y="322" width="380" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=actor;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;" parent="7_Zero_External_IP_n2" vertex="1">
+          <mxGeometry x="12" y="35" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n4" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud IAP - 35.235.240.0/20&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;authenticate IAM + OS Login&lt;br/&gt;iap.tunnelResourceAccessor&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A142F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="1171" y="313" width="407" height="141" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#F3E8FD;fillStyle=solid;strokeColor=#A142F4;strokeWidth=2.5;" parent="7_Zero_External_IP_n4" vertex="1">
+          <mxGeometry x="12" y="43" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n6" value="&lt;b style=&quot;font-size:22px;color:#1967D2;font-family:Helvetica;font-weight:800&quot;&gt;Shared VPC - gcp-sg-vpc-shared-001&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;" parent="1" vertex="1">
+          <mxGeometry x="2356" y="236" width="516" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;" parent="7_Zero_External_IP_n6" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n8" value="&lt;b style=&quot;font-size:22px;color:#188038;font-family:Helvetica;font-weight:800&quot;&gt;gcp-sg-snet-app-001 - 10.20.1.0/24&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F4EA;strokeColor=#34A853;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=1;dashPattern=8 5;opacity=60;" parent="1" vertex="1">
+          <mxGeometry x="2390" y="294" width="448" height="258" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;" parent="7_Zero_External_IP_n8" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n10" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;VM e2-small + Ops Agent&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;internal IP 10.20.1.x - NO public IP&lt;br/&gt;debian-12 - pd-balanced 20GB&lt;br/&gt;Shielded VM - OS Login - tag app-vm&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="2424" y="352" width="380" height="166" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;" parent="7_Zero_External_IP_n10" vertex="1">
+          <mxGeometry x="12" y="56" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n12" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud NAT - gcp-sg-nat-001&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;AUTO_ONLY - LIST_OF_SUBNETWORKS&lt;br/&gt;log ERRORS_ONLY&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="2354" y="949" width="489" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;" parent="7_Zero_External_IP_n12" vertex="1">
+          <mxGeometry x="12" y="35" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n14" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Internet&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9AA0A6;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="2723" y="1340" width="258" height="81" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#F1F3F4;fillStyle=solid;strokeColor=#9AA0A6;strokeWidth=2.5;" parent="7_Zero_External_IP_n14" vertex="1">
+          <mxGeometry x="12" y="14" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n16" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Org Policy: compute.vmExternalIpAccess = deny_all&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;No VM can ever have a public IP&lt;br/&gt;Internet CANNOT initiate inbound&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8E6;strokeColor=#EA4335;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;" parent="1" vertex="1">
+          <mxGeometry x="235" y="949" width="638" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;" parent="7_Zero_External_IP_n16" vertex="1">
+          <mxGeometry x="12" y="38" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n18" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;VM specs&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;machine_type e2-small - zone asia-southeast1-b&lt;br/&gt;deletion_protection ON - automatic_restart ON&lt;br/&gt;enable_sample_vm toggles creation&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E4F7FA;strokeColor=#12B5CB;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;" parent="1" vertex="1">
+          <mxGeometry x="235" y="1389" width="638" height="163" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;" parent="7_Zero_External_IP_n18" vertex="1">
+          <mxGeometry x="12" y="57" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n20" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;TLS - IAM auth&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;" parent="1" source="7_Zero_External_IP_n2" target="7_Zero_External_IP_n4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n21" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;tunnel to 10.20.1.x&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#A142F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;" parent="1" source="7_Zero_External_IP_n4" target="7_Zero_External_IP_n10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n22" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;egress only&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;" parent="1" source="7_Zero_External_IP_n10" target="7_Zero_External_IP_n12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n23" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;one-way source NAT&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;" parent="1" source="7_Zero_External_IP_n12" target="7_Zero_External_IP_n14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7_Zero_External_IP_n24" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#EA4335;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;" parent="1" source="7_Zero_External_IP_n10" target="7_Zero_External_IP_n16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZRt0uPD08DDh6uHpXgSj-1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Zero External IP - Egress via NAT, Ingress via IAP&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Org Policy denies all public IPs - admin enters via Cloud IAP tunnel - VM reaches Internet one-way via Cloud NAT&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-73" y="-2" width="2901" height="132" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="8 - Shared VPC SoD" id="8_Shared_VPC_SoD">
+    <mxGraphModel dx="3500" dy="2390" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2738" pageHeight="1982" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8_Shared_VPC_SoD_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Shared VPC - Host vs Service (Separation of Duties)&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;Network/SRE owns the network in the Host project - App team only deploys workloads in the Service project&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="2578" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n2" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Network / SRE Team&lt;/b&gt;&lt;div style=&quot;font-size:16px;color:#F1F3F4;font-family:Helvetica;line-height:1.5;margin-top:4px&quot;&gt;owns &amp; controls the network&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F9AB00;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;" parent="1" vertex="1">
+          <mxGeometry x="80" y="236" width="407" height="81" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=actor;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n2" vertex="1">
+          <mxGeometry x="12" y="15" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n4" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Application Team&lt;/b&gt;&lt;div style=&quot;font-size:16px;color:#F1F3F4;font-family:Helvetica;line-height:1.5;margin-top:4px&quot;&gt;deploys workloads only&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F9AB00;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;" parent="1" vertex="1">
+          <mxGeometry x="2229" y="236" width="407" height="81" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=actor;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n4" vertex="1">
+          <mxGeometry x="12" y="15" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n6" value="&lt;b style=&quot;font-size:22px;color:#1967D2;font-family:Helvetica;font-weight:800&quot;&gt;Host Project - lz-prj-sh-vpc (Host mode ON)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;" parent="1" vertex="1">
+          <mxGeometry x="203" y="712" width="638" height="643" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n6" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n8" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;VPC gcp-sg-vpc-shared-001&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;subnet gcp-sg-snet-app-001&lt;br/&gt;10.20.1.0/24 - GLOBAL routing&lt;br/&gt;google_compute_shared_vpc_host_project&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="237" y="770" width="570" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n8" vertex="1">
+          <mxGeometry x="12" y="41" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n10" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Network controls&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;Firewall Rules - Routes&lt;br/&gt;Cloud NAT - Cloud DNS private&lt;br/&gt;binds role compute.networkUser&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="237" y="1172" width="570" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n10" vertex="1">
+          <mxGeometry x="12" y="47" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n12" value="&lt;b style=&quot;font-size:22px;color:#188038;font-family:Helvetica;font-weight:800&quot;&gt;Service Project - lz-prj-sample-app&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F4EA;strokeColor=#34A853;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;" parent="1" vertex="1">
+          <mxGeometry x="2095" y="728" width="557" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n12" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n14" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;VM e2-small&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;deploys apps - consumes shared subnet&lt;br/&gt;subnetwork_project = host&lt;br/&gt;shared_vpc_service_project link&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;" parent="1" vertex="1">
+          <mxGeometry x="2129" y="786" width="489" height="163" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n14" vertex="1">
+          <mxGeometry x="12" y="54" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n16" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Separation of Duties&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;App team uses the network WITHOUT touching&lt;br/&gt;subnets - firewall - routing - VPN&lt;br/&gt;compute.networkUser granted at subnet scope&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E4F7FA;strokeColor=#12B5CB;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;" parent="1" vertex="1">
+          <mxGeometry x="197" y="1726" width="651" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n16" vertex="1">
+          <mxGeometry x="12" y="64" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n18" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Wiring resources&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;shared_vpc_host_project (enables Host)&lt;br/&gt;shared_vpc_service_project (attaches Service)&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;" parent="1" vertex="1">
+          <mxGeometry x="2088" y="1381" width="570" height="149" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;" parent="8_Shared_VPC_SoD_n18" vertex="1">
+          <mxGeometry x="12" y="50" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n20" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;" parent="1" source="8_Shared_VPC_SoD_n8" target="8_Shared_VPC_SoD_n10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#F9AB00;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;" parent="1" source="8_Shared_VPC_SoD_n2" target="8_Shared_VPC_SoD_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n22" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#F9AB00;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;" parent="1" source="8_Shared_VPC_SoD_n4" target="8_Shared_VPC_SoD_n12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n23" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;Shared VPC attachment&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=4;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;" parent="1" source="8_Shared_VPC_SoD_n6" target="8_Shared_VPC_SoD_n12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8_Shared_VPC_SoD_n24" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#12B5CB;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;" parent="1" source="8_Shared_VPC_SoD_n12" target="8_Shared_VPC_SoD_n18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="9 - Impersonation &amp; Observability" id="9_Impersonation_Observability">
+    <mxGraphModel dx="3000" dy="2049" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3162" pageHeight="1688" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9_Impersonation_Observability_n1" value="&lt;div style=&quot;text-align:center&quot;&gt;&lt;span style=&quot;font-size:32px;color:#202124;font-family:Helvetica;font-weight:800&quot;&gt;Zero-Key Impersonation + Centralized Observability&lt;/span&gt;&lt;div style=&quot;font-size:23px;color:#3C4043;font-family:Helvetica;font-weight:600;margin-top:10px&quot;&gt;No static Service Account keys - each Service Account writes only its state prefix - logs/metrics centralized to Management - Budget alerts&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="56" width="3002" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n2" value="&lt;b style=&quot;font-size:22px;color:#1967D2;font-family:Helvetica;font-weight:800&quot;&gt;Zero-Key Impersonation (no static Service Account keys)&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="236" width="1323" height="1339" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n3" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n2" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n4" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Human Admin / CI&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#1A73E8;fillStyle=solid;strokeColor=#1A73E8;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=72;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="563" y="294" width="353" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n5" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=actor;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n4" vertex="1">
+          <mxGeometry x="12" y="8" width="46" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n6" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;org-runner&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="114" y="545" width="217" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n7" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n6" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n8" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;connectivity-runner&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="634" y="545" width="237" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n9" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n8" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n10" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;security-runner&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1166" y="545" width="204" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n11" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n10" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n12" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;workload-runner&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="376" y="760" width="231" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n13" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n12" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n14" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;management-runner&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="947" y="760" width="237" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n15" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n14" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n16" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;GCS Terraform State&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;each Service Account writes ONLY its prefix&lt;br/&gt;per-prefix IAM lock - Object Versioning&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="433" y="1055" width="624" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n17" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cylinder3;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n16" vertex="1">
+          <mxGeometry x="12" y="31" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n18" value="&lt;b style=&quot;font-size:19px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Org Policy: iam.disableServiceAccountKeyCreation&lt;/b&gt;&lt;div style=&quot;font-size:17px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;static Service Account keys forbidden org-wide&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8E6;strokeColor=#EA4335;strokeWidth=2;arcSize=10;shadow=0;fontFamily=Helvetica;verticalAlign=middle;align=left;dashed=1;dashPattern=8 5;spacingLeft=73;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="433" y="1432" width="624" height="109" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n19" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FCE8E6;fillStyle=solid;strokeColor=#EA4335;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n18" vertex="1">
+          <mxGeometry x="12" y="30" width="49" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n20" value="&lt;b style=&quot;font-size:22px;color:#188038;font-family:Helvetica;font-weight:800&quot;&gt;Centralized Observability &amp; Cost Control&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F4EA;strokeColor=#34A853;strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;verticalAlign=top;align=left;spacingLeft=72;spacingTop=16;dashed=0;opacity=60;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1803" y="248" width="1278" height="1360" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n21" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n20" vertex="1">
+          <mxGeometry x="19" y="14" width="41" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n22" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;hub-net&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1837" y="306" width="204" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n23" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n22" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n24" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;sh-vpc&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2330" y="306" width="204" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n25" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cloud;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n24" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n26" value="&lt;b style=&quot;font-size:13px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;sample-app&lt;/b&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=70;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2831" y="306" width="217" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n27" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n26" vertex="1">
+          <mxGeometry x="12" y="9" width="43" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n28" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;management project&lt;/b&gt;&lt;div style=&quot;font-size:16px;color:#F1F3F4;font-family:Helvetica;line-height:1.5;margin-top:4px&quot;&gt;the single Metrics Scope&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F9AB00;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2363" y="539" width="407" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n29" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n28" vertex="1">
+          <mxGeometry x="12" y="11" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n30" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Log Bucket - HOT tier&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;retention 90 days&lt;br/&gt;org + folder sinks&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#34A853;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1904" y="834" width="339" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n31" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cylinder3;fillColor=#E6F4EA;fillStyle=solid;strokeColor=#34A853;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n30" vertex="1">
+          <mxGeometry x="12" y="31" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n32" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Log Views (scoped read)&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;sample-app - hub-net&lt;br/&gt;SOURCE(...) per project&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2702" y="834" width="326" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n33" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n32" vertex="1">
+          <mxGeometry x="12" y="31" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n34" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;GCS Archive - COLD tier&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;retention 365 days - ARCHIVE&lt;br/&gt;versioning ON&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#12B5CB;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="1904" y="1157" width="339" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n35" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cylinder3;fillColor=#E4F7FA;fillStyle=solid;strokeColor=#12B5CB;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n34" vertex="1">
+          <mxGeometry x="12" y="31" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n36" value="&lt;b style=&quot;font-size:20px;color:#202124;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Cloud Monitoring&lt;/b&gt;&lt;div style=&quot;font-size:18px;color:#3C4043;font-family:Helvetica;line-height:1.5;margin-top:6px&quot;&gt;3 Alerts: CPU/MEM/DISK&lt;br/&gt;2 Dashboards - email channel&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#4285F4;strokeWidth=2.5;shadow=1;arcSize=8;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=80;spacingRight=12;spacingTop=6;spacingBottom=6;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2702" y="1157" width="326" height="117" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n37" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=hexagon;fillColor=#E8F0FE;fillStyle=solid;strokeColor=#4285F4;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n36" vertex="1">
+          <mxGeometry x="12" y="31" width="54" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n38" value="&lt;b style=&quot;font-size:20px;color:#FFFFFF;font-family:Helvetica;font-weight:800;line-height:1.35&quot;&gt;Billing Budget&lt;/b&gt;&lt;div style=&quot;font-size:16px;color:#F1F3F4;font-family:Helvetica;line-height:1.5;margin-top:4px&quot;&gt;2,500,000 VND/mo - alert 50/80/100% + forecast&lt;/div&gt;" style="sketch=1;curveFitting=1;jiggle=2;rounded=1;whiteSpace=wrap;html=1;fillColor=#F9AB00;fillStyle=solid;strokeColor=#F9AB00;strokeWidth=1.5;shadow=1;arcSize=10;fontFamily=Helvetica;verticalAlign=middle;align=left;spacingLeft=78;spacingRight=12;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" vertex="1">
+          <mxGeometry x="2232" y="1501" width="489" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n39" value="" style="sketch=1;curveFitting=1;jiggle=2;html=1;shape=cylinder3;fillColor=#FFFFFF;fillStyle=solid;strokeColor=#FFFFFF;strokeWidth=2.5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="9_Impersonation_Observability_n38" vertex="1">
+          <mxGeometry x="12" y="11" width="52" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n40" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;impersonate - short-lived token&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n4" target="9_Impersonation_Observability_n6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n41" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n6" target="9_Impersonation_Observability_n16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n42" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n4" target="9_Impersonation_Observability_n8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="739" y="451" />
+              <mxPoint x="804" y="451" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n43" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n8" target="9_Impersonation_Observability_n16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n44" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n4" target="9_Impersonation_Observability_n10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n45" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n10" target="9_Impersonation_Observability_n16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n46" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n4" target="9_Impersonation_Observability_n12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="739" y="503" />
+              <mxPoint x="491" y="503" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n47" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n12" target="9_Impersonation_Observability_n16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n48" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#1A73E8;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n4" target="9_Impersonation_Observability_n14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n49" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n14" target="9_Impersonation_Observability_n16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n50" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#EA4335;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;dashed=1;dashPattern=8 5;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n16" target="9_Impersonation_Observability_n18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n51" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;Log Sinks&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n22" target="9_Impersonation_Observability_n28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1939" y="400" />
+              <mxPoint x="2634" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n52" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n24" target="9_Impersonation_Observability_n28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2432" y="453" />
+              <mxPoint x="2500" y="453" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n53" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n26" target="9_Impersonation_Observability_n28" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n54" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#34A853;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n28" target="9_Impersonation_Observability_n30" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n55" value="&lt;span style=&quot;font-family:Helvetica;font-size:15px;font-weight:700;color:#202124&quot;&gt;tiering&lt;/span&gt;" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#12B5CB;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n30" target="9_Impersonation_Observability_n34" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n56" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n28" target="9_Impersonation_Observability_n32" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n57" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#4285F4;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n28" target="9_Impersonation_Observability_n36" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2567" y="1021" />
+              <mxPoint x="2865" y="1021" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9_Impersonation_Observability_n58" value="" style="sketch=1;curveFitting=1;jiggle=2;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jettySize=auto;orthogonalLoop=1;strokeColor=#F9AB00;strokeWidth=2.5;fontColor=#202124;fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;labelBackgroundColor=#FFFFFF;spacingTop=2;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" parent="1" source="9_Impersonation_Observability_n28" target="9_Impersonation_Observability_n38" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
