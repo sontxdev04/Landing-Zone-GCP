@@ -67,7 +67,11 @@ for entry in "${RUNTIME_SA_BINDINGS[@]}"; do
     grant_project "$prj" "$email" "$role"
   done
   if [[ "$actas" == "yes" ]]; then
+    # sa-tf-wl-001: actAs để Terraform GẮN SA này vào VM lúc tạo.
     grant_on_sa "$email" "$prj" "serviceAccount:$SA_WL" "roles/iam.serviceAccountUser" "$SA_ORG"
+    # GRP_APP (nhóm người vận hành workload): actAs để SSH (OS Login) vào VM chạy
+    # bằng SA này — GCP yêu cầu actAs trên SA của VM mới cho phép đăng nhập OS Login.
+    grant_on_sa "$email" "$prj" "$GRP_APP" "roles/iam.serviceAccountUser" "$SA_ORG"
   fi
 done
 

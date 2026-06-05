@@ -16,15 +16,21 @@
 #   3. Hierarchical firewall policy đã cho phép dải IAP (35.235.240.0/20) trên port 22
 # =============================================================================
 
-# Lưu ý: VM dùng Compute Engine default SA với scope mặc định (đã có quyền ghi
-# monitoring/logging). Nếu org chặn default SA grants, cần cấp cho SA của VM hai
-# role roles/monitoring.metricWriter và roles/logging.logWriter để Ops Agent gửi metric.
+# Runtime SA gắn vào VM: gcp-sg-sa-sample-app-001 (tạo ở scripts/03-runtime-sa.sh,
+# đã có sẵn roles/monitoring.metricWriter + roles/logging.logWriter). KHÔNG dùng
+# default compute SA vì project-factory đã deprivilege/disable nó (least-privilege)
+# → nếu để VM tự gắn default SA, Ops Agent sẽ không lấy được token và metric
+# memory/disk không gửi lên được.
 resource "google_compute_instance" "gcp-sg-vm-sample-app-001" {
   count        = var.enable_sample_vm ? 1 : 0
   name         = "gcp-sg-vm-sample-app-001"
   machine_type = "e2-small"
   zone         = "asia-southeast1-b"
   project      = local.org.project_id_sample_app
+
+  # Cho phép Terraform tự stop/start VM khi đổi các thuộc tính yêu cầu dừng máy
+  # (vd: service_account, machine_type). An toàn với VM mẫu.
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
@@ -41,6 +47,13 @@ resource "google_compute_instance" "gcp-sg-vm-sample-app-001" {
     # Không có access_config = không IP public (egress qua Cloud NAT, truy cập qua IAP).
   }
 
+  # Gắn runtime SA (không phải default compute SA đã bị disable). Scope cloud-platform
+  # để Ops Agent dùng IAM của SA — quyền thực tế bị giới hạn bởi role của SA.
+  service_account {
+    email  = "gcp-sg-sa-sample-app-001@${local.org.project_id_sample_app}.iam.gserviceaccount.com"
+    scopes = ["cloud-platform"]
+  }
+
   shielded_instance_config {
     enable_secure_boot          = true
     enable_vtpm                 = true
@@ -50,10 +63,14 @@ resource "google_compute_instance" "gcp-sg-vm-sample-app-001" {
   metadata = {
     enable-oslogin = "TRUE"
     # Cài Google Cloud Ops Agent để xuất metric memory/disk lên Cloud Monitoring.
+    # Dùng URL repo chính thức + retry: tại thời điểm boot, Cloud NAT có thể chưa
+    # sẵn sàng ngay nên curl được retry vài lần để tránh tải nhầm trang lỗi.
     startup-script = <<-EOT
       #!/bin/bash
-      curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent.sh
-      sudo bash add-google-cloud-ops-agent.sh --also-install
+      set -euo pipefail
+      curl --retry 5 --retry-connrefused --retry-delay 10 -fsSO \
+        https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
+      sudo bash add-google-cloud-ops-agent-repo.sh --also-install
     EOT
   }
 
