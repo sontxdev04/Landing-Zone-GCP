@@ -21,7 +21,7 @@
 
 ---
 
-## � Mục lục
+## 📋 Mục lục
 
 - [💡 Giới thiệu dự án](#-giới-thiệu-dự-án)
 - [🎯 Đối tượng & kịch bản áp dụng](#-đối-tượng--kịch-bản-áp-dụng)

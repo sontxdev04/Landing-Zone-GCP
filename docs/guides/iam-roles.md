@@ -12,7 +12,7 @@
 
 ---
 
-## � Mục lục
+## 📋 Mục lục
 
 - [💡 Triết lý thiết kế](#-triết-lý-thiết-kế)
 - [🛡️ Mô hình IaC không key tĩnh (Zero-Key)](#️-mô-hình-iac-không-key-tĩnh-zero-key)
