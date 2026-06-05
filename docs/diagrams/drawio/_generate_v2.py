@@ -45,6 +45,24 @@ def esc(s):
              .replace('"', "&quot;"))
 
 
+# --- size-based block scale: small blocks grow more, large blocks grow less --
+#   small leaf  (<= A_SMALL area)  -> SCALE_SMALL (2.0x)
+#   large block (>= A_LARGE area)  -> SCALE_LARGE (1.5x)
+#   linear interpolation in between (keeps relative hierarchy readable)
+A_SMALL, A_LARGE = 18000.0, 56000.0
+SCALE_SMALL, SCALE_LARGE = 1.0, 1.0
+
+
+def block_scale(w, h):
+    area = float(w) * float(h)
+    if area <= A_SMALL:
+        return SCALE_SMALL
+    if area >= A_LARGE:
+        return SCALE_LARGE
+    t = (area - A_SMALL) / (A_LARGE - A_SMALL)
+    return SCALE_SMALL + (SCALE_LARGE - SCALE_SMALL) * t
+
+
 def label_html(title, details, tcolor, title_px=20, detail_px=18, align="left"):
     """Build a RAW HTML label: bold near-black title + dark detail lines.
     The full string is XML-escaped later when written into the cell value."""
@@ -63,8 +81,9 @@ class Page:
         self.name = name
         self.slug = re.sub(r"[^A-Za-z0-9]+", "_", name).strip("_")
         self.w, self.h = w, h            # design space (A4-ish)
-        self.F = 1.357                   # element size scale (A4 -> A3)
-        self.S = 2.2                     # spread factor (gaps between parts)
+        self.F = 2.55                    # element size scale (bigger blocks)
+        self.S = 1.28                    # spread factor (smaller gaps => blocks fill page)
+        self.FK = self.F / 1.357         # font scale, kept proportional to block size
         self.nodes = []                  # top-level vertices (design coords)
         self.children = []               # child vertices (local design coords)
         self.edges = []                  # raw edge xml
@@ -78,11 +97,11 @@ class Page:
 
     # --- top-level vertex (stored in design coords, transformed at emit) -
     def _vertex(self, value, style, x, y, w, h, nid=None, is_title=False,
-                is_group=False):
+                is_group=False, sscale=1.0):
         nid = nid or self.nid()
         self.nodes.append(dict(id=nid, value=value, style=style,
                                x=x, y=y, w=w, h=h, is_title=is_title,
-                               is_group=is_group))
+                               is_group=is_group, sscale=sscale))
         if is_title:
             self.title_id = nid
         return nid
@@ -123,9 +142,9 @@ class Page:
     # --- page title (centered over the content) -------------------------
     def title(self, big, small, x=28, y=14):
         v = (f'<div style="text-align:center">'
-             f'<span style="font-size:32px;color:{INK};font-family:Helvetica;'
+             f'<span style="font-size:{round(32 * self.FK)}px;color:{INK};font-family:Helvetica;'
              f'font-weight:800">{big}</span>'
-             f'<div style="font-size:23px;color:{DET};font-family:Helvetica;'
+             f'<div style="font-size:{round(23 * self.FK)}px;color:{DET};font-family:Helvetica;'
              f'font-weight:600;margin-top:10px">{small}</div></div>')
         st = ("text;html=1;strokeColor=none;fillColor=none;align=center;"
               "verticalAlign=middle;whiteSpace=wrap;")
@@ -135,14 +154,17 @@ class Page:
     def card(self, kind, title, details, x, y, w, h, title_px=20, detail_px=18,
              align="left"):
         stroke, tcolor, _ = PAL[kind]
+        sc = block_scale(w, h)
+        title_px = round(title_px * sc * self.FK)
+        detail_px = round(detail_px * sc * self.FK)
         sz = min(40, h - 14)
-        pad = round((9 + sz) * self.F + 14)
+        pad = round((9 + sz) * self.F * sc + 14)
         st = (f"{SKETCH}rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;"
               f"strokeColor={stroke};strokeWidth=2.5;shadow=1;arcSize=8;"
               f"fontFamily=Helvetica;verticalAlign=middle;align={align};"
               f"spacingLeft={pad};spacingRight=12;spacingTop=6;spacingBottom=6;")
         nid = self._vertex(label_html(title, details, tcolor, title_px, detail_px),
-                           st, x, y, w, h)
+                           st, x, y, w, h, sscale=sc)
         self._icon(nid, kind, title, 9, (h - sz) / 2, sz)
         return nid
 
@@ -150,19 +172,22 @@ class Page:
     def solid(self, kind, title, details, x, y, w, h, title_px=20):
         stroke, _, _ = PAL[kind]
         fill = stroke
+        sc = block_scale(w, h)
+        title_px = round(title_px * sc * self.FK)
+        body_px = round(16 * sc * self.FK)
         sz = min(38, h - 12)
-        pad = round((9 + sz) * self.F + 14)
+        pad = round((9 + sz) * self.F * sc + 14)
         v = (f'<b style="font-size:{title_px}px;color:#FFFFFF;'
              f'font-family:Helvetica;font-weight:800;line-height:1.35">{title}</b>')
         if details:
             body = "<br/>".join(details)
-            v += (f'<div style="font-size:16px;color:#F1F3F4;'
+            v += (f'<div style="font-size:{body_px}px;color:#F1F3F4;'
                   f'font-family:Helvetica;line-height:1.5;margin-top:4px">{body}</div>')
         st = (f"{SKETCH}rounded=1;whiteSpace=wrap;html=1;fillColor={fill};"
               f"fillStyle=solid;strokeColor={fill};strokeWidth=1.5;shadow=1;arcSize=10;"
               f"fontFamily=Helvetica;verticalAlign=middle;align=left;"
               f"spacingLeft={pad};spacingRight=12;")
-        nid = self._vertex(v, st, x, y, w, h)
+        nid = self._vertex(v, st, x, y, w, h, sscale=sc)
         self._icon(nid, kind, title, 9, (h - sz) / 2, sz, white=True)
         return nid
 
@@ -171,7 +196,7 @@ class Page:
         stroke, tcolor, tint = PAL[kind]
         d = "dashed=1;dashPattern=8 5;" if dashed else "dashed=0;"
         gpad = round((14 + 30) * self.F + 12)
-        v = (f'<b style="font-size:22px;color:{tcolor};font-family:Helvetica;'
+        v = (f'<b style="font-size:{round(22 * self.FK)}px;color:{tcolor};font-family:Helvetica;'
              f'font-weight:800">{label}</b>')
         st = (f"{SKETCH}rounded=1;whiteSpace=wrap;html=1;fillColor={tint};"
               f"strokeColor={stroke};strokeWidth=2.5;arcSize=3;fontFamily=Helvetica;"
@@ -184,14 +209,16 @@ class Page:
     # --- note sticky -----------------------------------------------------
     def note(self, kind, title, details, x, y, w, h):
         stroke, tcolor, tint = PAL[kind]
+        sc = block_scale(w, h)
         sz = min(36, h - 14)
-        pad = round((9 + sz) * self.F + 12)
+        pad = round((9 + sz) * self.F * sc + 12)
         st = (f"{SKETCH}rounded=1;whiteSpace=wrap;html=1;fillColor={tint};"
               f"strokeColor={stroke};strokeWidth=2;arcSize=10;shadow=0;"
               f"fontFamily=Helvetica;verticalAlign=middle;align=left;"
               f"dashed=1;dashPattern=8 5;spacingLeft={pad};spacingRight=12;")
-        nid = self._vertex(label_html(title, details, tcolor, 19, 17),
-                           st, x, y, w, h)
+        nid = self._vertex(label_html(title, details, tcolor,
+                                      round(19 * sc * self.FK), round(17 * sc * self.FK)),
+                           st, x, y, w, h, sscale=sc)
         self._icon(nid, kind, title, 9, (h - sz) / 2, sz)
         return nid
 
@@ -201,7 +228,7 @@ class Page:
         st = (f"{SKETCH}edgeStyle=orthogonalEdgeStyle;rounded={1 if rounded else 0};"
               f"html=1;jettySize=auto;orthogonalLoop=1;strokeColor={color};"
               f"strokeWidth={4 if thick else 2.5};fontColor={INK};"
-              f"fontFamily=Helvetica;fontSize=15;fontStyle=1;endArrow=block;endFill=1;"
+              f"fontFamily=Helvetica;fontSize={round(15 * self.FK)};fontStyle=1;endArrow=block;endFill=1;"
               f"labelBackgroundColor=#FFFFFF;spacingTop=2;")
         if dashed:
             st += "dashed=1;dashPattern=8 5;"
@@ -212,7 +239,7 @@ class Page:
         if entry:
             st += f"entryX={entry[0]};entryY={entry[1]};entryDx=0;entryDy=0;"
         eid = self.nid()
-        val = esc(f'<span style="font-family:Helvetica;font-size:15px;'
+        val = esc(f'<span style="font-family:Helvetica;font-size:{round(15 * self.FK)}px;'
                   f'font-weight:700;color:{INK}">{label}</span>') if label else ""
         self.edges.append(
             f'<mxCell id="{eid}" value="{val}" style="{st}" edge="1" parent="1" '
@@ -242,7 +269,8 @@ class Page:
             ecy = n["y"] + n["h"] / 2.0
             ncx = cx0 + (ecx - cx0) * S
             ncy = cy0 + (ecy - cy0) * S
-            fw, fh = n["w"] * F, n["h"] * F
+            sc = n.get("sscale", 1.0)
+            fw, fh = n["w"] * F * sc, n["h"] * F * sc
             return [ncx * F - fw / 2.0, ncy * F - fh / 2.0, fw, fh]
 
         for l in leaves:
@@ -299,13 +327,16 @@ class Page:
                 f'<mxGeometry x="{round(gx)}" y="{round(gy)}" '
                 f'width="{round(gw)}" height="{round(gh)}" as="geometry"/></mxCell>'
             )
-        # child icons: local coords relative to parent, size-only scaled
+        # child icons: local coords relative to parent, scaled with parent box
+        pscale = {n["id"]: n.get("sscale", 1.0) for n in self.nodes}
         for c in self.children:
+            ps = pscale.get(c["parent"], 1.0)
+            cf = F * ps
             cells.append(
                 f'<mxCell id="{c["id"]}" value="{esc(c["value"])}" '
                 f'style="{c["style"]}" vertex="1" parent="{c["parent"]}">'
-                f'<mxGeometry x="{round(c["x"] * F)}" y="{round(c["y"] * F)}" '
-                f'width="{round(c["w"] * F)}" height="{round(c["h"] * F)}" '
+                f'<mxGeometry x="{round(c["x"] * cf)}" y="{round(c["y"] * cf)}" '
+                f'width="{round(c["w"] * cf)}" height="{round(c["h"] * cf)}" '
                 f'as="geometry"/></mxCell>'
             )
         cells.extend(self.edges)
